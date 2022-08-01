@@ -91,11 +91,11 @@ return [
     |
     */
 
-    'from' => [
+    /* 'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
-    ],
-
+    ], */
+    'from' => ['address' => 'abhimanyu.geek@gmail.com', 'name' => 'Goal Achiever'],
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings

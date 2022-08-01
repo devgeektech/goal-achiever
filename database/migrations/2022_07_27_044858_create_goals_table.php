@@ -17,14 +17,13 @@ class CreateGoalsTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('subject')->nullable();
+            $table->bigInteger('subject_id')->unsigned();
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->string('unit')->nullable();
             $table->string('topic')->nullable();
-            $table->string('document')->nullable();
-            $table->string('video')->nullable();
-            $table->string('exam_document')->nullable();
             $table->string('creator_name')->nullable();
             $table->string('instructor_name')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

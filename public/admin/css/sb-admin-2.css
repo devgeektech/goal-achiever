@@ -11279,3 +11279,8 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+.btn-group a.btn.btn-primary {
+  margin-left: 10px !important; 
+  border-radius: 0.35rem !important;
+}

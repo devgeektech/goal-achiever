@@ -34,13 +34,18 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Add Goal</h6>
+                            <a href="{{ route('admin.goals.index')}}"class="btn btn-primary" style="float: right;">Back</a>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('goals.store') }}" method="post" enctype="multipart/form-data"> 
+                            <form action="{{ route('admin.goals.store') }}" method="post" enctype="multipart/form-data"> 
                                 @csrf
                                 <div class="form-group">
                                   <label for="goalSubject">Subject</label>
-                                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Enter Subject">
+                                    <select class="form-select form-control"  name="subject" id="subject">
+                                        @foreach($subjects as $subject)
+                                            <option value="{{$subject->id}}">{{$subject->title}}</option>
+                                        @endforeach   
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                   <label for="goalUnit">Unit</label>
@@ -52,16 +57,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="goalDocuments">Documents</label>
-                                    <input type="file" class="form-control-file" name="document" id="documents">
+                                    <label class="form-label"  for="goalDocuments">Documents</label>
+                                    <input type="file" class="form-control"  name="document[]" multiple accept="image/png, image/gif, image/jpeg"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="goalVideo">Video</label>
-                                    <input type="file" class="form-control-file" name="video" id="video">
+                                    <label class="form-label" for="goalVideo">Video</label>
+                                    <input type="file" class="form-control"  name="video[]" multiple accept="video/mp4,video/x-m4v,video/*"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleExamDocument">Exam Document</label>
-                                    <input type="file" class="form-control-file" name="exam_document" id="Exam Documents">
+                                    <label class="form-label" for="examDocument">Exam Document</label>
+                                    <input type="file" class="form-control"  name="exam_document[]" multiple accept="image/png, image/gif, image/jpeg"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="goalCreatorName">Creator's Name</label>

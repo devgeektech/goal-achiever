@@ -24,136 +24,33 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Goals Achieved</th>
+                                            <th>Goals Taken</th>
+                                            <th>Goals Pending</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Goals Achieved</th>
+                                            <th>Goals Taken</th>
+                                            <th>Goals Pending</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        @foreach($students as $student)
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td>{{ $student->name}}</td>
+                                            <td>{{ $student->id+2}}</td>
+                                            <td>{{ $student->id+5}}</td>
+                                            <td>{{ ($student->id+5) - ($student->id+2)}}</td>
                                             <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                      Status
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                      <a class="dropdown-item" href="#">Action</a>
-                                                      <a class="dropdown-item" href="#">Another action</a>
-                                                  </div>
-                                                </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                      Status
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                      <a class="dropdown-item" href="#">Acitve</a>
-                                                      <a class="dropdown-item" href="#">Deactive</a>
-                                                  </div>
-                                                </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                      Status
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Acitve</a>
-                                                        <a class="dropdown-item" href="#">Deactive</a>
-                                                  </div>
-                                                </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                      Status
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Acitve</a>
-                                                        <a class="dropdown-item" href="#">Deactive</a>
-                                                  </div>
-                                                </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                      Status
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Acitve</a>
-                                                        <a class="dropdown-item" href="#">Deactive</a>
-                                                  </div>
-                                                </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brielle Williamson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2012/12/02</td>
-                                            <td>$372,000</td>
-                                            <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                  Status
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">Acitve</a>
-                                                    <a class="dropdown-item" href="#">Deactive</a>
-                                              </div>
+                                                <a href="{{ route('admin.students.info',$student->id) }}" class="btn btn-primary">Info</a>
                                             </td>
                                         </tr>
-                                      
-                                   
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
