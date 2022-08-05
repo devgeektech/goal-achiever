@@ -30,7 +30,20 @@ class IndexController extends Controller
 
     public function contact(Request $request)
     {
-        
+        $data = [];
+        $subjects = Subject::latest()->get();
+        if($subjects){
+            $data['subjects'] = $subjects;
+        }
+        $countries = Country::get();
+        if($countries){
+            $data['countries'] = $countries;
+        }
+        $plans = Plan::get();
+        if($plans){
+            $data['plans'] = $plans;
+        }
+
         $contact = [];
         $contact['name'] = $request->firstname;
         $contact['email'] = $request->email;
@@ -39,9 +52,9 @@ class IndexController extends Controller
        try{
             Mail::to('harvinder@geekinformatic.com')->send(new ContactUsMail($contact));
             if (Mail::failures()) {
-                return 'Sorry! Please try again latter';
+                return view('index',$data)->with('error','Sorry email not sent');
             }else{
-                return 'Great! Successfully send in your mail';
+                return view('index',$data)->with('success','Great! Successfully send in your mail');
             }
        }catch(Exception $e){
             return $e->getMessage();
