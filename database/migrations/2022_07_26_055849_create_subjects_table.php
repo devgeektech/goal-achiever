@@ -16,6 +16,7 @@ class CreateSubjectsTable extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
