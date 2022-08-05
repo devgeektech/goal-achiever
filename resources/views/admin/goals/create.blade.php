@@ -121,6 +121,6 @@
     let get_units = "{{route('admin.goals.get_units')}}";
     let get_topics = "{{route('admin.goals.get_topics')}}";
 </script>
-<script src="{{URL::to('/admin/js/all.js')}}"></script>
+<script src="{{URL::to('/admin-panel/js/all.js')}}"></script>
 
 @endpush

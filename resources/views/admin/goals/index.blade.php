@@ -118,6 +118,6 @@
    <script>
         //let change_goal_status = "";
     </script>
-    <script src="{{URL::to('/admin/js/all.js')}}"></script>
+    <script src="{{URL::to('/admin-panel/js/all.js')}}"></script>
   
    @endpush
