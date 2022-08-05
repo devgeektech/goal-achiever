@@ -23,6 +23,11 @@ Route::group([
         Route::post('/update_password', [App\Http\Controllers\Auth\ResetPasswordController::class,'update_password'])->name('password_reset');
         Route::post('/update_username', [App\Http\Controllers\Auth\ResetPasswordController::class,'update_username'])->name('change-username');
     });
+    Route::group(['prefix' => 'goals','as' => 'goals.'], function ($router) {
+        Route::get('/', [App\Http\Controllers\Student\Goal\IndexController::class,'index'])->name('index');
+        Route::get('/info/{id}', [App\Http\Controllers\Student\Goal\IndexController::class,'show'])->name('info');
+        Route::get('/download/{filename}', [App\Http\Controllers\Student\Goal\IndexController::class,'doc_download'])->name('download');
+    });
 });
 
 

@@ -34,7 +34,8 @@ class GoalMedia extends Model
 	protected $fillable = [
 		'goal_id',
 		'media',
-		'ext'
+		'ext',
+		'type'
 	];
 
 	public function goal()

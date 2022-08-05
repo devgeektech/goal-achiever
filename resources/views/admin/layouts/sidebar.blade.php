@@ -12,10 +12,19 @@
         <a class="nav-link" href="{{route('admin.dashboard') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span></a>
     </li>
     <li class="nav-item ">
+        <a class="nav-link" href="{{route('admin.units.index') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Add Unit</span></a>
+    </li> 
+    <li class="nav-item ">
+        <a class="nav-link" href="{{route('admin.topics.index') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Add Topic</span></a>
+    </li> 
+    <li class="nav-item ">
+        <a class="nav-link" href="{{route('admin.goals.index') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Goals</span></a>
+    </li> 
+    <li class="nav-item ">
         <a class="nav-link" href="{{route('admin.students.index') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Students</span></a>
     </li>
     <li class="nav-item ">
-        <a class="nav-link" href="{{route('admin.goals.index') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Goals</span></a>
+        <a class="nav-link" href="{{route('admin.plans.index') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Membership Plans</span></a>
     </li>
 
     

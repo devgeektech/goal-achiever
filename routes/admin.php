@@ -34,8 +34,38 @@ Route::group([
             Route::get('/edit/{id}', [App\Http\Controllers\Admin\Goal\IndexController::class,'edit'])->name('edit');
             Route::post('/update/{id}', [App\Http\Controllers\Admin\Goal\IndexController::class,'update'])->name('update');
             Route::post('/store', [App\Http\Controllers\Admin\Goal\IndexController::class,'store'])->name('store');
+            Route::post('/update_doc', [App\Http\Controllers\Admin\Goal\IndexController::class,'update_doc'])->name('update-doc');
             Route::post('/destroy/{id}', [App\Http\Controllers\Admin\Goal\IndexController::class,'destroy'])->name('destroy');
+            Route::post('/get_units', [App\Http\Controllers\Admin\Goal\IndexController::class,'get_units'])->name('get_units');
+            Route::post('/get_topics', [App\Http\Controllers\Admin\Goal\IndexController::class,'get_topics'])->name('get_topics');
+            
         });
+
+        Route::group(['prefix' => 'plans','as' => 'plans.'], function ($router) {
+            Route::get('/', [App\Http\Controllers\Admin\MembershipPlan\IndexController::class,'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\Admin\MembershipPlan\IndexController::class,'create'])->name('create');
+            Route::get('/edit/{id}', [App\Http\Controllers\Admin\MembershipPlan\IndexController::class,'edit'])->name('edit');
+            Route::post('/update/{id}', [App\Http\Controllers\Admin\MembershipPlan\IndexController::class,'update'])->name('update');
+            Route::post('/store', [App\Http\Controllers\Admin\MembershipPlan\IndexController::class,'store'])->name('store');
+            Route::post('/destroy/{id}', [App\Http\Controllers\Admin\MembershipPlan\IndexController::class,'destroy'])->name('destroy');
+        });
+        Route::group(['prefix' => 'units','as' => 'units.'], function ($router) {
+            Route::get('/', [App\Http\Controllers\Admin\Unit\IndexController::class,'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\Admin\Unit\IndexController::class,'create'])->name('create');
+            Route::get('/edit/{id}', [App\Http\Controllers\Admin\Unit\IndexController::class,'edit'])->name('edit');
+            Route::post('/update/{id}', [App\Http\Controllers\Admin\Unit\IndexController::class,'update'])->name('update');
+            Route::post('/store', [App\Http\Controllers\Admin\Unit\IndexController::class,'store'])->name('store');
+            Route::post('/destroy/{id}', [App\Http\Controllers\Admin\Unit\IndexController::class,'destroy'])->name('destroy');
+        });
+        Route::group(['prefix' => 'topics','as' => 'topics.'], function ($router) {
+            Route::get('/', [App\Http\Controllers\Admin\Topic\IndexController::class,'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\Admin\Topic\IndexController::class,'create'])->name('create');
+            Route::get('/edit/{id}', [App\Http\Controllers\Admin\Topic\IndexController::class,'edit'])->name('edit');
+            Route::post('/update/{id}', [App\Http\Controllers\Admin\Topic\IndexController::class,'update'])->name('update');
+            Route::post('/store', [App\Http\Controllers\Admin\Topic\IndexController::class,'store'])->name('store');
+            Route::post('/destroy/{id}', [App\Http\Controllers\Admin\Topic\IndexController::class,'destroy'])->name('destroy');
+        });
+        
     });
 });
 

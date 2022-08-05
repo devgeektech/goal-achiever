@@ -37,8 +37,10 @@
                         <div class="card-body">
                             <form action="{{ route('admin.goals.update',$goal->id) }}" method="POST" enctype="multipart/form-data"> 
                                 @csrf 
-                                <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                <input type="hidden" name="subject_id" id="subject_id" value="">
+                                <input type="hidden" name="unit_id" id="unit_id" value="">
+                                <div class="row goalWrap">
+                                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                                   <div class="form-group">
                                     <strong>Subject:</strong>
                                     <select class="form-select form-control"  name="subject" id="subject">
@@ -46,62 +48,87 @@
                                             <option {{ $goal->subject_id == $subject->id ? 'selected':''}} value="{{$subject->id}}">{{$subject->title}}</option>
                                         @endforeach   
                                     </select>
+                                    @error('subject') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                   </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                                     <div class="form-group">
                                       <strong>Unit:</strong>
-                                      <input type="text" name="unit" value="{{ $goal->unit ?? "" }}" class="form-control" placeholder="Unit"> @error('unit') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
+                                      <select class="form-select form-control"  name="unit" id="unit">
+                                        @foreach($units as $unit)
+                                            <option {{ $goal->unit_id == $unit->id ? 'selected':''}} value="{{$unit->id}}">{{$unit->name}}</option>
+                                        @endforeach   
+                                    </select>
+                                     @error('unit') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                                     <div class="form-group">
                                       <strong>Topic:</strong>
-                                      <input type="text" name="topic" value="{{ $goal->topic ?? ""}}" class="form-control" placeholder="topic"> @error('topic') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
+                                      <select class="form-select form-control"  name="topic" id="topic">
+                                        @foreach($topics as $topic)
+                                            <option {{ $goal->topic_id == $topic->id ? 'selected':''}} value="{{$topic->id}}">{{$topic->name}}</option>
+                                        @endforeach   
+                                    </select>
+                                     @error('topic') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                                    <label class="form-label d-flex" for="customFile">Document</label>
                                     @foreach($media_document as $media)
-                                        <div class="form-group">
-                                        <img src="{{Storage::url($media->media) ?? URL::to('/images/dummy.jpg')}}" height="100" widht="100">
+                                        <div class="form-group videoImgBlock" style="display:inline-flex;">
+                                            <i class="fas fa-edit document_edit"  data-type="{{$media->type}}" data-id="{{$media->id}}" style="cursor:pointer"></i>
+                                                <img src="{{Storage::url($media->media) ?? URL::to('/images/dummy.jpg')}}" height="100" widht="100">
+                                           
                                         </div>
                                     @endforeach
-                                        <label class="form-label" for="customFile">Document</label>
                                         <input type="file" class="form-control" id="document" name="document[]" multiple accept="image/png, image/gif, image/jpeg"/>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                                    <label class="form-label d-flex" for="customFile">Video</label>
                                     @foreach($media_video as $vid_media)
-                                        <div class="form-group">
+                                        <div class="form-group videoImgBlock" style="display:inline-flex;">
+                                            <i class="fas fa-edit document_edit" data-type="{{$vid_media->type}}" data-id="{{$vid_media->id}}" style="cursor:pointer"></i>
                                             <video width="320" height="240" controls>
                                                 <source src="{{Storage::url($vid_media->media) ?? URL::to('/images/dummy.jpg')}}" type="video/mp4">
                                               </video>
+                                             
                                         </div>
                                     @endforeach
-                                        <label class="form-label" for="customFile">Video</label>
+                                       
                                         <input type="file" class="form-control" id="video" name="video[]" multiple accept="video/mp4,video/x-m4v,video/*"/>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                                    <label class="form-label d-flex" for="customFile">Exam Document</label>
                                     @foreach($exam_document as $exam_doc)
-                                    <div class="form-group">
-                                      <img src="{{Storage::url($exam_doc->media) ?? URL::to('/images/dummy.jpg')}}" height="100" widht="100">
+                                    <div class="form-group videoImgBlock" style="display:inline-flex;">
+                                        <i class="fas fa-edit document_edit" data-type="{{$exam_doc->type}}" data-id="{{$exam_doc->id}}" style="cursor:pointer"></i>
+                                        <img src="{{Storage::url($exam_doc->media) ?? URL::to('/images/dummy.jpg')}}" height="100" widht="100">
+                                        
                                     </div>
                                     @endforeach
-                                        <label class="form-label" for="customFile">Exam Document</label>
+                                        
                                         <input type="file" class="form-control" id="exam_document" name="exam_document[]" multiple accept="image/png, image/gif, image/jpeg"/>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                                    <div class="form-group">
+                                        <strong>Goal End Date:</strong>
+                                        <input type="date" name="end_date" value="{{ $goal->end_date ?? "" }}" class="form-control" placeholder="Goal End Date"> @error('end_date') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                                     <div class="form-group">
                                         <strong>Creator Name:</strong>
                                         <input type="text" name="creator_name" value="{{ $goal->creator_name ?? "" }}" class="form-control" placeholder="Creator name"> @error('creator_name') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                                     <div class="form-group">
                                         <strong>Instructor Name:</strong>
                                         <input type="text" name="instructor_name" value="{{ $goal->instructor_name ?? ""}}" class="form-control" placeholder="Instructor name"> @error('instructor_name') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary ml-3">Submit</button>
+                                <button type="submit" class="btn btn-primary ml-3">Update</button>
                               </div>
                             </form>
                         </div>
@@ -119,11 +146,48 @@
 
     </div>
     <!-- End of Page Wrapper -->
-
+    <!-- Modal -->
+    <div class="modal fade" id="add_doc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Document</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('admin.goals.update-doc') }}" method="post" enctype="multipart/form-data"> 
+                    @csrf
+                    <div class="form-group">
+                        <input type="hidden" name="doc_id" id="doc_id" value="">
+                        <input type="hidden" name="doc_type" id="doc_type" value="">
+                        <label class="form-label"  for="goalDocuments">Documents</label>
+                        <input type="file" class="form-control"  name="document" accept="image/png, image/gif, image/jpeg,video/mp4,video/x-m4v,video/* "/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+        </div>
+    </div>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
 
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+   
    @endsection
+   @push('js')
+   <script>
+    let get_units = "{{route('admin.goals.get_units')}}";
+    let get_topics = "{{route('admin.goals.get_topics')}}";
+    </script>
+    <script src="{{URL::to('/admin/js/all.js')}}"></script>
+   @endpush
+   

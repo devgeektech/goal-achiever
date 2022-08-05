@@ -44,6 +44,7 @@
                                             <th>Subject</th>
                                             <th>Unit</th>
                                             <th>Topic</th>
+                                            <th>Goal End Date</th>
                                             <th>Creator's Name</th>
                                             <th>Instructor's Name</th>
                                             <th>Participants</th>
@@ -55,6 +56,7 @@
                                             <th>Subject</th>
                                             <th>Unit</th>
                                             <th>Topic</th>
+                                            <th>Goal End Date</th>
                                             <th>Creator's Name</th>
                                             <th>Instructor's Name</th>
                                             <th>Participants</th>
@@ -66,23 +68,19 @@
                                             @foreach ($goals as $goal)                                            
                                                 <tr>
                                                     <td>{{ $goal->subject->title}}</td>
-                                                    <td>{{ $goal->unit}}</td>
-                                                    <td>{{ $goal->topic}}</td>
+                                                    <td>{{ getUnitName($goal->unit_id)}}</td>
+                                                    <td>{{ getTopicName($goal->topic_id)}}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($goal->end_date)->format('j F, Y') }}</td>
                                                     <td>{{ $goal->creator_name}}</td>
                                                     <td>{{ $goal->instructor_name}}</td>
                                                     <td>17</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <!--<button type="button" class="@if($goal->status == '1')btn btn-success @else btn btn-warning @endif dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                @if($goal->status == '1') Active @else Deactivate @endif
-                                                            </button>-->
-                                                            <div class="dropdown-menu">
-                                                            <a id="change_status" class="dropdown-item  @if($goal->status == '1') deactive @else activate @endif">@if($goal->status == '1') Deactive @else Active @endif</a>
-                                                        </div>
-                                                        <a style="margin-left:10px; border-radius: 0.35rem;" href="{{ route('admin.goals.edit', ['id' => $goal->id])}}" class="btn btn-primary">Edit</a>
+                                                        @if($goal->status == 1)
+                                                            <a style="margin-left:10px; border-radius: 0.35rem;" href="{{ route('admin.goals.edit', ['id' => $goal->id])}}" class="btn btn-primary">Edit</a>
+                                                        @endif
                                                         <form action="{{ route('admin.goals.destroy',['id' => $goal->id]) }}" method="POST">
                                                             @csrf
-                                                           
                                                             <button style="margin-left:10px; border-radius: 0.35rem;" type="submit" class="btn btn-danger">Delete</button>
                                                         </form>
                                                         </div>

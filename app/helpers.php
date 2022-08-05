@@ -2,7 +2,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 //use Exception;
-
+use App\Models\Unit;
+use App\Models\Topic;
 function uploadImageS3($request_file, $filename){     
     
     //Upload File to s3
@@ -23,5 +24,19 @@ function isImageExistsOnAws($image){
 function deleteImageFromS3($file){
     Storage::disk('s3')->delete($file);
 } 
+
+function getUnitName($id){
+    $getUnitName = Unit::where('id',$id)->first();
+    if($getUnitName){
+        return $getUnitName->name;
+    }
+}
+
+function getTopicName($id){
+    $getTopicName = Topic::where('id',$id)->first();
+    if($getTopicName){
+        return $getTopicName->name;
+    }
+}
 
 ?>

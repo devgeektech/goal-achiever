@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $subject_id
  * @property string|null $unit
  * @property string|null $topic
+ * @property string|null $end_date
  * @property string|null $creator_name
  * @property string|null $instructor_name
  * @property string|null $status
@@ -42,8 +43,9 @@ class Goal extends Model
 	protected $fillable = [
 		'user_id',
 		'subject_id',
-		'unit',
-		'topic',
+		'unit_id',
+		'topic_id',
+		'end_date',
 		'creator_name',
 		'instructor_name',
 		'status'

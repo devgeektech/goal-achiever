@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Subject;
 use App\Models\Country;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 use Mail;
 use Exception;
@@ -19,6 +20,10 @@ class IndexController extends Controller
         $countries = Country::get();
         if($countries){
             $data['countries'] = $countries;
+        }
+        $plans = Plan::get();
+        if($plans){
+            $data['plans'] = $plans;
         }
         return view('index', $data);
     }

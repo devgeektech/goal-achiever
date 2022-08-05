@@ -196,41 +196,15 @@
             </div>
           </div>
           <div class="row free-months-row">
+            @foreach($plans as $plan)
             <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 months-area">
               <div class="free-months-area-inner">
-                <p>free <br>
-                  <span>1 Month Of Access</span>
+                <p>{{ $plan->name}} <br>
+                  @if($plan->name != 'FREE') ${{ $plan->price}}@else<span>{{ $plan->price}}</span>@endif
                 </p>
               </div>
             </div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 months-area">
-              <div class="free-months-area">
-                <div class="free-months-area-inner">
-                  <p>Monthly <br>$23 </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 months-area">
-              <div class="free-months-area">
-                <div class="free-months-area-inner">
-                  <p>For 3 Monthly <br>$67 </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 months-area">
-              <div class="free-months-area">
-                <div class="free-months-area-inner">
-                  <p>For 6 Monthly <br>$135 </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 months-area">
-              <div class="free-months-area">
-                <div class="free-months-area-inner">
-                  <p>Year <br>$273 </p>
-                </div>
-              </div>
-            </div>
+            @endforeach
             <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 months-area"></div>
           </div>
       </section>

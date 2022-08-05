@@ -1,14 +1,51 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Subject
+ * 
+ * @property int $id
+ * @property string|null $title
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $image
+ * 
+ * @property Collection|Goal[] $goals
+ * @property Collection|Topic[] $topics
+ * @property Collection|Unit[] $units
+ *
+ * @package App\Models
+ */
 class Subject extends Model
 {
-    protected $fillable = [
-        'title',
-        'image'
-    ];
+	protected $table = 'subjects';
+
+	protected $fillable = [
+		'title',
+		'image'
+	];
+
+	public function goals()
+	{
+		return $this->hasMany(Goal::class);
+	}
+
+	public function topics()
+	{
+		return $this->hasMany(Topic::class);
+	}
+
+	public function units()
+	{
+		return $this->hasMany(Unit::class);
+	}
 }
