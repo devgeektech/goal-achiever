@@ -35,6 +35,9 @@ jQuery(".document_edit").on('click',function() {
  */
 
 $(document).ready(function () {
+    
+    $("#subject_id").val($('#subject').val());
+   
     $('#subject').on('change', function () {
         var subject_id = $(this).val();
         $("#subject_id").val(subject_id);
