@@ -6,12 +6,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
            @include('admin.layouts.topbar')
-           @if ($message = Session::get('success'))
-           <div class="alert alert-success alert-block">
-               <button type="button" class="close" data-dismiss="alert">×</button>    
-               <strong>{{ $message }}</strong>
-           </div>
-           @endif
+           
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -25,6 +20,12 @@
                             <a href="{{ route('admin.goals.index')}}"class="btn btn-primary" style="float: right;">Back</a>
                         </div>
                         <div class="card-body">
+                            @if ($message = Session::get('success'))
+                                <div class="alert alert-success alert-block">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>    
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @endif
                             <form action="{{ route('admin.goals.store') }}" method="post" enctype="multipart/form-data"> 
                                 @csrf
                                 <input type="hidden" name="subject_id" id="subject_id" value="">

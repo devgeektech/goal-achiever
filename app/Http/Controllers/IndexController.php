@@ -57,7 +57,7 @@ class IndexController extends Controller
                 return view('index',$data)->with('success','Great! Successfully send in your mail');
             }
        }catch(Exception $e){
-            return $e->getMessage();
+            return view('index',$data)->with('error',$e->getMessage());
         }
        
     }
