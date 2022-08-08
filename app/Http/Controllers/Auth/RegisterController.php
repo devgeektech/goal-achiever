@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-
+use Mail;
+use Exception;
+use App\Mail\RegisterMail;
 class RegisterController extends Controller
 {
     /*
@@ -63,10 +66,20 @@ class RegisterController extends Controller
         $user = $this->create($data);
         Auth::login($user);
         if(Auth::check()){
-          if($user->role == 3){
-            return redirect()->route("student.dashboard");
+          try{
+            Mail::to('harvinder@geekinformatic.com')->send(new RegisterMail($user));
+              if (Mail::failures()) {
+                return back()->with("errors", "Alert! Failed to register");
+              }else{
+                if($user->role == 3){
+                  return redirect()->route("student.dashboard");
+                }
+                return redirect()->route("admin.dashboard");
+              }
+          }catch(Exception $e){
+                return view('index',$data)->with('error',$e->getMessage());
           }
-          return redirect()->route("admin.dashboard");
+          
         }else{
           return back()->with("errors", "Alert! Failed to register");
         }

@@ -1,6 +1,6 @@
 <!-- Bootstrap core JavaScript-->
 
-<script src="{{URL::to('/admin-panel-panel/vendor/jquery/jquery.min.js')}}"></script>
+<script src="{{URL::to('/admin-panel/vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{URL::to('/admin-panel/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Core plugin JavaScript-->
 <script src="{{URL::to('/admin-panel/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
@@ -18,4 +18,5 @@
 
 <!-- Page level custom scripts -->
 <script src="{{URL::to('/admin-panel/js/demo/datatables-demo.js')}}"></script> 
+
 @stack('js')

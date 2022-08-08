@@ -8,12 +8,16 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item {{ (request()->is('student/dashboard*')) ? 'active' : '' }}">
         <a class="nav-link" href="{{route('student.dashboard') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span></a>
     </li>
-    <li class="nav-item ">
+    <li class="nav-item {{ (request()->is('student/goals*')) ? 'active' : '' }}">
         <a class="nav-link" href="{{route('student.goals.index') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Goals</span></a>
     </li>
+    <li class="nav-item {{ (request()->is('student/plans*')) ? 'active' : '' }}">
+        <a class="nav-link" href="{{route('student.plans.index') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Plans</span></a>
+    </li>
+    
     {{-- <li class="nav-item ">
         <a class="nav-link" href="{{route('admin.goals.index') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Goals</span></a>
     </li> --}}

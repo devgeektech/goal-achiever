@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactUsMail extends Mailable
+class RegisterMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,11 +16,12 @@ class ContactUsMail extends Mailable
      *
      * @return void
      */
-    public $contact;
-    
-    public function __construct($contact)
+
+    public $user;
+
+    public function __construct($user)
     {
-       $this->contact = $contact;
+        $this->user = $user;
     }
 
     /**
@@ -30,9 +31,9 @@ class ContactUsMail extends Mailable
      */
     public function build()
     {
-        $data['contact'] = $this->contact;
+        $data['user'] = $this->user;
        
         return $this->subject('Mail from Islamic Online Learnig Centre')
-                    ->view('emails.contactus', ['contact' => $data]);
+                    ->view('emails.register', ['user' => $data]);
     }
 }

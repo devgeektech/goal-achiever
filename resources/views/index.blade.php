@@ -50,7 +50,7 @@
           <div class="col-lg-7 col-md-6">
             <div class="LeftContent text-white">
               <h6>About The Site</h6>
-              <h1>This Site is Made for students to achieve some educational goal successfully</h1>
+              <h1>This Site is Made for students to achieve some educational goals successfully</h1>
               <a href="#">VIEW ALL GOALS <i class="fa-regular fa-arrow-right ml-2"></i>
               </a>
             </div>

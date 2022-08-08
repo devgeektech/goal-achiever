@@ -17,7 +17,7 @@
               <form method="POST" action="{{ route('student.change-username')}}" enctype="multipart/form-data"> @csrf <div class="row mb-3">
                   <label for="image" class="col-md-4 col-form-label text-md-end"></label>
                   <div class="col-md-6">
-                    <img class="img-profile rounded-circle" src="@if(Auth::user()->profile_image){{Storage::url(Auth::user()->profile_image)}} @else {{URL::to('/admin/img/undraw_profile.svg')}} @endif" height="100px" width="100px">
+                    <img class="img-profile rounded-circle" src="{{ (Auth::user()->profile_image) ? Storage::url(Auth::user()->profile_image) : URL::to('/admin-panel/img/undraw_profile.svg')}}" height="100px" width="100px">
                   </div>
                 </div>
                 <div class="row mb-3">

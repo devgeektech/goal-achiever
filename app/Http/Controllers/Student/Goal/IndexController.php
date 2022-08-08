@@ -16,6 +16,7 @@ class IndexController extends Controller
         if(count($goals)> 0){
             $data['goals'] = $goals;
         }
+        
         return view('student.goals.index',$data);
     }
 

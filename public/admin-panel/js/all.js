@@ -35,7 +35,7 @@ jQuery(".document_edit").on('click',function() {
  */
 
 $(document).ready(function () {
-    
+    $("#planModal").modal('show');
     $("#subject_id").val($('#subject').val());
    
     $('#subject').on('change', function () {

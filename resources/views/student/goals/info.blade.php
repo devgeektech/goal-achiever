@@ -28,11 +28,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="forUnit">Unit</label>
-                                    <input type="text" class="form-control" value="{{ $goal->unit }}" readonly>
+                                    <input type="text" class="form-control" value="{{ getUnitName($goal->unit_id) }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="forTopic">Topic</label>
-                                    <input type="text" class="form-control" value="{{ $goal->topic }}" readonly>
+                                    <input type="text" class="form-control" value="{{ getTopicName($goal->topic_id) }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="forGoalEndDate">Goal End Date</label>

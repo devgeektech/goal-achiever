@@ -28,12 +28,12 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Goals</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Plans</h1>
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Goals</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Plans</h6>
                            
                         </div>
                         <div class="card-body">
@@ -41,39 +41,26 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Subject</th>
-                                            <th>Unit</th>
-                                            <th>Topic</th>
-                                            <th>Goal End Date</th>
-                                            <th>Creator's Name</th>
-                                            <th>Instructor's Name</th>
+                                            <th>Name</th>
+                                            <th>Price</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Subject</th>
-                                            <th>Unit</th>
-                                            <th>Topic</th>
-                                            <th>Goal End Date</th>
-                                            <th>Creator's Name</th>
-                                            <th>Instructor's Name</th>
+                                            <th>Name</th>
+                                            <th>Price</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @isset($goals)
-                                            @foreach ($goals as $goal)                                            
+                                        @isset($plans)
+                                            @foreach ($plans as $plan)                                            
                                                 <tr>
-                                                    <td>{{ $goal->subject->title}}</td>
-                                                    <td>{{ getUnitName($goal->unit_id)}}</td>
-                                                    <td>{{ getTopicName($goal->topic_id)}}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($goal->end_date)->format('j F, Y') }}</td>
-                                                    <td>{{ $goal->creator_name}}</td>
-                                                    <td>{{ $goal->instructor_name}}</td>
+                                                    <td>{{ $plan->name}}</td>
+                                                    <td>{{ $plan->price}}</td>
                                                     <td>
-                                                       <button class="btn btn-primary">Buy</button>
-                                                       <a href="{{ route('student.goals.info',$goal->id) }}" class="btn btn-warning">Info</a>
+                                                       <a href="{{ route('student.plans.info',$plan->id) }}" class="btn btn-warning">Info</a>
                                                     </td>
                                                 </tr>
                                             @endforeach                                           

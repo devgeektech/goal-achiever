@@ -13,3 +13,88 @@
   padding: 10px;
   border-radius: 6px;
 }
+
+
+
+@media (min-width: 768px){
+.col-md-3{width: 20% !important;max-width: 20% !important;}
+
+}
+
+
+
+@media (min-width: 576px){
+.modal-dialog {
+    max-width: 700px;
+    margin: 1.75rem auto;
+}
+}
+
+
+.months-area {
+    padding-left: 4px;
+    padding-right: 4px;
+        margin-bottom: 7px;
+}
+
+.button-checkbox-area {
+  background-color: #000084;
+  padding: 10px;
+  border-radius: 10px;
+      min-height: 100px;
+          display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button-checkbox-area p {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+ margin-bottom: 0px;
+}
+
+.button-checkbox-area p span {
+  font-size: 11px;
+  color: #999;
+  font-weight: 400;
+  line-height: 17px !important;
+  display: block;
+      margin-top: 3px;
+}
+
+
+.button-checkbox-area input[type="radio"] {
+     display: none; 
+  }
+
+.button-checkbox-area input[type="radio"]:checked + label {
+    border: solid 2px #000;
+}
+
+.button-checkbox-area input[type="radio" i] {
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 3px 3px 0px 5px;
+    padding: initial;
+    border: initial;
+}
+
+
+.boxed label {
+  display: inline-block;
+  width: 200px;
+  padding: 10px;
+  border: solid 2px #ccc;
+  transition: all 0.3s;
+}
+
+.boxed input[type="radio"] {
+  display: none;
+}
+
+.boxed input[type="radio"]:checked + label {
+  border: solid 2px green;
+}
