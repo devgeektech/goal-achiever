@@ -23,6 +23,7 @@ class CreateMembershipsTable extends Migration
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->string('plan_days')->nullable();
             $table->string('type')->nullable();
+            $table->string('expiry_date')->nullable();
             $table->timestamps();
         });
     }

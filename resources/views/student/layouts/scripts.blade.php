@@ -17,4 +17,6 @@
 
 <!-- Page level custom scripts -->
 <script src="{{URL::to('/admin-panel/js/demo/datatables-demo.js')}}"></script> 
+<script src="{{URL::to('/admin-panel/js/jquery.slim.min.js')}}"></script>
+<script src="{{URL::to('/admin-panel/js/popper.min.js')}}"></script>
 @stack('js')

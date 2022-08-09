@@ -66,20 +66,16 @@ class RegisterController extends Controller
         $user = $this->create($data);
         Auth::login($user);
         if(Auth::check()){
-          try{
-            Mail::to('harvinder@geekinformatic.com')->send(new RegisterMail($user));
+          
+            /* Mail::to('harvinder@geekinformatic.com')->send(new RegisterMail($user));
               if (Mail::failures()) {
                 return back()->with("errors", "Alert! Failed to register");
-              }else{
+              }else{ */
                 if($user->role == 3){
                   return redirect()->route("student.dashboard");
                 }
                 return redirect()->route("admin.dashboard");
-              }
-          }catch(Exception $e){
-                return view('index',$data)->with('error',$e->getMessage());
-          }
-          
+              //}
         }else{
           return back()->with("errors", "Alert! Failed to register");
         }

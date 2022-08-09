@@ -15,11 +15,12 @@ class IndexController extends Controller
      * Display All Plans
      */
     public function index()
-    {
+    {  
         $data = [];
-        $plans = Plan::latest()->get();
-        if(count($plans)> 0){
-            $data['plans'] = $plans;
+        $data = getMembershipDetails();
+        $membership_plans = Membership::where('student_id', Auth::user()->id)->get();
+        if(count($membership_plans)> 0){
+            $data['membership_plans'] = $membership_plans;
         }
         return view('student.plans.index',$data);
     }
@@ -30,11 +31,12 @@ class IndexController extends Controller
     public function show($id)
     {
        
-       $data = [];
-       $plan = Plan::find($id);
-       if($plan){
+        $data = [];
+        $data = getMembershipDetails();
+        $plan = Plan::find($id);
+        if($plan){
             $data['plan'] = $plan;
-       }   
+        }   
         return view('student.plans.info',$data);
        
     }
@@ -51,23 +53,28 @@ class IndexController extends Controller
         try{
             switch ($request->plan) {
             case '1':
-                $plan_days = date('t');
+                $plan_days = countDays(1);
+                $expire_date = getExpiryDate(1);
                 $type = 'monthly';
                 break;
             case '2':
-                $plan_days = date('t');
+                $plan_days = countDays(1);
+                $expire_date = getExpiryDate(1);
                 $type = 'monthly';
                 break;
             case '3':
-                $plan_days = date('t')*3;
+                $plan_days = countDays(3);
+                $expire_date = getExpiryDate(3);
                 $type = '3 monthly';
                 break;
             case '4':
-                $plan_days = date('t')*6;
+                $plan_days = countDays(6);
+                $expire_date = getExpiryDate(6);
                 $type = '6 monthly';
                 break;
             default:
-                $plan_days = 365;
+                $plan_days = countDays(12);
+                $expire_date = getExpiryDate(12);
                 $type = 'yearly';
             }
             $membership = new Membership;
@@ -76,6 +83,7 @@ class IndexController extends Controller
             $membership->subject_id = $request->plan_subject;
             $membership->plan_days = $plan_days;
             $membership->type = $type;
+            $membership->expiry_date = $expire_date;
             $membership->save();
             if(intval($membership->id) > 0){
                 return redirect()->route('student.dashboard')->with('success',''.$request->name.' Plan has been purchased successfully.');

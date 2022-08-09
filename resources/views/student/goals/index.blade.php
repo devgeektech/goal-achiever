@@ -105,5 +105,5 @@
 
    @endsection
    @push('js')
-   
+    <script src="{{URL::to('/admin-panel/js/all.js')}}"></script>
    @endpush

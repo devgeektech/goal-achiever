@@ -41,26 +41,32 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>Plan</th>
                                             <th>Price</th>
+                                            <th>Service</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>Plan</th>
                                             <th>Price</th>
+                                            <th>Service</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @isset($plans)
-                                            @foreach ($plans as $plan)                                            
+                                        @isset($membership_plans)
+                                            @foreach ($membership_plans as $membership)                                         
                                                 <tr>
-                                                    <td>{{ $plan->name}}</td>
-                                                    <td>{{ $plan->price}}</td>
+                                                    <td>{{ $membership->plan->name}}</td>
+                                                    <td>${{ $membership->plan->price}}</td>
+                                                    <td>{{ $membership->subject->title}}</td>
+                                                    <td><a href="#" class="btn btn-success">@if(strtotime(now()) > strtotime($membership->expiry_date)) Deactivated @else Active @endif</a></td>
                                                     <td>
-                                                       <a href="{{ route('student.plans.info',$plan->id) }}" class="btn btn-warning">Info</a>
+                                                       <a href="{{ route('student.plans.info',$membership->plan_id) }}" class="btn btn-warning">Info</a>
                                                     </td>
                                                 </tr>
                                             @endforeach                                           
@@ -92,5 +98,5 @@
 
    @endsection
    @push('js')
-   
+    <script src="{{URL::to('/admin-panel/js/all.js')}}"></script>
    @endpush

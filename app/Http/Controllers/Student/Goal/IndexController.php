@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Student\Goal;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use App\Models\Goal;
+use Illuminate\Support\Facades\Auth;
 use App\Models\GoalMedia;
+use App\Models\Subject;
+use App\Models\Membership;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 class IndexController extends Controller
 {
     public function index()
     {   
         $data = [];
+        $data = getMembershipDetails();
         $goals = Goal::latest()->get();
         if(count($goals)> 0){
             $data['goals'] = $goals;
@@ -27,6 +31,7 @@ class IndexController extends Controller
     {
        
        $data = [];
+       $data = getMembershipDetails();
        $goal = Goal::find($id);
        if($goal){
             $data['goal'] = $goal;
@@ -43,7 +48,7 @@ class IndexController extends Controller
        if(count($exam_document)> 0){
            $data['exam_document'] = $exam_document;
        }
-       
+      
         return view('student.goals.info',$data);
        
     }

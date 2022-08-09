@@ -35,7 +35,12 @@ jQuery(".document_edit").on('click',function() {
  */
 
 $(document).ready(function () {
-    $("#planModal").modal('show');
+    
+    var is_plan = $('#is_plan').val();
+    var is_plan_expire = $('#plan_expire').val();
+    if((is_plan == 2) || (is_plan_expire == 1)){
+        $('#myModal').modal('show');
+    }
     $("#subject_id").val($('#subject').val());
    
     $('#subject').on('change', function () {

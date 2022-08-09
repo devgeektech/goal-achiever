@@ -7,54 +7,11 @@
         <!-- Main Content -->
         <div id="content">
            @include('student.layouts.topbar')
-       
+            
+           
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 
-                @if(!empty(Session::get('get_plan')) && Session::get('get_plan') == 1)
-                <script>
-                $(function() {
-                    $('#planModal').modal({backdrop: 'static', keyboard: false}, 'show');
-                });
-                </script>
-                @endif
-
-                <!-- Modal -->
-                <div class="modal fade" id="planModal" data-keyboard="false" data-backdrop="static">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Membership</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-                            </div>
-                            <form method="post" action="{{route('student.plans.store')}}">
-                            @csrf
-                                <div class="modal-body"> 
-                                    <p>Select Skill:</p>
-                                    <div class="boxed">
-                                        @foreach($plans as $plan)
-                                            <input type="radio" id="plan_{{$plan->id}}" name="plan" value="{{$plan->id}}">
-                                            <label for="plan_{{$plan->id}}">{{$plan->name}}</label>
-                                        @endforeach
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="goalSubject">Subject</label>
-                                          <select class="form-select form-control"  name="plan_subject" id="plan_subject">
-                                              <option value="">Select Subject</option>
-                                              @foreach($subjects as $subject)
-                                                  <option value="{{$subject->id}}">{{$subject->title}}</option>
-                                              @endforeach   
-                                          </select>
-                                          @error('subject') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Save Plan</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1> <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
