@@ -91,4 +91,12 @@ $(document).ready(function () {
             }
         });
     });
+
+/**
+ * Get months of selected plan in register modal
+ */
+    $('.selct-plan').on('change', function (){
+        var get_months = $(this).find(':input').data('months');
+        $("#plan_months").val(get_months);
+    });
 });

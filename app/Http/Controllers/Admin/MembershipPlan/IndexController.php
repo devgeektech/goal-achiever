@@ -27,12 +27,14 @@ class IndexController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'months' => 'required'
         ]);
         try{
             $plan = new Plan;
             $plan->name = $request->name;
             $plan->price = $request->price;
+            $plan->months = $request->months;
             $plan->save();
             if(intval($plan->id) > 0){
                 return redirect()->route('admin.plans.index')->with('success','Plan has been created successfully.');
@@ -79,11 +81,13 @@ class IndexController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
+            'months' => 'required'
         ]);
         try{
             $plan = Plan::find($id);
             $plan->name = $request->name;
             $plan->price = $request->price;
+            $plan->months = $request->months;
             $plan->save();
             if(intval($plan->id) > 0){
                 return redirect()->route('admin.plans.index')->with('success','Plan has been updated successfully');

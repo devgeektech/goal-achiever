@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string|null $name
  * @property string|null $price
+ * @property string|null $months
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
@@ -29,7 +30,8 @@ class Plan extends Model
 
 	protected $fillable = [
 		'name',
-		'price'
+		'price',
+		'months'
 	];
 
 	public function memberships()

@@ -36,9 +36,13 @@ class IndexController extends Controller
                 $data['subjects'] = $subjects;
             }
             //Get all Plans
-            $plans = DB::table('plans')->whereNotIn('id', function($q){
-                            $q->select('plan_id')->from('memberships');
-                        })->get();
+            $get_free_plan_id = Membership::where('student_id',Auth::user()->id)->where('plan_id', 1)->first();
+           
+            if($get_free_plan_id){
+                $plans = DB::table('plans')->whereNotIn('id', [1])->get();
+            }else{
+                $plans = DB::table('plans')->get();
+            }
             if(count($plans) > 0){
                 $data['plans'] = $plans;
             }

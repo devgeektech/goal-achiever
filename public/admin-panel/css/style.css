@@ -13,7 +13,7 @@ body {
 .selct-plan .card.card-body {
     background-image: url(../images/month-bg-2.png);
     width: 100%;
-    height: 90px;
+    height: 100%;
     background-size: cover;
     background-position: center;
     text-align: center;
@@ -421,6 +421,7 @@ label {
     justify-content: space-evenly;
     border-radius: 5px;
     padding: 0px 0px;
+    margin-left: 21px;
   }
   .btn-wrapper .option{
     background: #fff;
@@ -452,4 +453,20 @@ label {
   #option-1:checked:checked ~ .option-1 span,
   #option-2:checked:checked ~ .option-2 span{
     color: #fff;
+  }
+  .selct-plan {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    align-content: stretch;
+  }
+  
+  .selct-plan .card.card-body h6{
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0px;
+  }
+  .selct-plan .card.card-body h6 span {
+    font-size: 14px;
+    font-weight: 500;
   }

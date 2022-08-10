@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Validator;
 use Mail;
 use Exception;
 use App\Mail\RegisterMail;
+use App\Mail\RegisterMailToAdmin;
+
 class RegisterController extends Controller
 {
     /*
@@ -67,15 +69,16 @@ class RegisterController extends Controller
         Auth::login($user);
         if(Auth::check()){
           
-            /* Mail::to('harvinder@geekinformatic.com')->send(new RegisterMail($user));
+            Mail::to('harvinder@geekinformatic.com')->send(new RegisterMail($user));
+            Mail::to('harvinder@geekinformatic.com')->send(new RegisterMailToAdmin($user));
               if (Mail::failures()) {
                 return back()->with("errors", "Alert! Failed to register");
-              }else{ */
+              }else{ 
                 if($user->role == 3){
                   return redirect()->route("student.dashboard");
                 }
                 return redirect()->route("admin.dashboard");
-              //}
+              }
         }else{
           return back()->with("errors", "Alert! Failed to register");
         }

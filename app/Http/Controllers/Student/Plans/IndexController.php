@@ -53,28 +53,28 @@ class IndexController extends Controller
         try{
             switch ($request->plan) {
             case '1':
-                $plan_days = countDays(1);
-                $expire_date = getExpiryDate(1);
+                $plan_days = countDays($request->plan_months);
+                $expire_date = getExpiryDate($request->plan_months);
                 $type = 'monthly';
                 break;
             case '2':
-                $plan_days = countDays(1);
-                $expire_date = getExpiryDate(1);
+                $plan_days = countDays($request->plan_months);
+                $expire_date = getExpiryDate($request->plan_months);
                 $type = 'monthly';
                 break;
             case '3':
-                $plan_days = countDays(3);
-                $expire_date = getExpiryDate(3);
+                $plan_days = countDays($request->plan_months);
+                $expire_date = getExpiryDate($request->plan_months);
                 $type = '3 monthly';
                 break;
             case '4':
-                $plan_days = countDays(6);
-                $expire_date = getExpiryDate(6);
+                $plan_days = countDays($request->plan_months);
+                $expire_date = getExpiryDate($request->plan_months);
                 $type = '6 monthly';
                 break;
             default:
-                $plan_days = countDays(12);
-                $expire_date = getExpiryDate(12);
+                $plan_days = countDays($request->plan_months);
+                $expire_date = getExpiryDate($request->plan_months);
                 $type = 'yearly';
             }
             $membership = new Membership;
@@ -83,6 +83,7 @@ class IndexController extends Controller
             $membership->subject_id = $request->plan_subject;
             $membership->plan_days = $plan_days;
             $membership->type = $type;
+            $membership->subscription = $request->subscription_type;
             $membership->expiry_date = $expire_date;
             $membership->save();
             if(intval($membership->id) > 0){

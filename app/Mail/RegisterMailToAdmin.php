@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class RegisterMail extends Mailable
+class RegisterMailToAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,9 +16,7 @@ class RegisterMail extends Mailable
      *
      * @return void
      */
-
     public $user;
-
     public function __construct($user)
     {
         $this->user = $user;
@@ -33,6 +31,6 @@ class RegisterMail extends Mailable
     {
         $data['user'] = $this->user;
         return $this->subject('Mail from Islamic Online Learnig Centre')
-                    ->view('emails.register', ['user' => $data]);
+                    ->view('emails.register-mail-to-admin', ['user' => $data]);
     }
 }

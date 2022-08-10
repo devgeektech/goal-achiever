@@ -41,6 +41,12 @@
                                       <input type="text" name="price" value="{{ $plan->price ?? "" }}" class="form-control" placeholder="Price"> @error('price') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                      <strong>Months:</strong>
+                                      <input type="text" name="months" value="{{ $plan->months ?? "" }}" class="form-control" placeholder="Months"> @error('months') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
                                 <button type="submit" class="btn btn-primary ml-3">Update</button>
                               </div>
                             </form>

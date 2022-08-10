@@ -1,7 +1,5 @@
 @extends('admin.layouts.master')
-
 @section('content')
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -17,7 +15,6 @@
             </div>
             @endif
            </div>
-
            @if ($message = Session::get('success'))
            <div class="alert alert-success alert-block">
                <button type="button" class="close" data-dismiss="alert">×</button>    
@@ -39,7 +36,6 @@
                         <div class="card-body">
                             <form action="{{ route('admin.plans.store') }}" method="post" enctype="multipart/form-data"> 
                                 @csrf
-                                
                                 <div class="form-group">
                                   <label for="planName">Name</label>
                                   <input type="text" class="form-control" name="name" id="name" placeholder="Name">
@@ -48,6 +44,10 @@
                                     <label for="planPrice">Price</label>
                                     <input type="text" class="form-control" name="price" id="price" placeholder="Price">
                                 </div>
+                                <div class="form-group">
+                                    <label for="planMonths">Months</label>
+                                    <input type="text" class="form-control" name="months" id="months" placeholder="For how many months">
+                                </div>
                                 <button type="submit" class="btn btn-primary">Add</button>
                               </form>
                         </div>
@@ -55,11 +55,8 @@
 
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
-
-           
         </div>
         <!-- End of Content Wrapper -->
 

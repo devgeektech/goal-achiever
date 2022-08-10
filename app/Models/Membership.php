@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $subject_id
  * @property string|null $plan_days
  * @property string|null $type
+ * @property string|null $subscription
+ * @property string|null $expiry_date
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
@@ -43,6 +45,7 @@ class Membership extends Model
 		'subject_id',
 		'plan_days',
 		'type',
+		'subscription',
 		'expiry_date'
 	];
 

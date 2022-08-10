@@ -17,6 +17,7 @@ class CreatePlansTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('price')->nullable();
+            $table->string('months')->nullable();
             $table->timestamps();
         });
     }

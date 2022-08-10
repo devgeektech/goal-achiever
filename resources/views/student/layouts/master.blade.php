@@ -14,7 +14,6 @@
 	<!-- Custom styles for this template-->
 	<link href="{{URL::to('/admin-panel/css/sb-admin-2.min.css')}}" rel="stylesheet"> </head>
 	<link href="{{URL::to('/admin-panel/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{URL::to('/admin-panel/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{URL::to('/admin-panel/css/style.css')}}">
 <body id="page-top">
 	<!-- Page Wrapper -->
@@ -32,7 +31,7 @@
 	<input type="hidden" name="plan_expire" id="plan_expire" value="{{ Session::get('plan_expire') }}">
 
 	<!-- Modal -->
-	<div id="myModal" class="modal">
+	<div id="myModal" class="modal" data-backdrop="static" data-keyboard="false">
 
 
 	<!-- Modal content -->
@@ -65,83 +64,35 @@
 									</li>
 								</ul>
 							</div>
-
-							<form role="form" action="index.html" class="login-box">
+							
+							<form action="{{ route('student.plans.store') }}" method="post" enctype="multipart/form-data"> 
+								@csrf
 								<div class="tab-content" id="main_form">
 									<div class="tab-pane active" role="tabpanel" id="step1">
 										<h4 class="text-center">Select Plan</h4>
 										<div class="plan row free-months-row">
 												<div class="container">
 													<div class="row mt-4">
-														<div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
-
-															<label>
-																<input type="radio" name="demo" class="card-input-element d-none" id="demo1">
-																<div class="card card-body bg-light d-flex justify-content-center  align-items-center">
-																	<div class="box mb-2 d-flex flex-column align-items-center text-dark">
-
-																		<h6>FREE</h6>
+														<input type="hidden" name="plan_months" id="plan_months" value="">
+														@foreach ($plans as $plan)
+															<div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
+																<label>
+																	<input type="radio" data-months="{{$plan->months}}" name="plan" class="card-input-element d-none plan-input" id="plan" value="{{$plan->id}}">
+																	
+																	<div class="card card-body bg-light">
+																		<div class="box mb-2">
+																			<h6>{{$plan->name}} <br>@if($plan->name == 'FREE') <span>${{ $plan->price}}</span> @else ${{ $plan->price}}@endif</h6>
+																		</div>
 																	</div>
-																</div>
-															</label>
-														</div>
-														<div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
-
-															<label>
-																<input type="radio" name="demo" class="card-input-element d-none" id="demo1">
-																<div class="card card-body bg-light d-flex justify-content-center align-items-center">
-																	<div class="box mb-2  d-flex flex-column align-items-center">
-
-																		<h6>MONTHLY</h6>
-																	</div>
-																</div>
-															</label>
-														</div>
-														<div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
-
-															<label>
-																<input type="radio" name="demo" class="card-input-element d-none" id="demo3">
-																<div class="card card-body bg-light d-flex justify-content-center  align-items-center">
-																	<div class="box mb-2  d-flex flex-column align-items-center">
-
-																		<h6>FOR 3 MONTHS</h6>
-																	</div>
-																</div>
-															</label>
-														</div>
-														<div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
-
-															<label>
-																<input type="radio" name="demo" class="card-input-element d-none" id="demo4">
-																<div class="card card-body bg-light d-flex justify-content-center  align-items-center">
-																	<div class="box mb-2  d-flex flex-column align-items-center">
-
-																		<h6>FOR 6 MONTHS</h6>
-																	</div>
-																</div>
-															</label>
-														</div>
-														<div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan mt-3 mt-md-0">
-
-															<label>
-																<input type="radio" name="demo" class="card-input-element d-none" id="demo5">
-																<div class="card card-body bg-light d-flex justify-content-center  align-items-center">
-																	<div class="box mb-2  d-flex flex-column align-items-center">
-
-																		<h6>YEAR</h6>
-																	</div>
-																</div>
-															</label>
-														</div>
-
-
+																</label>
+															</div>
+														@endforeach
 													</div>
-
+													@error('plan') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
 												</div>
 										</div>
 										<ul class="list-inline pull-right">
-											<li><button type="button" class="default-btn next-step">Continue to next
-													step</button></li>
+											<li><button type="button" class="default-btn next-step">Continue</button></li>
 										</ul>
 									</div>
 
@@ -149,95 +100,22 @@
 										<h4 class="text-center">Select Subject</h4>
 										<div class="container">
 											<div class="row mt-4">
+												@foreach ($subjects as $subject)
 												<div class="col-lg-3 col-md-4 edu-popup">
-
 													<label>
-														<input type="radio" name="demo" class="card-input-element d-none" id="demo1">
+														<input type="radio" name="plan_subject" class="card-input-element d-none" id="demo1" value="{{$subject->id}}">
 														<div class="card card-body bg-light d-flex justify-content-center  align-items-center">
-															<div class="box mb-2 d-flex flex-column align-items-center text-dark">
-																<img src="{{URL::to('./images/quran-img.png')}}" />
-																<h6>Quran</h6>
+															<div class="box mb-2 d-flex flex-column align-items-center text-white">
+																<img src="{{Storage::url($subject->image)}}" />
+																<h6>{{$subject->title}}</h6>
 															</div>
 														</div>
 													</label>
 												</div>
-												<div class="col-lg-3 col-md-4 edu-popup">
-
-													<label>
-														<input type="radio" name="demo" class="card-input-element d-none" id="demo1">
-														<div class="card card-body bg-light d-flex justify-content-center  align-items-center">
-															<div class="box mb-2 text-white d-flex flex-column align-items-center">
-																<img src="{{URL::to('./images/islam-img.png')}}" />
-																<h6>Islam</h6>
-															</div>
-														</div>
-													</label>
-												</div>
-												<div class="col-lg-3 col-md-4 edu-popup">
-
-													<label>
-														<input type="radio" name="demo" class="card-input-element d-none" id="demo3">
-														<div class="card card-body bg-light d-flex justify-content-center  align-items-center">
-															<div class="box mb-2 text-white d-flex flex-column align-items-center">
-																<img src="{{URL::to('./images/arabic-png.png')}}" />
-																<h6>Arabic</h6>
-															</div>
-														</div>
-													</label>
-												</div>
-												<div class="col-lg-3 col-md-4 edu-popup">
-
-													<label>
-														<input type="radio" name="demo" class="card-input-element d-none" id="demo4">
-														<div class="card card-body bg-light d-flex justify-content-center  align-items-center">
-															<div class="box mb-2 text-white d-flex flex-column align-items-center">
-																<img src="{{URL::to('./images/english-img.png')}}" />
-																<h6>English</h6>
-															</div>
-														</div>
-													</label>
-												</div>
-												<div class="col-lg-3 col-md-4 edu-popup mt-3 mt-md-0">
-
-													<label>
-														<input type="radio" name="demo" class="card-input-element d-none" id="demo5">
-														<div class="card card-body bg-light d-flex justify-content-center  align-items-center">
-															<div class="box mb-2 text-white d-flex flex-column align-items-center">
-																<img src="{{URL::to('./images/dhivehi-img.png')}}" />
-																<h6>Dhivehi</h6>
-															</div>
-														</div>
-													</label>
-												</div>
-												<div class="col-lg-3 col-md-4 edu-popup mt-3 mt-md-0">
-
-													<label>
-														<input type="radio" name="demo" class="card-input-element d-none" id="demo6">
-														<div class="card card-body bg-light d-flex justify-content-center  align-items-center">
-															<div class="box mb-2 text-white d-flex flex-column align-items-center">
-																<img src="{{URL::to('./images/computer-img.png')}}" />
-																<h6>Computer</h6>
-															</div>
-														</div>
-													</label>
-												</div>
-												<div class="col-lg-3 col-md-4 edu-popup mt-3 mt-md-0">
-
-													<label>
-														<input type="radio" name="demo" class="card-input-element d-none" id="demo7">
-														<div class="card card-body bg-light d-flex justify-content-center  align-items-center">
-															<div class="box mb-2 text-white d-flex flex-column align-items-center">
-																<img src="{{URL::to('./images/math-img.png')}}" />
-																<h6>Math</h6>
-															</div>
-														</div>
-													</label>
-												</div>
+												@endforeach
 											</div>
-
+											@error('plan_subject') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
 										</div>
-
-
 										<ul class="list-inline pull-right">
 											<li><button type="button" class="default-btn prev-step">Back</button></li>
 											<li><button type="button" class="default-btn next-step">Continue</button>
@@ -247,11 +125,22 @@
 									<div class="tab-pane" role="tabpanel" id="step3">
 										<h4 class="text-center">Payment</h4>
 										<div class="container">
-											<div class='row'>
+											<label class="payment-label pl-3">What type of subscription you want to select?</label>
+											<div class='row my-4'>
+												<div class="btn-wrapper">
+													<input type="radio" name="subscription_type" id="option-1" value="manual" checked>
+													<input type="radio" name="subscription_type" id="option-2" value="auto">
+													  <label for="option-1" class="option option-1">
+
+														 <span>Manual</span>
+														 </label>
+													  <label for="option-2" class="option option-2">
+														 <span>Auto</span>
+													  </label>
+												   </div>
+												</div>
 
 												<div class='col-md-12'>
-												  <script src='https://js.stripe.com/v2/' type='text/javascript'></script>
-												  <form accept-charset="UTF-8" action="/" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /><input name="_method" type="hidden" value="PUT" /><input name="authenticity_token" type="hidden" value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8=" /></div>
 													<div class='form-row'>
 													  <div class=' col-md-12 col-xs-12 form-group required'>
 														<label class='control-label'>Name on Card</label>
@@ -288,35 +177,18 @@
 													</div>
 													<div class='form-row'>
 													  <div class='col-md-12 form-group mt-2'>
-														<button class='form-control btn btn-primary submit-button' type='submit'>Pay »</button>
+														<button class='form-control btn btn-primary submit-button' type='button'>Pay »</button>
 													  </div>
 													</div>
-												  </form>
-												  <div class="btn-wrapper">
-													<input type="radio" name="select" id="option-1" checked>
-													<input type="radio" name="select" id="option-2">
-													  <label for="option-1" class="option option-1">
-
-														 <span>Manual</span>
-														 </label>
-													  <label for="option-2" class="option option-2">
-														 <span>Auto</span>
-													  </label>
-												   </div>
 												</div>
-
-											</div>
 										</div>
 										<ul class="list-inline pull-right">
 											<li><button type="button" class="default-btn prev-step">Back</button></li>
-											<li><button type="button" class="default-btn next-step">Continue</button>
+											<li><button type="submit" class="default-btn next-step">Continue</button>
 											</li>
 										</ul>
 									</div>
-
-									<div class="clearfix"></div>
 								</div>
-
 							</form>
 						</div>
 					</div>

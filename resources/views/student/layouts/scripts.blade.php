@@ -14,9 +14,6 @@
 <!-- Page level plugins -->
 <script src="{{URL::to('/admin-panel/vendor/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{URL::to('/admin-panel/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-
 <!-- Page level custom scripts -->
 <script src="{{URL::to('/admin-panel/js/demo/datatables-demo.js')}}"></script> 
-<script src="{{URL::to('/admin-panel/js/jquery.slim.min.js')}}"></script>
-<script src="{{URL::to('/admin-panel/js/popper.min.js')}}"></script>
 @stack('js')

@@ -36,7 +36,8 @@
                                             <input type="text" class="form-control" value="{{ $plan->price }}" readonly>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary ml-3">Buy</button>
+                                    
+                                    <button type="button" class="btn btn-primary ml-3">Buy</button>
                                 </div>
                             </form>
                         </div>
