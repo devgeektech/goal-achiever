@@ -74,10 +74,11 @@
 												<div class="container">
 													<div class="row mt-4">
 														<input type="hidden" name="plan_months" id="plan_months" value="">
+														<input type="hidden" name="plan_name" id="plan_name" value="">
 														@foreach ($plans as $plan)
 															<div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
 																<label>
-																	<input type="radio" data-months="{{$plan->months}}" name="plan" class="card-input-element d-none plan-input" id="plan" value="{{$plan->id}}">
+																	<input type="radio" data-name="{{$plan->name}}" data-months="{{$plan->months}}" name="plan" class="card-input-element d-none plan-input" id="plan" value="{{$plan->id}}">
 																	
 																	<div class="card card-body bg-light">
 																		<div class="box mb-2">

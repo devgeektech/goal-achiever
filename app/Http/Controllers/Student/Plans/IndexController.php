@@ -87,7 +87,7 @@ class IndexController extends Controller
             $membership->expiry_date = $expire_date;
             $membership->save();
             if(intval($membership->id) > 0){
-                return redirect()->route('student.dashboard')->with('success',''.$request->name.' Plan has been purchased successfully.');
+                return redirect()->route('student.dashboard')->with('success','Plan "'.$request->plan_name.'" has been purchased successfully.');
             }
         }catch(Exception $e){
             return redirect()->route('student.dashboard')->with('error',$e->getMessage());

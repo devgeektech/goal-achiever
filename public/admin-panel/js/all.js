@@ -97,6 +97,8 @@ $(document).ready(function () {
  */
     $('.selct-plan').on('change', function (){
         var get_months = $(this).find(':input').data('months');
+        var get_plan_name = $(this).find(':input').data('name');
         $("#plan_months").val(get_months);
+        $("#plan_name").val(get_plan_name);
     });
 });
