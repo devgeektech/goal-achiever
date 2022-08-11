@@ -98,7 +98,89 @@ $(document).ready(function () {
     $('.selct-plan').on('change', function (){
         var get_months = $(this).find(':input').data('months');
         var get_plan_name = $(this).find(':input').data('name');
+        var get_plan_price = $(this).find(':input').data('price');
+        if(get_plan_price == '1 MONTH OF ACCESS'){
+            get_plan_price = 0;
+            $.ajax({
+                success: function () {
+                    $('.subscription-type').html("");
+                    $('.subscription-type').append('<div class="btn-wrapper"><input type="radio" name="subscription_type" id="option-1" value="manual" checked><label for="option-1" class="option option-1"><span>Manual</span></label></div>');
+                }
+            });
+        }else{
+            $.ajax({
+                success: function () {
+                    $('.subscription-type').html("");
+                    $('.subscription-type').append('<div class="btn-wrapper"><input type="radio" name="subscription_type" id="option-1" value="manual" checked><input type="radio" name="subscription_type" id="option-2" value="auto"><label for="option-1" class="option option-1"><span>Manual</span></label><label for="option-2" class="option option-2"><span>Auto</span></label></div>');
+                }
+            });
+        }
         $("#plan_months").val(get_months);
         $("#plan_name").val(get_plan_name);
+        $("#plan_price").val(get_plan_price);
+        $("#total_amount").text('$'+get_plan_price);
+
+        
+
     });
+/**
+ * Steps functionality
+ */
+ // ------------step-wizard-------------
+    $(document).ready(function () {
+        $('.nav-tabs > li a[title]').tooltip();
+        //Wizard
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target);
+            if (target.parent().hasClass('disabled')) {
+                return false;
+            }
+        });
+        $(".next-step").click(function (e) {
+            if($(this).hasClass('subject_button')){
+                if( $("input[name='plan_subject']").is(':checked') ){
+                    var active = $('.wizard .nav-tabs li.active');
+                    active.next().removeClass('disabled');
+                    nextTab(active);
+                    $('.plan_subject_error').text("");
+                }
+                else{
+                    $('.plan_subject_error').css('color','red').text("Please choose atleast one subject :)");
+                    return false;
+                }
+            }
+            if( $("input[name='plan']").is(':checked') ){
+                var active = $('.wizard .nav-tabs li.active');
+                active.next().removeClass('disabled');
+                nextTab(active);
+                $('.plan_error').text("");
+            }
+            else{
+                $('.plan_error').css('color','red').text("Please choose atleast one plan :)");
+                return false;
+            }
+            
+        });
+        $(".prev-step").click(function (e) {
+            var active = $('.wizard .nav-tabs li.active');
+            prevTab(active);
+        });
+    });
+    function nextTab(elem) {
+        $(elem).next().find('a[data-toggle="tab"]').click();
+    }
+    function prevTab(elem) {
+        $(elem).prev().find('a[data-toggle="tab"]').click();
+    }
+    $('.nav-tabs').on('click', 'li', function () {
+        $('.nav-tabs li.active').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    jQuery("#plan_form").validate({
+          submitHandler: function(form) {
+            form.submit();
+          }
+     });
+     
 });

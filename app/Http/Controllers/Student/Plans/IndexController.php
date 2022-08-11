@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Plan;
 use App\Models\Membership;
+use App\Models\Payment;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,10 @@ class IndexController extends Controller
         if(count($membership_plans)> 0){
             $data['membership_plans'] = $membership_plans;
         }
+        $card_details = Payment::where('student_id', Auth::user()->id)->get();
+        if(count($card_details)> 0){
+            $data['card_details'] = $card_details;
+        }
         return view('student.plans.index',$data);
     }
 
@@ -36,6 +41,10 @@ class IndexController extends Controller
         $plan = Plan::find($id);
         if($plan){
             $data['plan'] = $plan;
+        }   
+        $payment = Payment::where('plan_id',$id)->first();
+        if($payment){
+            $data['payment'] = $payment;
         }   
         return view('student.plans.info',$data);
        
@@ -87,7 +96,18 @@ class IndexController extends Controller
             $membership->expiry_date = $expire_date;
             $membership->save();
             if(intval($membership->id) > 0){
-                return redirect()->route('student.dashboard')->with('success','Plan "'.$request->plan_name.'" has been purchased successfully.');
+                $payment = new Payment;
+                $payment->plan_id = $request->plan;
+                $payment->student_id = Auth::user()->id;
+                $payment->subject_id = $request->plan_subject;
+                $payment->name_on_card = base64_encode($request->name_on_card);
+                $payment->card_number = substr_replace($request->card_number, str_repeat("X", 8), 4, 8);
+                $payment->cvc = substr_replace($request->cvc_number, str_repeat("X", 2), 0, 2);
+                $payment->expiration_date = base64_encode($request->expiration_month.'/'.$request->expiration_year);
+                $payment->save();
+                if(intval($membership->id) > 0){
+                    return redirect()->route('student.dashboard')->with('success','Plan "'.$request->plan_name.'" has been purchased successfully.');
+                }
             }
         }catch(Exception $e){
             return redirect()->route('student.dashboard')->with('error',$e->getMessage());

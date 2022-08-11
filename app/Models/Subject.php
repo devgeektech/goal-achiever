@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $image
  * 
  * @property Collection|Goal[] $goals
+ * @property Collection|Membership[] $memberships
+ * @property Collection|Payment[] $payments
  * @property Collection|Topic[] $topics
  * @property Collection|Unit[] $units
  *
@@ -37,6 +39,16 @@ class Subject extends Model
 	public function goals()
 	{
 		return $this->hasMany(Goal::class);
+	}
+
+	public function memberships()
+	{
+		return $this->hasMany(Membership::class);
+	}
+
+	public function payments()
+	{
+		return $this->hasMany(Payment::class);
 	}
 
 	public function topics()

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Storage;
 //use Exception;
 use App\Models\Unit;
 use App\Models\Topic;
+use App\Models\Plan;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Subject;
 use App\Models\Membership;
@@ -54,10 +55,14 @@ function getMembershipDetails(){
         }
         Session::put('set_plan', $set_plan);
         foreach($plan_details as $key => $val){
-            if(strtotime(now()) > strtotime($val->expiry_date)){
+            if((strtotime(now()) > strtotime($val->expiry_date)) && ($val->subscription == 'manual')){
                 Session::put('plan_expire', 1);
             }else{
-                Session::put('plan_expire', 2);
+                if((strtotime(now()) > strtotime($val->expiry_date)) && ($val->subscription == 'auto')){
+                    $new_expiry_date = getNewExpiryDate($val->plan_id,$val->expiry_date);
+                    update_membership_plan($val->id,$new_expiry_date);
+                    Session::put('plan_expire', 2);
+                }
             }
         }
         //Get subjects
@@ -66,9 +71,12 @@ function getMembershipDetails(){
             $data['subjects'] = $subjects;
         }
         //Get all Plans
-        $plans = DB::table('plans')->whereNotIn('id', function($q){
-                        $q->select('plan_id')->from('memberships');
-                    })->get();
+        $get_free_plan_id = Membership::where('student_id',Auth::user()->id)->first();
+        if(!empty($get_free_plan_id)){
+            $plans = DB::table('plans')->whereNotIn('id', [1])->get();
+        }else{
+            $plans = DB::table('plans')->get();
+        }
 
         if(count($plans) > 0){
             $data['plans'] = $plans;
@@ -85,6 +93,18 @@ function countDays($plan_id){
 function getExpiryDate($plan_id){
     $expiry_date = date('Y-m-d', strtotime("+".$plan_id." months", strtotime(now())));
     return $expiry_date;
+}
+
+function update_membership_plan($id,$expiry_date){
+    $membership = Membership::find($id);
+    $membership->expiry_date = $expiry_date;
+    $membership->save();
+}
+
+function getNewExpiryDate($plan_id,$expiry_date){
+    $get_months = Plan::where('id',$plan_id)->first();
+    $new_expiry_date = date('Y-m-d', strtotime("+".$get_months->months." months", strtotime($expiry_date)));
+    return $new_expiry_date;
 }
 
 ?>

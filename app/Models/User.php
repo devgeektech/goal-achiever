@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 /**
  * Class User
  * 
@@ -25,6 +26,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string|null $profile_image
  * 
  * @property Collection|Goal[] $goals
+ * @property Collection|Membership[] $memberships
+ * @property Collection|Payment[] $payments
+ * @property Collection|TakenGoal[] $taken_goals
  *
  * @package App\Models
  */
@@ -60,5 +64,20 @@ class User extends Authenticatable
 	public function goals()
 	{
 		return $this->hasMany(Goal::class);
+	}
+
+	public function memberships()
+	{
+		return $this->hasMany(Membership::class, 'student_id');
+	}
+
+	public function payments()
+	{
+		return $this->hasMany(Payment::class, 'student_id');
+	}
+
+	public function taken_goals()
+	{
+		return $this->hasMany(TakenGoal::class, 'student_id');
 	}
 }

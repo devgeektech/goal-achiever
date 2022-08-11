@@ -16,4 +16,5 @@
 <script src="{{URL::to('/admin-panel/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 <!-- Page level custom scripts -->
 <script src="{{URL::to('/admin-panel/js/demo/datatables-demo.js')}}"></script> 
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 @stack('js')

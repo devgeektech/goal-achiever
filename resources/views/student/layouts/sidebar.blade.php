@@ -12,7 +12,10 @@
         <a class="nav-link" href="{{route('student.dashboard') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span></a>
     </li>
     <li class="nav-item {{ (request()->is('student/goals*')) ? 'active' : '' }}">
-        <a class="nav-link" href="{{route('student.goals.index') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Goals</span></a>
+        <a class="nav-link" href="{{route('student.goals.index') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>All Goals</span></a>
+    </li>
+    <li class="nav-item {{ (request()->is('student/taken_goals*')) ? 'active' : '' }}">
+        <a class="nav-link" href="{{route('student.taken_goals.index') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Taken Goals</span></a>
     </li>
     <li class="nav-item {{ (request()->is('student/plans*')) ? 'active' : '' }}">
         <a class="nav-link" href="{{route('student.plans.index') }}"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Plans</span></a>

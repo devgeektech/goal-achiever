@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Membership;
 use App\Models\Subject;
+use App\Models\Plan;
 use Exception;
 use Illuminate\Support\Facades\Session;
 class IndexController extends Controller
@@ -23,11 +24,16 @@ class IndexController extends Controller
                 $set_plan = 2;
             }
             Session::put('set_plan', $set_plan);
+        
             foreach($plan_details as $key => $val){
-                if(strtotime(now()) > strtotime($val->expiry_date)){
+                if((strtotime(now()) > strtotime($val->expiry_date)) && ($val->subscription == 'manual')){
                     Session::put('plan_expire', 1);
                 }else{
-                    Session::put('plan_expire', 2);
+                    if((strtotime(now()) > strtotime($val->expiry_date)) && ($val->subscription == 'auto')){
+                        $new_expiry_date = getNewExpiryDate($val->plan_id,$val->expiry_date);
+                        update_membership_plan($val->id,$new_expiry_date);
+                        Session::put('plan_expire', 2);
+                    }
                 }
             }
             //Get subjects
@@ -36,13 +42,13 @@ class IndexController extends Controller
                 $data['subjects'] = $subjects;
             }
             //Get all Plans
-            $get_free_plan_id = Membership::where('student_id',Auth::user()->id)->where('plan_id', 1)->first();
-           
-            if($get_free_plan_id){
+            $get_free_plan_id = Membership::where('student_id',Auth::user()->id)->first();
+            if(!empty($get_free_plan_id)){
                 $plans = DB::table('plans')->whereNotIn('id', [1])->get();
             }else{
                 $plans = DB::table('plans')->get();
             }
+            
             if(count($plans) > 0){
                 $data['plans'] = $plans;
             }

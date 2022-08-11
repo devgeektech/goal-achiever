@@ -41,6 +41,7 @@
 
 		<section class="signup-step-container">
 			<h3 class="popup-heading text-center">Membership</h3>
+			<hr>
 			<div class="container mt-5">
 				<div class="row d-flex justify-content-center">
 					<div class="col-md-12 col-lg-12">
@@ -65,7 +66,7 @@
 								</ul>
 							</div>
 							
-							<form action="{{ route('student.plans.store') }}" method="post" enctype="multipart/form-data"> 
+							<form action="{{ route('student.plans.store') }}" method="post" id="plan_form" enctype="multipart/form-data"> 
 								@csrf
 								<div class="tab-content" id="main_form">
 									<div class="tab-pane active" role="tabpanel" id="step1">
@@ -75,10 +76,11 @@
 													<div class="row mt-4">
 														<input type="hidden" name="plan_months" id="plan_months" value="">
 														<input type="hidden" name="plan_name" id="plan_name" value="">
+														<input type="hidden" name="plan_price" id="plan_price" value="">
 														@foreach ($plans as $plan)
 															<div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
 																<label>
-																	<input type="radio" data-name="{{$plan->name}}" data-months="{{$plan->months}}" name="plan" class="card-input-element d-none plan-input" id="plan" value="{{$plan->id}}">
+																	<input type="radio" data-price="{{$plan->price}}" data-name="{{$plan->name}}" data-months="{{$plan->months}}" name="plan" class="card-input-element d-none plan-input" id="plan" value="{{$plan->id}}">
 																	
 																	<div class="card card-body bg-light">
 																		<div class="box mb-2">
@@ -89,14 +91,14 @@
 															</div>
 														@endforeach
 													</div>
+													<span class="plan_error"></span>
 													@error('plan') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
 												</div>
 										</div>
 										<ul class="list-inline pull-right">
-											<li><button type="button" class="default-btn next-step">Continue</button></li>
+											<li><button type="button" class="default-btn next-step plans_button">Continue</button></li>
 										</ul>
 									</div>
-
 									<div class="tab-pane" role="tabpanel" id="step2">
 										<h4 class="text-center">Select Subject</h4>
 										<div class="container">
@@ -115,77 +117,60 @@
 												</div>
 												@endforeach
 											</div>
+											<span class="plan_subject_error"></span>
 											@error('plan_subject') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
 										</div>
 										<ul class="list-inline pull-right">
 											<li><button type="button" class="default-btn prev-step">Back</button></li>
-											<li><button type="button" class="default-btn next-step">Continue</button>
+											<li><button type="button" class="default-btn next-step subject_button">Continue</button>
 											</li>
 										</ul>
 									</div>
 									<div class="tab-pane" role="tabpanel" id="step3">
 										<h4 class="text-center">Payment</h4>
 										<div class="container">
-											<label class="payment-label pl-3">What type of subscription you want to select?</label>
-											<div class='row my-4'>
-												<div class="btn-wrapper">
-													<input type="radio" name="subscription_type" id="option-1" value="manual" checked>
-													<input type="radio" name="subscription_type" id="option-2" value="auto">
-													  <label for="option-1" class="option option-1">
-
-														 <span>Manual</span>
-														 </label>
-													  <label for="option-2" class="option option-2">
-														 <span>Auto</span>
-													  </label>
-												   </div>
-												</div>
-
+											<label class="payment-label pl-3 text-center">What type of subscription you want to select?</label>
+											<div class='row my-4 justify-content-center subscription-type'></div>
 												<div class='col-md-12'>
 													<div class='form-row'>
 													  <div class=' col-md-12 col-xs-12 form-group required'>
 														<label class='control-label'>Name on Card</label>
-														<input class='form-control' size='4' type='text'>
+														<input class='form-control' size='4' type='text' name="name_on_card" required>
 													  </div>
 													</div>
 													<div class='form-row'>
 													  <div class=' col-md-12 col-xs-12 form-group required'>
 														<label class='control-label'>Card Number</label>
-														<input autocomplete='off' class='form-control card-number' size='20' type='text'>
+														<input id="cr_no" type="text" maxlength="16" name="card_number" class='form-control card-number' placeholder="xxxx xxxx xxxx xxxx" required>
 													  </div>
 													</div>
 													<div class='form-row'>
 													  <div class='col-xs-4 col-md-4 form-group cvc required'>
 														<label class='control-label'>CVC</label>
-														<input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'>
+														<input autocomplete='off'  name="cvc_number" class='form-control card-cvc' placeholder='ex. 311' size='4' type='text' required>
 													  </div>
 													  <div class='col-xs-4 col-md-4 form-group expiration required'>
 														<label class='control-label'>Expiration</label>
-														<input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
+														<input class='form-control card-expiry-month' name="expiration_month" placeholder='MM' size='2' type='text' required>
 													  </div>
 													  <div class='col-xs-4 col-md-4 form-group expiration required'>
 														<label class='control-label'> </label>
-														<input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
+														<input class='form-control card-expiry-year' name="expiration_year" placeholder='YYYY' size='4' type='text' required>
 													  </div>
 													</div>
 													<div class='form-row'>
 													  <div class='col-md-12'>
 														<div class='form-control total btn btn-info'>
-														  Total:
-														  <span class='amount'></span>
+														  Total: 
+														  <span class='amount' id="total_amount"></span>
 														</div>
-													  </div>
-													</div>
-													<div class='form-row'>
-													  <div class='col-md-12 form-group mt-2'>
-														<button class='form-control btn btn-primary submit-button' type='button'>Pay »</button>
 													  </div>
 													</div>
 												</div>
 										</div>
 										<ul class="list-inline pull-right">
 											<li><button type="button" class="default-btn prev-step">Back</button></li>
-											<li><button type="submit" class="default-btn next-step">Continue</button>
+											<li><button type="submit" class="default-btn next-step">Pay</button>
 											</li>
 										</ul>
 									</div>
@@ -224,47 +209,4 @@
 	</div>
 	@include('student.layouts.scripts')
 </body>
- <script>
-        // ------------step-wizard-------------
-        $(document).ready(function () {
-            $('.nav-tabs > li a[title]').tooltip();
-
-            //Wizard
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-
-                var target = $(e.target);
-
-                if (target.parent().hasClass('disabled')) {
-                    return false;
-                }
-            });
-
-            $(".next-step").click(function (e) {
-
-                var active = $('.wizard .nav-tabs li.active');
-                active.next().removeClass('disabled');
-                nextTab(active);
-
-            });
-            $(".prev-step").click(function (e) {
-
-                var active = $('.wizard .nav-tabs li.active');
-                prevTab(active);
-
-            });
-        });
-
-        function nextTab(elem) {
-            $(elem).next().find('a[data-toggle="tab"]').click();
-        }
-        function prevTab(elem) {
-            $(elem).prev().find('a[data-toggle="tab"]').click();
-        }
-
-
-        $('.nav-tabs').on('click', 'li', function () {
-            $('.nav-tabs li.active').removeClass('active');
-            $(this).addClass('active');
-        });
-    </script>
 </html>

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Student\Goal;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Goal;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GoalMedia;
-use App\Models\Subject;
-use App\Models\Membership;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\DB;
+use App\Models\TakenGoal;
+use Exception;
 class IndexController extends Controller
 {
     public function index()
@@ -65,5 +64,31 @@ class IndexController extends Controller
                 'Content-Type: application/pdf',
                 );
         return Response::download($file, $doc, $headers); */
+    }
+
+    public function take_goal(Request $request)
+    {
+        $request->validate([
+            'goal_id' => 'required',
+        ]);
+        try{
+            $data = getMembershipDetails();
+            $goals = Goal::latest()->get();
+            if(count($goals)> 0){
+                $data['goals'] = $goals;
+            }
+            $taken_goal = new TakenGoal;
+            $taken_goal->goal_id = $request->goal_id;
+            $taken_goal->student_id = Auth::user()->id;
+            $taken_goal->status = 'inprogress';
+            $taken_goal->save();
+            if(intval($taken_goal->id) > 0){
+                return redirect()->route('student.goals.index',$data)->with('success','Thanks for taking a goal to achieve :)');
+            }else{
+                return redirect()->route('student.goals.index',$data)->with('error','Something wnet wrong :(');
+            }
+        }catch(Exception $e){
+            return redirect()->route('student.goals.index',$data)->with('error',$e->getMessage());
+        }
     }
 }

@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $updated_at
  * 
  * @property Collection|Membership[] $memberships
+ * @property Collection|Payment[] $payments
  *
  * @package App\Models
  */
@@ -37,5 +38,10 @@ class Plan extends Model
 	public function memberships()
 	{
 		return $this->hasMany(Membership::class);
+	}
+
+	public function payments()
+	{
+		return $this->hasMany(Payment::class);
 	}
 }

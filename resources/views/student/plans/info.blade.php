@@ -20,8 +20,6 @@
                             <a href="{{ route('student.plans.index')}}"class="btn btn-primary" style="float: right;">Back</a>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('student.plans.store') }}" method="post" enctype="multipart/form-data"> 
-                                @csrf
                                 <div class="row goalWrap">
                                     <input type="hidden" name="plan_id" value="{{ $plan->id }}">
                                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -36,12 +34,42 @@
                                             <input type="text" class="form-control" value="{{ $plan->price }}" readonly>
                                         </div>
                                     </div>
-                                    
-                                    <button type="button" class="btn btn-primary ml-3">Buy</button>
                                 </div>
-                            </form>
                         </div>
                         </div>
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Card Info</h6>
+                            </div>
+                            <div class="card-body">
+                                    <div class="row goalWrap">
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <div class="form-group" >
+                                                <label for="forSubject">Name on Card</label>
+                                                <input type="text" class="form-control" value="{{ base64_decode($payment->name_on_card) }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <div class="form-group" >
+                                                <label for="forSubject">Card Number</label>
+                                                <input type="text" class="form-control" value="{{ $payment->card_number }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <div class="form-group" >
+                                                <label for="forSubject">CVC Number</label>
+                                                <input type="text" class="form-control" value="{{ $payment->cvc }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <div class="form-group" >
+                                                <label for="forSubject">Expiry Date</label>
+                                                <input type="text" class="form-control" value="{{ base64_decode($payment->expiration_date) }}" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            </div>
                     </div>
 
                 </div>
