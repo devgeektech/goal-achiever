@@ -13,11 +13,10 @@ class IndexController extends Controller
     public function index()
     {   
         $data = [];
-        $data['students'] = User::where('role', 3)->get();
+        $data['students'] = User::where('role', 3)->with('taken_goals')->get();
         if($data['students']){
             return view('admin.student.index',$data);
         }
-        
     }
 
     /**

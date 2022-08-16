@@ -62,23 +62,27 @@ class RegisterController extends Controller
             'name' => 'required|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:6',
+            'country' => 'required',
+            'age' => 'required'
         ]);
            
         $data = $request->all();
         $user = $this->create($data);
         Auth::login($user);
         if(Auth::check()){
-          
-            Mail::to('harvinder@geekinformatic.com')->send(new RegisterMail($user));
-            Mail::to('harvinder@geekinformatic.com')->send(new RegisterMailToAdmin($user));
-              if (Mail::failures()) {
-                return back()->with("errors", "Alert! Failed to register");
-              }else{ 
+
+            //Mail::to('harvinder@geekinformatic.com')->send(new RegisterMail($user));
+            //Mail::to('harvinder@geekinformatic.com')->send(new RegisterMailToAdmin($user));
+              //if (Mail::failures()) {
+              //  return back()->with("errors", "Alert! Failed to register");
+              //}else{ 
                 if($user->role == 3){
-                  return redirect()->route("student.dashboard");
+                  return response()->json([ 'status' => 'Success']);
+                  //return redirect()->route("index");
+                  //return redirect()->route("student.dashboard");
                 }
                 return redirect()->route("admin.dashboard");
-              }
+              //}
         }else{
           return back()->with("errors", "Alert! Failed to register");
         }
@@ -92,7 +96,9 @@ class RegisterController extends Controller
         'name' => $data['name'],
         'email' => $data['email'],
         'password' => Hash::make($data['password']),
-        'role' => 3
+        'role' => 3,
+        'country' => $data['country'],
+        'age' => $data['age']
       ]);
     }    
 }

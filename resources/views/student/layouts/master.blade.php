@@ -24,9 +24,7 @@
 	<!-- End of Page Wrapper -->
 	<!-- Scroll to Top Button-->
 	<a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i> </a>
-
-
-
+	
 	<input type="hidden" name="is_plan" id="is_plan" value="{{ Session::get('set_plan') }}">
 	<input type="hidden" name="plan_expire" id="plan_expire" value="{{ Session::get('plan_expire') }}">
 

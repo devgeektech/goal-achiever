@@ -13,23 +13,18 @@ use App\Http\Controllers\SendEmailController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/cache', function () {
-
-    \Artisan::call('optimize');
-
-   dd("cleared");
-
-});
 
 
- Route::get('/', [App\Http\Controllers\IndexController::class,'index'])->name('index');
-
- 
+Route::get('/', [App\Http\Controllers\IndexController::class,'index'])->name('index');
 //Auth::routes();
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class,'register'])->name('register');
 Route::post('/login',[App\Http\Controllers\Auth\LoginController::class,'login'])->name('login');
 Route::post('logout', [App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');
 Route::post('contact', [App\Http\Controllers\IndexController::class,'contact'])->name('contact');
+
+Route::get('/goals', [App\Http\Controllers\Web\Goals\IndexController::class,'goals'])->name('goals');
+Route::get('/info/{id}', [App\Http\Controllers\Web\Goals\IndexController::class,'show'])->name('info');
+Route::get('/description/{id}', [App\Http\Controllers\Web\Goals\IndexController::class,'description'])->name('description');
 
 
 

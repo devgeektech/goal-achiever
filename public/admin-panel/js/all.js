@@ -1,26 +1,3 @@
-//Change goal satus
-jQuery("#change_status").on('click',function() {        
-    jQuery.ajax({
-        type: "post",
-        url: change_goal_status,
-        data:{workbooks:value},
-        success: function (data) { 
-                if(data && data.status =='Success'){
-                    
-                }else{
-                    window.swal({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: data.message
-                        });
-                }                  
-        },
-        error: function(xhr){
-            console.error('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
-        }
-    });
-});
-
 /**
  * Update Goal Documents,Videos,Exam Documents
  */
@@ -111,7 +88,7 @@ $(document).ready(function () {
             $.ajax({
                 success: function () {
                     $('.subscription-type').html("");
-                    $('.subscription-type').append('<div class="btn-wrapper"><input type="radio" name="subscription_type" id="option-1" value="manual" checked><input type="radio" name="subscription_type" id="option-2" value="auto"><label for="option-1" class="option option-1"><span>Manual</span></label><label for="option-2" class="option option-2"><span>Auto</span></label></div>');
+                    $('.subscription-type').append('<div class="btn-wrapper"><input type="radio" name="subscription_type" id="option-1" value="manual" checked><label for="option-1" class="option option-1"><span>Manual</span></label></div>');
                 }
             });
         }
@@ -128,6 +105,7 @@ $(document).ready(function () {
  */
  // ------------step-wizard-------------
     $(document).ready(function () {
+        
         $('.nav-tabs > li a[title]').tooltip();
         //Wizard
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -182,5 +160,19 @@ $(document).ready(function () {
             form.submit();
           }
      });
-     
+
+    
+});
+$(document).ready(function () {
+    /*disable non active tabs*/
+    $('.nav-tabs li').not('.active').addClass('disabled');
+    /*to actually disable clicking the bootstrap tab, as noticed in comments by user3067524*/
+    $('.nav-tabs li').not('.active').find('a').removeAttr("data-toggle");
+
+    $('button').click(function () {
+        
+        /*enable next tab*/
+        $('.nav-tabs li.active').next('li').removeClass('disabled');
+        $('.nav-tabs li.active').next('li').find('a').attr("data-toggle", "tab")
+    });
 });

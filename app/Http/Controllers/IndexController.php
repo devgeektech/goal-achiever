@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 use App\Models\Subject;
 use App\Models\Country;
 use App\Models\Plan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Mail;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use App\Mail\ContactUsMail;
 class IndexController extends Controller
 {
@@ -17,10 +19,12 @@ class IndexController extends Controller
         if($subjects){
             $data['subjects'] = $subjects;
         }
+
         $countries = Country::get();
         if($countries){
             $data['countries'] = $countries;
         }
+
         $plans = Plan::get();
         if($plans){
             $data['plans'] = $plans;

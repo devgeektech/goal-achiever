@@ -8,6 +8,7 @@ use App\Models\Plan;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Subject;
 use App\Models\Membership;
+use App\Models\TakenGoal;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 function uploadImageS3($request_file, $filename){     
@@ -31,13 +32,14 @@ function deleteImageFromS3($file){
     Storage::disk('s3')->delete($file);
 } 
 
+//Get unit name by unit id
 function getUnitName($id){
     $getUnitName = Unit::where('id',$id)->first();
     if($getUnitName){
         return $getUnitName->name;
     }
 }
-
+//Get topic name by topic id
 function getTopicName($id){
     $getTopicName = Topic::where('id',$id)->first();
     if($getTopicName){
@@ -45,6 +47,7 @@ function getTopicName($id){
     }
 }
 
+//Get Membership details
 function getMembershipDetails(){
         //Get plan details
         $plan_details = Membership::where('student_id',Auth::user()->id)->get();
@@ -85,26 +88,46 @@ function getMembershipDetails(){
     return $data;
 }
 
+//Count total days for any chosen plan
 function countDays($plan_id){
     $expire_date = date('Y-m-d', strtotime("+".$plan_id." months", strtotime(now())));
     $days = (strtotime($expire_date) - strtotime(now())) / (60 * 60 * 24);
     return round($days);
 }
+
+//Get Expiry Date for any chosen plan
 function getExpiryDate($plan_id){
     $expiry_date = date('Y-m-d', strtotime("+".$plan_id." months", strtotime(now())));
     return $expiry_date;
 }
 
+//Update membership plan according to its type i.e manual or auto
 function update_membership_plan($id,$expiry_date){
     $membership = Membership::find($id);
     $membership->expiry_date = $expiry_date;
     $membership->save();
 }
 
+//Get new expiry date of plan when it is goimg to expired
 function getNewExpiryDate($plan_id,$expiry_date){
     $get_months = Plan::where('id',$plan_id)->first();
     $new_expiry_date = date('Y-m-d', strtotime("+".$get_months->months." months", strtotime($expiry_date)));
     return $new_expiry_date;
 }
 
+//Get total number of students participated in goal
+function getTotalParticipants($goal_id){
+    $get_total_participants = TakenGoal::where('goal_id', $goal_id)->count();
+    if(!empty($get_total_participants)){
+        return $get_total_participants;
+    }
+}
+
+//Get total number of goals taken by student
+function getTotalGoalsTaken($id){
+    $get_total_goals_taken = TakenGoal::where('student_id', $id)->count();
+    if(!empty($get_total_goals_taken)){
+        return $get_total_goals_taken;
+    }
+}
 ?>

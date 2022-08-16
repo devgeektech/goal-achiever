@@ -21,7 +21,7 @@ class IndexController extends Controller
     public function index()
     {
         $data = [];
-        $goals = Goal::latest()->get();
+        $goals = Goal::latest()->with('taken_goals')->get();
         if(count($goals)> 0){
             $data['goals'] = $goals;
         }

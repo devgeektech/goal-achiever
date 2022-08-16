@@ -58,7 +58,9 @@ class User extends Authenticatable
 		'password',
 		'remember_token',
 		'role',
-		'profile_image'
+		'profile_image',
+		'country',
+		'age'
 	];
 
 	public function goals()

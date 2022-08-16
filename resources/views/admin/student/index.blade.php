@@ -44,7 +44,7 @@
                                         <tr>
                                             <td>{{ $student->name}}</td>
                                             <td>{{ $student->id+2}}</td>
-                                            <td>{{ $student->id+5}}</td>
+                                            <td>{{ getTotalGoalsTaken($student->id)}}</td>
                                             <td>{{ ($student->id+5) - ($student->id+2)}}</td>
                                             <td>
                                                 <a href="{{ route('admin.students.info',$student->id) }}" class="btn btn-primary">Info</a>

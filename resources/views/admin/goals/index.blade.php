@@ -67,13 +67,13 @@
                                         @isset($goals)
                                             @foreach ($goals as $goal)                                            
                                                 <tr>
-                                                    <td>{{ $goal->subject->title}}</td>
-                                                    <td>{{ getUnitName($goal->unit_id)}}</td>
-                                                    <td>{{ getTopicName($goal->topic_id)}}</td>
+                                                    <td>{{ $goal->subject->title }}</td>
+                                                    <td>{{ $goal->unit->name }}</td>
+                                                    <td>{{ $goal->topic->name }}</td>
                                                     <td>{{ \Carbon\Carbon::parse($goal->end_date)->format('j F, Y') }}</td>
                                                     <td>{{ $goal->creator_name}}</td>
                                                     <td>{{ $goal->instructor_name}}</td>
-                                                    <td>17</td>
+                                                    <td>{{ getTotalParticipants($goal->id) }}</td>
                                                     <td>
                                                         <div class="btn-group">
                                                         @if($goal->status == 1)
