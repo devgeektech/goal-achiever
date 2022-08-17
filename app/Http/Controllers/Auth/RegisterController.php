@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-
+use App\Models\Payment;
+use App\Models\Membership;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -65,24 +66,21 @@ class RegisterController extends Controller
             'country' => 'required',
             'age' => 'required'
         ]);
-           
+       
         $data = $request->all();
         $user = $this->create($data);
+        if($request->register_from == 'plan'){
+          return response()->json([ 'status' => 'Success', 'user_id' => $user->id]);
+        }
+        //Mail::to('nahu_ooo@hotmail.com')->send(new RegisterMailToAdmin($user));
         Auth::login($user);
         if(Auth::check()){
-
-            //Mail::to('harvinder@geekinformatic.com')->send(new RegisterMail($user));
-            //Mail::to('harvinder@geekinformatic.com')->send(new RegisterMailToAdmin($user));
-              //if (Mail::failures()) {
-              //  return back()->with("errors", "Alert! Failed to register");
-              //}else{ 
+            //Mail::to('nahu_ooo@hotmail.com')->send(new RegisterMail($user));
                 if($user->role == 3){
-                  return response()->json([ 'status' => 'Success']);
-                  //return redirect()->route("index");
-                  //return redirect()->route("student.dashboard");
+                  return redirect()->route("student.dashboard");
                 }
-                return redirect()->route("admin.dashboard");
-              //}
+                 return redirect()->route("admin.dashboard");
+              
         }else{
           return back()->with("errors", "Alert! Failed to register");
         }
@@ -100,5 +98,68 @@ class RegisterController extends Controller
         'country' => $data['country'],
         'age' => $data['age']
       ]);
-    }    
+    }  
+    
+     /**
+     * Store Purchase Plan into Database
+     */
+    public function paymentStore(Request $request)
+    {
+        try{
+            switch ($request->plan) {
+            case '1':
+                $plan_days = countDays($request->plan_months);
+                $expire_date = getExpiryDate($request->plan_months);
+                $type = 'monthly';
+                break;
+            case '2':
+                $plan_days = countDays($request->plan_months);
+                $expire_date = getExpiryDate($request->plan_months);
+                $type = 'monthly';
+                break;
+            case '3':
+                $plan_days = countDays($request->plan_months);
+                $expire_date = getExpiryDate($request->plan_months);
+                $type = '3 monthly';
+                break;
+            case '4':
+                $plan_days = countDays($request->plan_months);
+                $expire_date = getExpiryDate($request->plan_months);
+                $type = '6 monthly';
+                break;
+            default:
+                $plan_days = countDays($request->plan_months);
+                $expire_date = getExpiryDate($request->plan_months);
+                $type = 'yearly';
+            }
+           
+            $membership = new Membership;
+            $membership->plan_id = $request->plan;
+            $membership->student_id = $request->user_id;
+            $membership->subject_id = $request->plan_subject;
+            $membership->plan_days = $plan_days;
+            $membership->type = $type;
+            $membership->subscription = $request->subscription_type;
+            $membership->expiry_date = $expire_date;
+            $membership->save();
+            if(intval($membership->id) > 0){
+                $payment = new Payment;
+                $payment->plan_id = $request->plan;
+                $payment->student_id = $request->user_id;
+                $payment->subject_id = $request->plan_subject;
+                $payment->name_on_card = base64_encode($request->name_on_card);
+                $payment->card_number = substr_replace($request->card_number, str_repeat("X", 8), 4, 8);
+                $payment->cvc = substr_replace($request->cvc_number, str_repeat("X", 2), 0, 2);
+                $payment->expiration_date = base64_encode($request->expiration_month.'/'.$request->expiration_year);
+                $payment->save();
+                if(intval($membership->id) > 0){
+                    $user = User::find($request->user_id);
+                    Auth::login($user);
+                    return response()->json([ 'status' => 'Success', 'message' => 'true']);
+                }
+            }
+        }catch(Exception $e){
+            return response()->json([ 'status' => 'false', 'message' => $e->getMessage()]);
+        }
+    }
 }

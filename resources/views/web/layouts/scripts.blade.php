@@ -5,7 +5,7 @@
   <script src="{{URL::to('js/popper.min.js')}}"></script>
   <script src="{{URL::to('js/bootstrap.bundle.min.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
-
+  <script src="{{URL::to('/js/custom.js')}}"></script>
   @stack('js')
   <script>
     $('.education-slider').slick({

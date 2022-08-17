@@ -14,262 +14,195 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   </head>
-  <body>
-    @include('web.layouts.topbar')
-    @yield('content')
-      <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-              <button class="close" type="button" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button> 
-              <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <a  class="btn btn-primary" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
+  <body> @include('web.layouts.topbar') @yield('content') <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content logout">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <form method="POST" action="{{ route('logout') }}"> @csrf <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();
                              this.closest('form').submit();">
-                  {{ __('Logout') }}
-                </a>
-              </form>
+                {{ __('Logout') }}
+              </a>
+            </form>
           </div>
         </div>
       </div>
-      </div>
-
-      <!-- Membership Modal -->
+    </div>
+    <!-- Membership Modal -->
     <div class="modal fade" id="membershipModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-         <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <section>
-
-        <section class="signup-step-container">
+      <!-- Modal content -->
+      <div class="modal-content">
+       
+        <section>
+          <section class="signup-step-container">
             <h3 class="popup-heading text-center">Membership</h3>
+            <hr>
             <div class="container mt-5">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-12 col-lg-12">
-                        <div class="wizard">
-                            <div class="wizard-inner">
-                                <div class="connecting-line"></div>
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active">
-                                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab"
-                                            aria-expanded="true"><span class="round-tab">1 </span> <i>Register</i></a>
-                                    </li>
-                                    <li role="presentation" class="disabled">
-                                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab"
-                                            aria-expanded="false"><span class="round-tab">2</span> <i>Select
-                                                Plan</i></a>
-                                    </li>
-
-                                    <li role="presentation" class="disabled">
-                                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab"><span
-                                                class="round-tab">3</span> <i>Payment</i></a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <form role="form" action="index.html" class="login-box">
-                                <div class="tab-content" id="main_form">
-                                    <div class="tab-pane active" role="tabpanel" id="step1">
-
-                                               <!-- Form HTML Start-->
-              <form action="#" method="post">
-                     <div class="form-group">
-                  <input type="text" class="form-control px-3 py-3" placeholder="Username" id="m_name" name="name">
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control px-3 py-3" placeholder="Email Address" id="m_email" name="email">
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control px-3 py-3" placeholder="Password" id="m_pwd" name="password">
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control px-3 py-3" placeholder="Confirm Password" id="m_confirm-pwd" name="password_confirmation">
-                </div>
-                <div class="form-group">
-                  <input type="number" class="form-control px-3 py-3" placeholder="Age" id="m_age" name="age">
-                </div>
-                <div class="form-group">
-                  <select class="form-control" placeholder="Select Counrty" id="m_country" required="true" name="country">
-                    @foreach($countries as $country)
-                    <option value="{{$country->name}}">{{$country->name}}</option>
-                    @endforeach
-                  </select>
-                </div>
-                <button type="button" id="registerBtn" class="btn btn-primary register d-block mx-auto">Register Now<i class="fa-solid fa-arrow-right ml-2"></i>
-                </button>
-              </form>
-              <!-- Form HTML End-->
-                                    </div>
-                                    <div class="tab-pane" role="tabpanel" id="step2">
-                                        <h4 class="text-center">Select Plan</h4>
-                                        <div class="plan row free-months-row">
-                                                <div class="container">
-                                                    <div class="row mt-4">
-                                                        <div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
-
-                                                            <label>
-                                                                <input type="radio" name="demo" class="card-input-element d-none" id="demo1">
-                                                                <div class="card card-body bg-light">
-                                                                    <div class="box mb-2">
-                                                                        <h6>FREE <br><span>1 Month of Access</span></h6>
-                                                                    </div>
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
-
-                                                            <label>
-                                                                <input type="radio" name="demo" class="card-input-element d-none" id="demo1">
-                                                                <div class="card card-body">
-                                                                    <div class="box mb-2">
-
-                                                                        <h6>MONTHLY<br><span>$23</span></h6>
-                                                                    </div>
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
-
-                                                            <label>
-                                                                <input type="radio" name="demo" class="card-input-element d-none" id="demo3">
-                                                                <div class="card card-body bg-light">
-                                                                    <div class="box mb-2">
-
-                                                                        <h6>FOR 3 MONTHS<br><span>$67</span></h6>
-                                                                    </div>
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
-
-                                                            <label>
-                                                                <input type="radio" name="demo" class="card-input-element d-none" id="demo4">
-                                                                <div class="card card-body bg-light">
-                                                                    <div class="box mb-2">
-
-                                                                        <h6>FOR 6 MONTHS<br><span>$135</span></h6>
-                                                                    </div>
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan mt-3 mt-md-0">
-
-                                                            <label>
-                                                                <input type="radio" name="demo" class="card-input-element d-none" id="demo5">
-                                                                <div class="card card-body bg-light">
-                                                                    <div class="box mb-2">
-
-                                                                        <h6>YEAR<br><span>$135</span></h6>
-                                                                    </div>
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                        </div>
-                                        <ul class="list-inline pull-right">
-                                            <li><button type="button" class="default-btn prev-step">Back</button></li>
-                                            <li><button type="button" class="default-btn next-step">Continue</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="tab-pane" role="tabpanel" id="step3">
-                                        <h4 class="text-center">Payment</h4>
-                                        <div class="container">
-                                            <div class='row'>
-
-                                                <div class='col-md-12'>
-                                                 
-                                                  <form accept-charset="UTF-8" action="/"  method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /></div>
-                                                    <div class='form-row'>
-                                                      <div class=' col-md-12 col-xs-12 form-group required'>
-                                                        <label class='control-label'>Name on Card</label>
-                                                        <input class='form-control' size='4' type='text'>
-                                                      </div>
-                                                    </div>
-                                                    <div class='form-row'>
-                                                      <div class=' col-md-12 col-xs-12 form-group required'>
-                                                        <label class='control-label'>Card Number</label>
-                                                        <input autocomplete='off' class='form-control card-number' size='20' type='text'>
-                                                      </div>
-                                                    </div>
-                                                    <div class='form-row'>
-                                                      <div class='col-xs-4 col-md-4 form-group cvc required'>
-                                                        <label class='control-label'>CVC</label>
-                                                        <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'>
-                                                      </div>
-                                                      <div class='col-xs-4 col-md-4 form-group expiration required'>
-                                                        <label class='control-label'>Expiration</label>
-                                                        <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
-                                                      </div>
-                                                      <div class='col-xs-4 col-md-4 form-group expiration required'>
-                                                        <label class='control-label'> </label>
-                                                        <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
-                                                      </div>
-                                                    </div>
-                                                    <div class='form-row'>
-                                                      <div class='col-md-12'>
-                                                        <div class='form-control total btn btn-info'>
-                                                          Total:
-                                                          <span class='amount'></span>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class='form-row'>
-                                                      <div class='col-md-12 form-group mt-2'>
-                                                        <button class='form-control btn btn-primary submit-button' type='submit'>Pay »</button>
-                                                      </div>
-                                                    </div>
-                                                    <div class='form-row'>
-                                                      <div class='col-md-12 error form-group hide'>
-                                                        <div class='alert-danger alert'>
-                                                          Please correct the errors and try again.
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </form>
-                                                  <div class="btn-wrapper">
-                                                    <input type="radio" name="select" id="option-1" checked>
-                                                    <input type="radio" name="select" id="option-2">
-                                                      <label for="option-1" class="option option-1">
-
-                                                         <span>Manual</span>
-                                                         </label>
-                                                      <label for="option-2" class="option option-2">
-                                                         <span>Auto</span>
-                                                      </label>
-                                                   </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <ul class="list-inline pull-right">
-                                            <li><button type="button" class="default-btn prev-step">Back</button></li>
-                                            <li><button type="button" class="default-btn next-step">Continue</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="clearfix"></div>
-                                </div>
-
-                            </form>
-                        </div>
+              <div class="row d-flex justify-content-center">
+                <div class="col-md-12 col-lg-12">
+                  <div class="wizard">
+                    <div class="wizard-inner">
+                      <div class="connecting-line"></div>
+                      <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                          <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" aria-expanded="true">
+                            <span class="round-tab">1 </span>
+                            <i>Register</i>
+                          </a>
+                        </li>
+                        <li role="presentation" class="disabled">
+                          <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" aria-expanded="false">
+                            <span class="round-tab">2</span>
+                            <i>Select Plan</i>
+                          </a>
+                        </li>
+                        <li role="presentation" class="disabled">
+                          <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab">
+                            <span class="round-tab">3</span>
+                            <i>Payment</i>
+                          </a>
+                        </li>
+                      </ul>
                     </div>
+                   
+                      <div class="tab-content" id="main_form">
+                        <div class="tab-pane active" role="tabpanel" id="step1">
+                          <!-- Form HTML Start-->
+                          <form action="#" method="post" id="membership_form">
+                            <div class="form-group">
+                              <input type="text" class="form-control px-3 py-3" placeholder="Username" id="m_name" name="name">
+                              <span class="username_error error"></span>
+                            </div>
+                            <div class="form-group">
+                              <input type="email" class="form-control px-3 py-3" placeholder="Email Address" id="m_email" name="email">
+                              <span class="email_error error"></span>
+                            </div>
+                            <div class="form-group">
+                              <input type="password" class="form-control px-3 py-3" placeholder="Password" id="m_pwd" name="password">
+                              <span class="password_error error"></span>
+                            </div>
+                            <div class="form-group">
+                              <input type="password" class="form-control px-3 py-3" placeholder="Confirm Password" id="m_confirm-pwd" name="password_confirmation">
+                              <span class="confirm-pwd_error error"></span>
+                            </div>
+                            <div class="form-group">
+                              <input type="number" class="form-control px-3 py-3" placeholder="Age" id="m_age" name="age">
+                              <span class="age_error error"></span>
+                            </div>
+                            <div class="form-group">
+                              <select class="form-control" placeholder="Select Counrty" id="m_country" required="true" name="country"> @foreach($countries as $country) <option value="{{$country->name}}">{{$country->name}}</option> @endforeach </select>
+                            </div>
+                            <button type="button" id="registerBtn" class="btn btn-primary register d-block mx-auto registerBtn">Register Now <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </button>
+                          </form>
+                          <!-- Form HTML End-->
+                        </div>
+                        
+                        <div class="tab-pane" role="tabpanel" id="step2">
+                          <h4 class="text-center">Select Plan</h4>
+                          <div class="plan row free-months-row">
+                            <div class="container">
+                              <div class="row mt-4">
+                                <input type="hidden" name="plan_months" id="plan_months" value="">
+                                <input type="hidden" name="plan_name" id="plan_name" value="">
+                                <input type="hidden" name="plan_price" id="plan_price" value=""> 
+                                <input type="hidden" name="plan_id" id="plan_id" value=""> 
+                                <input type="hidden" name="user_id" id="user_id" value="">
+                                  @foreach ($plans as $plan) 
+                                  <div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
+                                    <label>
+                                      <input type="radio" data-price="{{$plan->price}}" data-name="{{$plan->name}}" data-months="{{$plan->months}}" name="plan" class="card-input-element d-none plan-input" id="plan" value="{{$plan->id}}">
+                                      <div class="card card-body bg-light">
+                                        <div class="box mb-2">
+                                          <h6>{{$plan->name}}
+                                            <br>@if($plan->name == 'FREE') <span>${{ $plan->price}}</span> @else ${{ $plan->price}}@endif
+                                          </h6>
+                                        </div>
+                                      </div>
+                                    </label>
+                                  </div> 
+                                  @endforeach
+                              </div>
+                              <span class="plan_error"></span> @error('plan') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
+                            </div>
+                          </div>
+                          <ul class="list-inline pull-right">
+                            <li>
+                              <button type="button" class="default-btn prev-step">Back</button>
+                            </li>
+                            <li>
+                              <button type="button" class="default-btn next-step">Continue</button>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="tab-pane" role="tabpanel" id="step3">
+                          <h4 class="text-center">Payment</h4>
+                          <div class="container">
+                            <label class="payment-label pl-3 text-center">What type of subscription you want to select?</label>
+                            <div class='row my-4 justify-content-center subscription-type'>
+                             
+                            </div>
+                            <div class='col-md-12'>
+                              <div class='form-row'>
+                                <div class=' col-md-12 col-xs-12 form-group required'>
+                                  <label class='control-label'>Name on Card</label>
+                                  <input class='form-control' size='4' type='text' id="name_on_card" name="name_on_card" required>
+                                </div>
+                              </div>
+                              <div class='form-row'>
+                                <div class=' col-md-12 col-xs-12 form-group required'>
+                                  <label class='control-label'>Card Number</label>
+                                  <input id="cr_no" type="text" maxlength="16" name="card_number" class='form-control card-number' placeholder="xxxx xxxx xxxx xxxx" required>
+                                </div>
+                              </div>
+                              <div class='form-row'>
+                                <div class='col-xs-4 col-md-4 form-group cvc required'>
+                                  <label class='control-label'>CVC</label>
+                                  <input autocomplete='off' name="cvc_number" id="cvc_number" class='form-control card-cvc' placeholder='ex. 311' size='4' type='text' required>
+                                </div>
+                                <div class='col-xs-4 col-md-4 form-group expiration required'>
+                                  <label class='control-label'>Expiration</label>
+                                  <input class='form-control card-expiry-month' id="expiration_month" name="expiration_month" placeholder='MM' size='2' type='text' required>
+                                </div>
+                                <div class='col-xs-4 col-md-4 form-group expiration required'>
+                                  <label class='control-label'></label>
+                                  <input class='form-control card-expiry-year' id="expiration_year" name="expiration_year" placeholder='YYYY' size='4' type='text' required>
+                                </div>
+                              </div>
+                              <div class='form-row'>
+                                <div class='col-md-12'>
+                                  <div class='form-control total btn btn-info'> Total: <span class='amount' id="total_amount"></span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <ul class="list-inline pull-right">
+                            <li>
+                              <button type="button" class="default-btn prev-step">Back</button>
+                            </li>
+                            <li>
+                              <button type="button" id="purchase_plan" class="default-btn next-step">Pay</button>
+                            </li>
+                          </ul>
+                        </div>
+                   
+                  </div>
                 </div>
+              </div>
             </div>
+          </section>
         </section>
-    </section>
+      </div>
     </div>
-    </div>
-      <!----------FOOTER-SECTION-END-HERE--------->
-      @extends('web.layouts.scripts')
-      
+    <!----------FOOTER-SECTION-END-HERE---------> 
+    @extends('web.layouts.scripts')

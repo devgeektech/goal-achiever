@@ -43,7 +43,6 @@
                                         <tr>
                                             <th>Plan</th>
                                             <th>Price</th>
-                                            <th>Service</th>
                                             <th>Type</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -53,7 +52,6 @@
                                         <tr>
                                             <th>Plan</th>
                                             <th>Price</th>
-                                            <th>Service</th>
                                             <th>Type</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -65,7 +63,6 @@
                                                 <tr>
                                                     <td>{{ $membership->plan->name}}</td>
                                                     <td>${{ $membership->plan->price}}</td>
-                                                    <td>{{ $membership->subject->title}}</td>
                                                     <td>{{ ucfirst(trans($membership->subscription))}}</td>
                                                     <td><a href="#" class="btn btn-success">@if(strtotime(now()) > strtotime($membership->expiry_date)) Deactivated @else Active @endif</a></td>
                                                     <td>

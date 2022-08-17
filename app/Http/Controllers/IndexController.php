@@ -29,6 +29,7 @@ class IndexController extends Controller
         if($plans){
             $data['plans'] = $plans;
         }
+     
         return view('index', $data);
     }
 
@@ -47,14 +48,13 @@ class IndexController extends Controller
         if($plans){
             $data['plans'] = $plans;
         }
-
         $contact = [];
         $contact['name'] = $request->firstname;
         $contact['email'] = $request->email;
         $contact['country'] = $request->country;
         $contact['comment'] = $request->comment;
        try{
-            Mail::to('harvinder@geekinformatic.com')->send(new ContactUsMail($contact));
+            Mail::to('nahu_ooo@hotmail.com')->send(new ContactUsMail($contact));
             if (Mail::failures()) {
                 return view('index',$data)->with('error','Sorry email not sent');
             }else{
@@ -63,7 +63,6 @@ class IndexController extends Controller
        }catch(Exception $e){
             return view('index',$data)->with('error',$e->getMessage());
         }
-       
     }
 
 }

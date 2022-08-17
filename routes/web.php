@@ -26,5 +26,5 @@ Route::get('/goals', [App\Http\Controllers\Web\Goals\IndexController::class,'goa
 Route::get('/info/{id}', [App\Http\Controllers\Web\Goals\IndexController::class,'show'])->name('info');
 Route::get('/description/{id}', [App\Http\Controllers\Web\Goals\IndexController::class,'description'])->name('description');
 
-
+Route::post('/payment-store', [App\Http\Controllers\Auth\RegisterController::class,'paymentStore'])->name('payment_store');
 

@@ -1,35 +1,105 @@
 //Change goal satus
-jQuery("#registerBtn").on('click',function() {    
-    var name = jQuery('#m_name').val();
-    var email = jQuery('#m_email').val();
-    var password = jQuery('#m_pwd').val();
-    var password_confirmation = jQuery('#m_confirm-pwd').val();
-    var country = jQuery('#m_country').val();
-    var age = jQuery('#m_age').val();
-    jQuery.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-    jQuery.ajax({
-        type: "post",
-        url: register_route,
-        data:{name:name,email:email,password:password,password_confirmation:password_confirmation,country:country,age:age},
-        success: function (response) { 
-           
-            if (response.status == 'Success') {
-                var active = $('.wizard .nav-tabs li.active');
-                active.next().removeClass('disabled');
-                nextTab(active);
-            }else{
-               
+jQuery(".registerBtn").on('click',function() { 
+   
+    var name = jQuery('#m_name').val() != "" ? jQuery('#m_name').val() : jQuery('#name').val();
+    var email = jQuery('#m_email').val() != "" ? jQuery('#m_email').val() : jQuery('#email').val();
+    var password = jQuery('#m_pwd').val() != "" ? jQuery('#m_pwd').val() : jQuery('#password').val();
+    var password_confirmation = jQuery('#m_confirm-pwd').val() != "" ? jQuery('#m_confirm-pwd').val() : jQuery('#confirm-pwd').val();
+    var country = jQuery('#m_country').val() != "" ? jQuery('#m_country').val() : jQuery('#country').val();
+    var age = jQuery('#m_age').val() != "" ? jQuery('#m_age').val() : jQuery('#age').val();
+    var register_from = 'plan';
+    var username_error = email_error = password_error = con_password_error = password_match_error = age_error = false;
+    if(name == ""){
+        jQuery(".username_error").html('Please enter name.');
+         username_error = false;
+    }else{
+        jQuery(".username_error").html('');
+         username_error = true;
+    }
+    if(email == ""){
+        jQuery(".email_error").html('Please enter email.');
+         email_error = false;
+    }else{
+        jQuery(".email_error").html('');
+        email_error = true;
+    }
+    if (password == "") {
+        $(".password_error").html('Please enter a password.');
+         password_error = false;
+    }else{
+        $(".password_error").html('');
+        password_error = true;
+    } 
+    if (password_confirmation == '') {
+        $(".confirm-pwd_error").html('Please re-enter your password.');
+         con_password_error = false;
+    }else{
+        $(".confirm-pwd_error").html('');
+         con_password_error = true;
+    }
+    if (password != password_confirmation ) {
+        $(".confirm-pwd_error").html('Passwords do not match.');
+         password_match_error = false;
+    }else{
+        $(".confirm-pwd_error").html('');
+        password_match_error = true;
+    }
+    if(age == ""){
+        $(".age_error").html('Please enter age.');
+         age_error = false;
+    }else{
+        $(".age_error").html('');
+        age_error = true;
+    }
+  
+    if((username_error == true) && (email_error == true) && (password_error == true) && (con_password_error == true) && (password_match_error == true) && (age_error == true)){
+        jQuery("#membershipModal").modal('show');
+        jQuery.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        },
-        error: function(xhr){
-            console.error('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
-        }
-    });
+          });
+       
+        jQuery.ajax({
+            type: "post",
+            url: register_route,
+            data:{
+                name:name,
+                email:email,
+                password:password,
+                password_confirmation:password_confirmation,
+                country:country,
+                age:age,
+                register_from:register_from
+            },
+            beforeSend: function(msg){
+                jQuery('#registerBtn').html("Please wait....");
+            },
+            success: function (response) { 
+                if (response.status == 'Success') {
+                    jQuery("#user_id").val(response.user_id);
+                    jQuery('#registerBtn').html("Register Now");
+                    jQuery('#registerBtn').addClass("btn btn-primary register d-block mx-auto");
+                    var active = $('.wizard .nav-tabs li.active');
+                    active.next().removeClass('disabled');
+                    nextTab(active);
+                }else{
+                   
+                }
+            },
+            error: function(xhr){
+                console.error('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+            }
+        });
+    }else{
+       
+        return false;
+    }
+
+   
 });
+
+
 
 jQuery(document).ready(function () {
            
@@ -62,4 +132,91 @@ function prevTab(elem) {
 $('.nav-tabs').on('click', 'li', function () {
     jQuery('.nav-tabs li.active').removeClass('active');
     jQuery(this).addClass('active');
+});
+
+/**
+ * Get months of selected plan in register modal
+ */
+ $('.selct-plan').on('change', function (){
+    var get_months = $(this).find(':input').data('months');
+    var get_plan_name = $(this).find(':input').data('name');
+    var get_plan_price = $(this).find(':input').data('price');
+    if(get_plan_price == '1 MONTH OF ACCESS'){
+        get_plan_price = 0;
+        $.ajax({
+            success: function () {
+                $('.subscription-type').html("");
+                $('.subscription-type').append('<div class="btn-wrapper"><input type="radio" name="subscription_type" id="option-1" value="manual" checked><label for="option-1" class="option option-1"><span>Manual</span></label></div>');
+            }
+        });
+    }else{
+        $.ajax({
+            success: function () {
+                $('.subscription-type').html("");
+                $('.subscription-type').append('<div class="btn-wrapper"><input type="radio" name="subscription_type" id="option-1" value="manual" checked><label for="option-1" class="option option-1"><span>Manual</span></label></div>');
+            }
+        });
+    }
+    $("#plan_months").val(get_months);
+    $("#plan_name").val(get_plan_name);
+    $("#plan_price").val(get_plan_price);
+    $("#plan_id").val($(this).find(':input').val());
+    $("#total_amount").text('$'+get_plan_price);
+});
+
+/**
+ * Functionlity for purchase plan after register process
+ */
+jQuery('#purchase_plan').on('click', function(){
+    var plan_months = jQuery('#plan_months').val();
+    var plan_name = jQuery('#plan_name').val();
+    var plan_price = jQuery('#plan_price').val();
+    var name_on_card = jQuery('#name_on_card').val();
+    var cr_no = jQuery('#cr_no').val();
+    var cvc_number = jQuery('#cvc_number').val();
+    var expiration_month = jQuery('#expiration_month').val();
+    var expiration_year = jQuery('#expiration_year').val();
+    var subscription_type = jQuery('#option-1').val();
+    var plan = jQuery('#plan_id').val();
+    var user_id = jQuery('#user_id').val();
+    jQuery.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+    jQuery.ajax({
+        type: "post",
+        url: purchase_plan_route,
+        data:{  
+                plan_months:plan_months,
+                plan_name:plan_name,
+                plan_price:plan_price,
+                name_on_card:name_on_card,
+                card_number:cr_no,
+                cvc_number:cvc_number,
+                expiration_month:expiration_month,
+                expiration_year:expiration_year,
+                subscription_type:subscription_type,
+                plan:plan,
+                user_id:user_id
+            },
+        beforeSend: function(msg){
+            jQuery('#purchase_plan').html("Processing....");
+        },
+        success: function (response) {
+            if (response.status == 'Success') {
+                jQuery("#membershipModal").hide();
+                swal("Good job!", "You have successfully purchased '" +plan_name+ "' plan!", "success");
+                setTimeout(() => {
+                    window.location.href = "/student/dashboard";
+                }, 5000);
+               
+            }else{
+               
+            }
+        },
+        error: function(xhr){
+            console.error('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+        }
+    });
 });

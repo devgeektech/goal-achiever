@@ -32,22 +32,27 @@
           <div class="tab-content mt-5">
             <div class="tab-pane active" id="register" role="tabpanel" aria-labelledby="register-tab">
               <!-- Form HTML Start-->
-              <form action="{{route('register')}}" method="post">
+              <form action="{{route('register')}}" method="post" id="register_form">
                 @csrf
                 <div class="form-group">
                   <input type="text" class="form-control px-4 py-4" placeholder="Username" id="name" name="name">
+                  <span class="username_error error"></span>
                 </div>
                 <div class="form-group">
                   <input type="email" class="form-control px-4 py-4" placeholder="Email Address" id="email" name="email">
+                  <span class="email_error error"></span>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control px-4 py-4" placeholder="Password" id="pwd" name="password">
+                  <input type="password" class="form-control px-4 py-4" placeholder="Password" id="password" name="password">
+                  <span class="password_error error"></span>
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control px-4 py-4" placeholder="Confirm Password" id="confirm-pwd" name="password_confirmation">
+                  <span class="confirm-pwd_error error"></span>
                 </div>
                 <div class="form-group">
                   <input type="number" class="form-control px-4 py-4" placeholder="Age" id="age" name="age">
+                  <span class="age_error error"></span>
                 </div>
                 <div class="form-group">
                   <select class="form-control" placeholder="Select Counrty" id="country" required="true" name="country">
@@ -56,7 +61,7 @@
                     @endforeach
                   </select>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">REGISTER NOW <i class="fa-regular fa-arrow-right"></i>
+                <button type="button" class="btn btn-primary w-100 registerBtn">REGISTER NOW <i class="fa-regular fa-arrow-right"></i>
                 </button>
               </form>
               <!-- Form HTML End-->
@@ -169,7 +174,7 @@
       <div class="row free-months-row">
         @foreach($plans as $plan)
         <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 months-area">
-          <div class="free-months-area-inner" data-toggle="modal" data-target="#membershipModal" style="cursor: pointer">
+          <div class="free-months-area-inner" @guest data-toggle="modal" data-target="#membershipModal" @endguest  style="cursor: pointer">
             <p>{{ $plan->name}} <br>
               @if($plan->name != 'FREE') ${{ $plan->price}}@else<span>{{ $plan->price}}</span>@endif
             </p>
@@ -305,6 +310,6 @@
   @push('js')
     <script>
       let register_route = "{{route('register')}}";
+      let purchase_plan_route = "{{route('payment_store')}}";
     </script>
-      <script src="{{URL::to('/js/custom.js')}}"></script>
     @endpush

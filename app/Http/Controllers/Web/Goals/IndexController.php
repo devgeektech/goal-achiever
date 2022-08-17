@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Goal;
 use App\Models\Subject;
 use App\Models\Country;
+use App\Models\Plan;
 use Exception;
 class IndexController extends Controller
 {
@@ -25,7 +26,10 @@ class IndexController extends Controller
         if(count($countries)> 0){
             $data['countries'] = $countries;
         }
-        
+        $plans = Plan::get();
+        if($plans){
+            $data['plans'] = $plans;
+        }
         return view('web.goals.index',$data);
     }
 
@@ -39,6 +43,10 @@ class IndexController extends Controller
             $countries = Country::latest()->get();
             if(count($countries)> 0){
                 $data['countries'] = $countries;
+            }
+            $plans = Plan::get();
+            if($plans){
+                $data['plans'] = $plans;
             }
             return view('web.goals.info',$data);
         }catch(Exception $e){
@@ -56,6 +64,10 @@ class IndexController extends Controller
             $countries = Country::latest()->get();
             if(count($countries)> 0){
                 $data['countries'] = $countries;
+            }
+            $plans = Plan::get();
+            if($plans){
+                $data['plans'] = $plans;
             }
             return view('web.goals.description',$data);
         }catch(Exception $e){
