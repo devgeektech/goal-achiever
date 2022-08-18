@@ -179,9 +179,7 @@ ul.slick-dots {
     color: #3f3f3f;
 }
 
-.education-goals h2,
-.goal-tips h2,
-.progress-chart-section h2 {
+.education-goals h2, .goal-tips h2, .progress-chart-section h2, .education-goals-section h2, .islam h2{
     font-size: 52px;
     color: #000084;
     font-weight: 700;
@@ -190,7 +188,9 @@ ul.slick-dots {
 }
 
 .education-goals h2:after,
-.progress-chart-section h2:after {
+.progress-chart-section h2:after,
+.education-goals-section h2:after,
+.islam h2:after {
     content: url(../images/separator2.png);
     position: absolute;
     left: 10px;
@@ -866,15 +866,15 @@ button:focus,
 }
 
 .connecting-line {
-  height: 2px;
-  background: #e0e0e0;
-  position: absolute;
-  width: 67%;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  top: 15px;
-  z-index: 1;
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 68%;
+    margin: 0 auto;
+    left: 0;
+    right: -9px;
+    top: 15px;
+    z-index: 1;
 }
 
 span.round-tab {
@@ -897,15 +897,15 @@ span.round-tab i {
   color: #555555;
 }
 .wizard li.active span.round-tab {
-  background: #000084;
+  background: #fd5c26;
   color: #fff;
-  border-color: #000084;
+  border-color: #fd5c26
 }
 .wizard li.active span.round-tab i {
   color: #5bc0de;
 }
 .wizard .nav-tabs > li.active > a i {
-  color: #000084;
+  color: #fff
 }
 
 .wizard .nav-tabs > li {
@@ -944,7 +944,7 @@ span.round-tab i {
   transform: translate(-24%, -50%);
   font-size: 12px;
   font-weight: 700;
-  color: #000;
+  color: #fff;
 }
 
 .wizard .nav-tabs > li a:hover {
@@ -973,9 +973,9 @@ span.round-tab i {
   border-color: transparent !important;
 }
 .next-step:hover, .register:hover, .register:focus {
-  background-color: #000084 !important;
+  background-color: #0ebd18!important;
   color: #fff;
-  box-shadow: 0 0 0 0.2rem #000084 !important;
+  box-shadow: 0 0 0 0.2rem #0ebd18!important;
 }
 .step-head {
   font-size: 20px;
@@ -1126,18 +1126,23 @@ label {
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
 
-  /* Modal Content */
-  .modal-content {
-    background-color: #fefefe;
+/* Modal Content */
+.modal-content {
+
     margin: auto;
     padding: 20px;
-    border: 1px solid #888;
     width: 50%;
+    background: url(../images/smooth-dark-blue-background1.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transition: .2s;
+
   }
 
   /* The Close Button */
   .close {
-    color: #aaaaaa;
+    color: #fff;
     text-align: end;
     font-size: 28px;
     font-weight: bold;
@@ -1178,8 +1183,8 @@ label {
   }
   #option-1:checked:checked ~ .option-1,
   #option-2:checked:checked ~ .option-2{
-    border-color: #000084;
-    background: #000084;
+    border-color: #0ebd18;
+    background: #0ebd18;
   }
 
   .btn-wrapper .option span{
@@ -1190,8 +1195,190 @@ label {
   #option-2:checked:checked ~ .option-2 span{
     color: #fff;
   }
+  .wizard #main_form input, .wizard #main_form select{
+    background: #f8fafc;
+    border: 0px;
+    font-size: 14px;
+    height: calc(1.5em + .75rem + 12px) !important;
+  }
 
 .error{
     color: red;
-    font-size: 12px;
+    font-size: 14px;
 }
+.signup-step-container hr {
+    border-top: 1px solid rgb(217 217 217 / 20%) !important;
+}
+
+
+
+/* Goals page css */
+
+
+.education-slider-goals .col-lg-4:nth-child(1) .goal-box,
+.education-slider-goals .col-lg-4:nth-child(2) .goal-box,
+.education-slider-goals .col-lg-4:nth-child(3) .goal-box,
+.education-slider-goals .col-lg-4:nth-child(4) .goal-box,
+.education-slider-goals .col-lg-4:nth-child(5) .goal-box,
+.education-slider-goals .col-lg-4:nth-child(6) .goal-box,
+.education-slider-goals .col-lg-4:nth-child(7) .goal-box
+{
+    background: url(../images/course-javascript.png) !important;
+    background-repeat: no-repeat !important;
+    height: 180px;
+    border-radius: 20px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 299px;
+    transition: 0.3s ease-in-out;
+}
+.education-slider-goals .col-lg-4.col-md-4.col-sm-6:nth-child(2) .goal-box {
+    background: url(../images/arabic.png) !important;
+}
+
+.education-slider-goals .col-lg-4:nth-child(3) .goal-box{
+    background: url(../images/course-react.png) !important;
+}
+
+.education-slider-goals .col-lg-4:nth-child(4) .goal-box {
+    background: url(../images/course-css.png) !important;
+}
+.education-slider-goals .col-lg-4:nth-child(5) .goal-box {
+    background: url(../images/dhivehi.png) !important;
+}
+.education-slider-goals .col-lg-4:nth-child(6) .goal-box {
+    background: url(../images/computer.png) !important;
+}
+.education-slider-goals .col-lg-4:nth-child(7) .goal-box {
+    background: url(../images/math.png) !important;
+}
+.goal-box:hover {
+    text-decoration: none;
+    box-shadow: 0 5px 15px #0000008a;
+}
+
+/* islam css*/
+.cards .card {
+    margin: 0 auto;
+    height: fit-content;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    color: #000;
+  }
+  .cards .card:hover {
+    cursor: pointer;
+    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s, transform 0.3s;
+    transform: scale(1.05);
+    text-decoration: none;
+  }
+  .cards .card:hover .card-header h3 {
+    transition: color 0.3s;
+    color: royalblue;
+  }
+  .cards .card .card-hero img {
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  .cards .card .card-header {
+    padding: 8px 16px;
+    background-color: transparent !important;
+    border-bottom: none !important;
+  }
+  .cards .card .card-body {
+    padding: 8px 16px;
+  }
+  
+  @media only screen and (max-width: 1100px) {
+    .cards .card {
+      max-width: 280px;
+    }
+  }
+  @media only screen and (max-width: 920px) {
+    .cards {
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      grid-template-columns: 1fr;
+    }
+    .cards .card {
+      max-width: 400px;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    .cards {
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      grid-template-columns: 1fr;
+    }
+    .cards .card {
+      max-width: 320px;
+    }
+  }
+  
+  
+  
+  .card-image img {
+      width: 100%;
+  }
+  .achieve-btn {
+      background: #fd5c26;
+      color: #fff;
+      padding: 14px;
+      border-radius: 5px;
+      margin-top: 30px;
+      display: block;
+      text-align: center;
+      margin: auto;
+  }
+  .achieve-btn:hover {
+      background-color: #0ebd18;
+      text-decoration: none;
+      color: #fff;
+  }
+  
+    .cards {
+      display: flex;
+    }
+  
+    .cards .card-item {
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      width: 100%;
+      border-radius: 6px;
+      box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      transition: transform 0.5s;
+      -webkit-transition: transform 0.5s;
+    }
+    .cards .card-item:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+      -webkit-transform: scale(1.1);
+    }
+    .cards .card-item:hover .card-image {
+      opacity: 1;
+    }
+    .cards .card-info {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      padding: 1rem;
+      line-height: 1.5em;
+      text-align: center;
+    }
+    .cards .card-title {
+      font-size: 25px;
+      line-height: 1.1em;
+      color: #000000;
+      margin-bottom: 14px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .education-slider a:hover {
+      text-decoration: none;
+    }

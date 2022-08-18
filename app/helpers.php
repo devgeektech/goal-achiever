@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Unit;
 use App\Models\Topic;
 use App\Models\Plan;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Subject;
 use App\Models\Membership;
@@ -120,6 +121,8 @@ function getTotalParticipants($goal_id){
     $get_total_participants = TakenGoal::where('goal_id', $goal_id)->count();
     if(!empty($get_total_participants)){
         return $get_total_participants;
+    }else{
+        return "Not taken yet";
     }
 }
 
@@ -128,6 +131,24 @@ function getTotalGoalsTaken($id){
     $get_total_goals_taken = TakenGoal::where('student_id', $id)->count();
     if(!empty($get_total_goals_taken)){
         return $get_total_goals_taken;
+    }
+}
+
+
+function getAdminInfo(){
+    $admin_info = User::where('role',1)->first();
+    if($admin_info){
+        return $admin_info;
+    }
+    return null;
+}
+
+function checkGoalAval($id){
+    $get_aval = TakenGoal::where('goal_id',$id)->first();
+    if($get_aval){
+        return 'yes';
+    }else{
+        return 'no';
     }
 }
 ?>

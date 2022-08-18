@@ -8,6 +8,17 @@ jQuery(".document_edit").on('click',function() {
 });
 
 /**
+ * Update Goal Image
+ */
+ jQuery(".goal_image_edit").on('click',function() { 
+    jQuery("#goal_id").val($(this).attr('data-id'));
+    jQuery('#edit_goal_image').modal('show');
+});
+
+
+
+
+/**
  * Get Units and Topics dropdown
  */
 

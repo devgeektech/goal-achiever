@@ -1,4 +1,3 @@
-
   <!-- JS Links Start -->
   <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
   <script src="{{URL::to('/js/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>

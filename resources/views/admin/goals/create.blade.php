@@ -77,6 +77,11 @@
                                     @error('exam_document') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label class="form-label" for="goalImage">Goal Image</label>
+                                    <input type="file" class="form-control"  name="goal_image" accept="image/png, image/gif, image/jpeg"/>
+                                    @error('goal_image') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="goalEndDate">Goal End Name</label>
                                     <input type="date" class="form-control" name="end_date" id="datepicker" placeholder="Goal End Date">
                                     @error('end_date') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
@@ -90,6 +95,11 @@
                                     <label for="goalInstructorName">Instructor's Name</label>
                                     <input type="text" class="form-control" name="instructor_name" id="instructor_name" placeholder="Instructor's Name" value="{{ Auth::user()->name }}">
                                     @error('instructor_name') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="goalDescription">Description</label>
+                                    <textarea class="form-control" name="description" id="exampleDescription" rows="3"></textarea>
+                                    @error('description') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                 </div>
                                 
                                 <button type="submit" class="btn btn-primary">Add</button>

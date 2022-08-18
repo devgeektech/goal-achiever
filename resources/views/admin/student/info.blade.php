@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="forProfileImage">Profile Image</label><br>
-                                    <img src="@if($student->profile_image){{ Storage::url($student->profile_image) }} @else {{URL::to('/admin/img/undraw_profile.svg')}} @endif" height="100px" width="100px">
+                                    <img src="@if($student->profile_image){{ Storage::url($student->profile_image) }} @else {{URL::to('/admin-panel/img/undraw_profile.svg')}} @endif" height="100px" width="100px">
                                 </div>
                                 <div class="form-group">
                                     <label for="forGoalsAchieved">Goals Achieved</label>

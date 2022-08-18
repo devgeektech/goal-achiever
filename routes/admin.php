@@ -38,6 +38,8 @@ Route::group([
             Route::post('/destroy/{id}', [App\Http\Controllers\Admin\Goal\IndexController::class,'destroy'])->name('destroy');
             Route::post('/get_units', [App\Http\Controllers\Admin\Goal\IndexController::class,'get_units'])->name('get_units');
             Route::post('/get_topics', [App\Http\Controllers\Admin\Goal\IndexController::class,'get_topics'])->name('get_topics');
+            Route::post('/update_image', [App\Http\Controllers\Admin\Goal\IndexController::class,'update_image'])->name('update_image');
+            
             
         });
 

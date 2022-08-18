@@ -48,6 +48,10 @@ class IndexController extends Controller
             if($plans){
                 $data['plans'] = $plans;
             }
+            $get_subject_title = Subject::where('id',$id)->first();
+            if($get_subject_title){
+                $data['get_subject_title'] = $get_subject_title->title;
+            }
             return view('web.goals.info',$data);
         }catch(Exception $e){
             return redirect()->route('web.goals.info',$data)->with('error',$e->getMessage());

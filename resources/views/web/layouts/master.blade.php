@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   
   </head>
   <body> @include('web.layouts.topbar') @yield('content') <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -44,7 +45,7 @@
        
         <section>
           <section class="signup-step-container">
-            <h3 class="popup-heading text-center">Membership</h3>
+            <h3 class="popup-heading text-center text-white">Membership</h3>
             <hr>
             <div class="container mt-5">
               <div class="row d-flex justify-content-center">
@@ -76,40 +77,43 @@
                    
                       <div class="tab-content" id="main_form">
                         <div class="tab-pane active" role="tabpanel" id="step1">
+                          <h4 class="text-center mb-4 text-white">Register</h4>
                           <!-- Form HTML Start-->
                           <form action="#" method="post" id="membership_form">
-                            <div class="form-group">
+                            <div class="row">
+                            <div class="form-group col-lg-6 col-md-6 col-12">
                               <input type="text" class="form-control px-3 py-3" placeholder="Username" id="m_name" name="name">
                               <span class="username_error error"></span>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-lg-6 col-md-6 col-12">
                               <input type="email" class="form-control px-3 py-3" placeholder="Email Address" id="m_email" name="email">
                               <span class="email_error error"></span>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-lg-6 col-md-6 col-12">
                               <input type="password" class="form-control px-3 py-3" placeholder="Password" id="m_pwd" name="password">
                               <span class="password_error error"></span>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-lg-6 col-md-6 col-12">
                               <input type="password" class="form-control px-3 py-3" placeholder="Confirm Password" id="m_confirm-pwd" name="password_confirmation">
                               <span class="confirm-pwd_error error"></span>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-lg-6 col-md-6 col-12">
                               <input type="number" class="form-control px-3 py-3" placeholder="Age" id="m_age" name="age">
                               <span class="age_error error"></span>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-lg-6 col-md-6 col-12">
                               <select class="form-control" placeholder="Select Counrty" id="m_country" required="true" name="country"> @foreach($countries as $country) <option value="{{$country->name}}">{{$country->name}}</option> @endforeach </select>
                             </div>
-                            <button type="button" id="registerBtn" class="btn btn-primary register d-block mx-auto registerBtn">Register Now <i class="fa-solid fa-arrow-right ml-2"></i>
+                            <button type="button" id="registerBtn" class="btn btn-primary register d-block mx-auto mt-3 registerBtn">Register Now <i class="fa-solid fa-arrow-right ml-2"></i>
                             </button>
+                            </div>
                           </form>
                           <!-- Form HTML End-->
                         </div>
                         
                         <div class="tab-pane" role="tabpanel" id="step2">
-                          <h4 class="text-center">Select Plan</h4>
-                          <div class="plan row free-months-row">
+                          <h4 class="text-center text-white">Select Plan</h4>
+                          <div class="plan row free-months-row pt-2">
                             <div class="container">
                               <div class="row mt-4">
                                 <input type="hidden" name="plan_months" id="plan_months" value="">
@@ -145,37 +149,43 @@
                           </ul>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step3">
-                          <h4 class="text-center">Payment</h4>
+                          <h4 class="text-center text-white">Payment</h4>
                           <div class="container">
-                            <label class="payment-label pl-3 text-center">What type of subscription you want to select?</label>
+                            
+                            <label class="payment-label pl-3 text-center text-white">What type of subscription you want to select?</label>
                             <div class='row my-4 justify-content-center subscription-type'>
                              
                             </div>
                             <div class='col-md-12'>
                               <div class='form-row'>
                                 <div class=' col-md-12 col-xs-12 form-group required'>
-                                  <label class='control-label'>Name on Card</label>
+                                  <label class='control-label text-white'>Name on Card</label>
                                   <input class='form-control' size='4' type='text' id="name_on_card" name="name_on_card" required>
+                                  <span class="card_name_error error"></span>
                                 </div>
                               </div>
                               <div class='form-row'>
                                 <div class=' col-md-12 col-xs-12 form-group required'>
-                                  <label class='control-label'>Card Number</label>
+                                  <label class='control-label text-white'>Card Number</label>
                                   <input id="cr_no" type="text" maxlength="16" name="card_number" class='form-control card-number' placeholder="xxxx xxxx xxxx xxxx" required>
+                                  <span class="card_number_error error"></span>
                                 </div>
                               </div>
                               <div class='form-row'>
                                 <div class='col-xs-4 col-md-4 form-group cvc required'>
-                                  <label class='control-label'>CVC</label>
+                                  <label class='control-label text-white'>CVC</label>
                                   <input autocomplete='off' name="cvc_number" id="cvc_number" class='form-control card-cvc' placeholder='ex. 311' size='4' type='text' required>
+                                  <span class="cvc_error error"></span>
                                 </div>
                                 <div class='col-xs-4 col-md-4 form-group expiration required'>
-                                  <label class='control-label'>Expiration</label>
+                                  <label class='control-label text-white'>Expiration</label>
                                   <input class='form-control card-expiry-month' id="expiration_month" name="expiration_month" placeholder='MM' size='2' type='text' required>
+                                  <span class="exp_month_error error"></span>
                                 </div>
                                 <div class='col-xs-4 col-md-4 form-group expiration required'>
                                   <label class='control-label'></label>
-                                  <input class='form-control card-expiry-year' id="expiration_year" name="expiration_year" placeholder='YYYY' size='4' type='text' required>
+                                  <input class='form-control card-expiry-year mt-2' id="expiration_year" name="expiration_year" placeholder='YYYY' size='4' type='text' required>
+                                  <span class="exp_year_error error"></span>
                                 </div>
                               </div>
                               <div class='form-row'>
@@ -191,12 +201,13 @@
                               <button type="button" class="default-btn prev-step">Back</button>
                             </li>
                             <li>
-                              <button type="button" id="purchase_plan" class="default-btn next-step">Pay</button>
+                              <button type="submit" id="purchase_plan" class="default-btn next-step">Pay</button>
                             </li>
                           </ul>
                         </div>
-                   
+                     
                   </div>
+               
                 </div>
               </div>
             </div>
@@ -206,3 +217,10 @@
     </div>
     <!----------FOOTER-SECTION-END-HERE---------> 
     @extends('web.layouts.scripts')
+    @extends('web.layouts.footer')
+    @push('js')
+    <script>
+      let register_route = "{{route('register')}}";
+      let purchase_plan_route = "{{route('payment_store')}}";
+    </script>
+    @endpush

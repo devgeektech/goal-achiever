@@ -5,32 +5,34 @@ jQuery(".registerBtn").on('click',function() {
     var email = jQuery('#m_email').val() != "" ? jQuery('#m_email').val() : jQuery('#email').val();
     var password = jQuery('#m_pwd').val() != "" ? jQuery('#m_pwd').val() : jQuery('#password').val();
     var password_confirmation = jQuery('#m_confirm-pwd').val() != "" ? jQuery('#m_confirm-pwd').val() : jQuery('#confirm-pwd').val();
+    
     var country = jQuery('#m_country').val() != "" ? jQuery('#m_country').val() : jQuery('#country').val();
     var age = jQuery('#m_age').val() != "" ? jQuery('#m_age').val() : jQuery('#age').val();
     var register_from = 'plan';
+   
     var username_error = email_error = password_error = con_password_error = password_match_error = age_error = false;
-    if(name == ""){
+    if(name == "" || typeof name === "undefined"){
         jQuery(".username_error").html('Please enter name.');
          username_error = false;
     }else{
         jQuery(".username_error").html('');
          username_error = true;
     }
-    if(email == ""){
+    if(email == "" || typeof email === "undefined"){
         jQuery(".email_error").html('Please enter email.');
          email_error = false;
     }else{
         jQuery(".email_error").html('');
         email_error = true;
     }
-    if (password == "") {
+    if (password == "" || typeof password === "undefined") {
         $(".password_error").html('Please enter a password.');
          password_error = false;
     }else{
         $(".password_error").html('');
         password_error = true;
     } 
-    if (password_confirmation == '') {
+    if (password_confirmation == '' || typeof password_confirmation === "undefined") {
         $(".confirm-pwd_error").html('Please re-enter your password.');
          con_password_error = false;
     }else{
@@ -44,7 +46,7 @@ jQuery(".registerBtn").on('click',function() {
         $(".confirm-pwd_error").html('');
         password_match_error = true;
     }
-    if(age == ""){
+    if(age == "" || typeof age === "undefined"){
         $(".age_error").html('Please enter age.');
          age_error = false;
     }else{
@@ -100,26 +102,49 @@ jQuery(".registerBtn").on('click',function() {
 });
 
 
-
-jQuery(document).ready(function () {
-           
-    jQuery('.nav-tabs > li a[title]').tooltip();
+/**
+ * Multistep register form functionality
+ */
+$(document).ready(function () {
+        
+    $('.nav-tabs > li a[title]').tooltip();
     //Wizard
-    jQuery('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         var target = $(e.target);
         if (target.parent().hasClass('disabled')) {
             return false;
         }
     });
-    jQuery(".next-step").click(function (e) {
-        var active = $('.wizard .nav-tabs li.active');
-        active.next().removeClass('disabled');
-        nextTab(active);
+    $(".next-step").click(function (e) {
+        if($(this).hasClass('subject_button')){
+            if( $("input[name='plan_subject']").is(':checked') ){
+                var active = $('.wizard .nav-tabs li.active');
+                active.next().removeClass('disabled');
+                nextTab(active);
+                $('.plan_subject_error').text("");
+            }
+            else{
+                $('.plan_subject_error').css('color','red').text("Please choose atleast one subject :)");
+                return false;
+            }
+        }
+        if( $("input[name='plan']").is(':checked') ){
+            var active = $('.wizard .nav-tabs li.active');
+            active.next().removeClass('disabled');
+            nextTab(active);
+            $('.plan_error').text("");
+        }
+        else{
+            $('.plan_error').css('color','red').text("Please choose atleast one plan :)");
+            return false;
+        }
+        
     });
-    jQuery(".prev-step").click(function (e) {
+    $(".prev-step").click(function (e) {
         var active = $('.wizard .nav-tabs li.active');
         prevTab(active);
     });
+    
 });
 
 function nextTab(elem) {
@@ -133,6 +158,8 @@ $('.nav-tabs').on('click', 'li', function () {
     jQuery('.nav-tabs li.active').removeClass('active');
     jQuery(this).addClass('active');
 });
+
+
 
 /**
  * Get months of selected plan in register modal
@@ -165,7 +192,7 @@ $('.nav-tabs').on('click', 'li', function () {
 });
 
 /**
- * Functionlity for purchase plan after register process
+ * Functionality for purchase plan after register process
  */
 jQuery('#purchase_plan').on('click', function(){
     var plan_months = jQuery('#plan_months').val();
@@ -179,44 +206,125 @@ jQuery('#purchase_plan').on('click', function(){
     var subscription_type = jQuery('#option-1').val();
     var plan = jQuery('#plan_id').val();
     var user_id = jQuery('#user_id').val();
-    jQuery.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-    jQuery.ajax({
-        type: "post",
-        url: purchase_plan_route,
-        data:{  
-                plan_months:plan_months,
-                plan_name:plan_name,
-                plan_price:plan_price,
-                name_on_card:name_on_card,
-                card_number:cr_no,
-                cvc_number:cvc_number,
-                expiration_month:expiration_month,
-                expiration_year:expiration_year,
-                subscription_type:subscription_type,
-                plan:plan,
-                user_id:user_id
-            },
-        beforeSend: function(msg){
-            jQuery('#purchase_plan').html("Processing....");
-        },
-        success: function (response) {
-            if (response.status == 'Success') {
-                jQuery("#membershipModal").hide();
-                swal("Good job!", "You have successfully purchased '" +plan_name+ "' plan!", "success");
-                setTimeout(() => {
-                    window.location.href = "/student/dashboard";
-                }, 5000);
-               
-            }else{
-               
+
+    var card_name_error = card_number_error = cvc_error = exp_month_error = exp_year_error = false;
+    if(name_on_card == ""){
+        jQuery(".card_name_error").html("Please enter card holder name.");
+        card_name_error = false;
+    }else{
+        jQuery(".card_name_error").html("");
+        card_name_error = true;
+    }
+    if(cr_no == ""){
+        jQuery(".card_number_error").html("Please enter card number.");
+        card_number_error = false;
+    }else{
+        jQuery(".card_number_error").html("");
+        card_number_error = true;
+    }
+    if(cvc_number == ""){
+        jQuery(".cvc_error").html("Please enter cvc number.");
+        cvc_error = false;
+    }else{
+        jQuery(".cvc_error").html("");
+        cvc_error = true;
+    }
+    if(expiration_month == ""){
+        jQuery(".exp_month_error").html("Please enter card expiration month.");
+        exp_month_error = false;
+    }else{
+        jQuery(".exp_month_error").html("");
+        exp_month_error = true;
+    }
+    if(expiration_year == ""){
+        jQuery(".exp_year_error").html("Please enter card expiration year.");
+        exp_year_error = false;
+    }else{
+        jQuery(".exp_year_error").html("");
+        exp_year_error = true;
+    }
+
+    if((card_name_error == true) && (card_number_error == true) && (cvc_error == true) && (exp_month_error == true) &&  (exp_year_error == true)){
+        jQuery.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        },
-        error: function(xhr){
-            console.error('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
-        }
-    });
+          });
+        jQuery.ajax({
+            type: "post",
+            url: purchase_plan_route,
+            data:{  
+                    plan_months:plan_months,
+                    plan_name:plan_name,
+                    plan_price:plan_price,
+                    name_on_card:name_on_card,
+                    card_number:cr_no,
+                    cvc_number:cvc_number,
+                    expiration_month:expiration_month,
+                    expiration_year:expiration_year,
+                    subscription_type:subscription_type,
+                    plan:plan,
+                    user_id:user_id
+                },
+            beforeSend: function(msg){
+                jQuery('#purchase_plan').html("Processing....");
+            },
+            success: function (response) {
+                if (response.status == 'Success') {
+                    jQuery("#membershipModal").hide();
+                    swal("Good!", "You have successfully purchased '" +plan_name+ "' plan!", "success");
+                    setTimeout(() => {
+                        window.location.href = "/student/dashboard";
+                    }, 5000);
+                   
+                }else{
+                   
+                }
+            },
+            error: function(xhr){
+                console.error('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+            }
+        });
+    }
+
+
 });
+
+
+/**
+ * Achieve Goal From Frontend Gaols Details Page
+ */
+
+jQuery(".achieve_goal").on('click', function(){
+    swal("","Please wait......","warning");
+    var goal_id = jQuery(this).data('id');
+    setTimeout(() => {
+        jQuery.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        jQuery.ajax({
+            type: "post",
+            url: achieve_goal,
+            data:{
+                goal_id:goal_id,
+                taken_from:'front'
+            },
+            
+            success: function (response) { 
+                if (response.status == 'Success') {
+                    swal("Yeah!", "Goal is taken successfully!", "success");
+                }
+                if (response.status == 'already') {
+                    swal("ooh!", "Goal is already taken !", "warning");
+                }
+            },
+            error: function(xhr){
+                console.error('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+            }
+        });
+    }, 2000);
+    
+});
+ 

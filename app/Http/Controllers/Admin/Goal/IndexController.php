@@ -10,6 +10,7 @@ use App\Models\Subject;
 use App\Models\Unit;
 use App\Models\Topic;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 class IndexController extends Controller
 {
@@ -65,9 +66,15 @@ class IndexController extends Controller
             'topic' => 'required',
             'end_date' => 'required',
             'creator_name' => 'required',
-            'instructor_name' => 'required'
+            'instructor_name' => 'required',
+            'description' => 'required'
         ]);
         try{
+            if($request->hasFile('goal_image')){ 
+                $image_name = $request->file('goal_image')->getClientOriginalName();
+                $image_path = $request->file('goal_image')->store('public/images');
+            }
+
             $medias = array();
             if($request->hasFile('document')){ 
 
@@ -100,7 +107,7 @@ class IndexController extends Controller
                 } 
             }
             $goal = new Goal;
-            $goal->user_id = 1;
+            $goal->user_id = Auth::user()->id;
             $goal->subject_id = $request->subject;
             $goal->unit_id = $request->unit;
             $goal->topic_id = $request->topic;
@@ -108,6 +115,8 @@ class IndexController extends Controller
             $goal->creator_name = $request->creator_name;
             $goal->instructor_name = $request->instructor_name;
             $goal->status = 1;
+            $goal->image = $image_path;
+            $goal->description = $request->description;
             $goal->save();
             if(intval($goal->id) > 0){
                 if(count($medias) > 0){
@@ -202,7 +211,8 @@ class IndexController extends Controller
             'topic' => 'required',
             'end_date' => 'required',
             'creator_name' => 'required',
-            'instructor_name' => 'required'
+            'instructor_name' => 'required',
+            'description' => 'required'
         ]);
         try{
             $goal = Goal::find($id);
@@ -237,7 +247,7 @@ class IndexController extends Controller
                     $medias['exam_document'][$k]['type'] = 'exam_document';
                 } 
             }
-            $goal->user_id = 1;
+            $goal->user_id = Auth::user()->id;
             $goal->subject_id = $request->subject;
             $goal->unit_id = $request->unit;
             $goal->topic_id = $request->topic;
@@ -245,6 +255,7 @@ class IndexController extends Controller
             $goal->creator_name = $request->creator_name;
             $goal->instructor_name = $request->instructor_name;
             $goal->status = 1;
+            $goal->description = $request->description;
             $goal->save();
 
             if(intval($goal->id) > 0){
@@ -311,6 +322,28 @@ class IndexController extends Controller
         }
     }
 
+    /**
+     * Update Goal Image
+     */
+
+     public function update_image(Request $request){
+        try{
+            $request->validate([
+                'goal_image' => 'required',
+            ]);
+            if($request->hasFile('goal_image')){ 
+                    $path = $request->file('goal_image')->store('public/images');
+                    $name = $request->file('goal_image')->getClientOriginalName();
+            }
+
+            $goal = Goal::find($request->goal_id);
+            $goal->image =$path; 
+            $goal->save();
+            return redirect()->route('admin.goals.index')->with('success','Document has been updated successfully');
+        }catch(Exception $e){
+            return redirect()->route('admin.goals.index')->with('error',$e->getMessage());
+        }
+     }
     /**
      * Delete Goal Document By ID
      */

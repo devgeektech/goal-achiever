@@ -53,7 +53,9 @@ class Goal extends Model
 		'end_date',
 		'creator_name',
 		'instructor_name',
-		'status'
+		'status',
+		'image',
+		'description'
 	];
 
 	public function subject()

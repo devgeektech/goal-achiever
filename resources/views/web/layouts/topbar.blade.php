@@ -1,7 +1,7 @@
 <header>
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand mr-5" href="#">
+        <a class="navbar-brand mr-5" href="{{ route('index')}}">
           <img src="{{URL::to('./images/logo.png')}}">
         </a>
         <h4 class="nav-heading">GOAL ACHIEVER</h4>
@@ -14,7 +14,7 @@
               <a class="nav-link mr-4" href="#">HOME</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link goals mr-4" href="#">GOALS <span>|</span>
+              <a class="nav-link goals mr-4" href="{{ route('goals')}}">GOALS <span>|</span>
               </a>
             </li>
             @auth

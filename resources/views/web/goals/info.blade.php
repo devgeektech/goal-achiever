@@ -1,98 +1,43 @@
 @extends('web.layouts.master')
 @section('content')
 
+<section id="islam" class="islam my-5 py-4">
+
   <div class="container">
-    <div class="row align-items-center pt-5">
-    
-<section id="edu-goals" class="education-goals">
-  <div class="container">
-    <h2>Our Educational Goals To Achieve</h2>
-    <div class="container">
-      <div class="education-slider mt-5">
-        @if(isset($goal_detials))
-            @foreach($goal_detials as $goal_detial)
-                <a href="{{ route('description', $goal_detial->id)}}"> 
-                    <div class="box mb-2 text-white" >
-                        <h3>{{$goal_detial->unit->name}}</h3>
-                    </div>
-                </a>
-            @endforeach
-        @else
-        <div class="box mb-2 text-white">
-            <h3>No Goal Found</h3>
-        </div>
+    <h2>{{ $get_subject_title }}</h2>
+    <div class="row justify-content-center pt-5">
+
+      @if(isset($goal_detials))
+        @foreach($goal_detials as $goal_detial)
+          <div class="cards col-lg-4 col-md-6">
+            <div class="card-item">
+              <div class="card-image">
+                <img src="{{ Storage::url($goal_detial->image) }}" height="200" width="200"/>
+              </div>
+              <div class="card-info">
+                <h3 class="card-title">{{$goal_detial->unit->name}}</h3>
+                <h5>Instructor:{{$goal_detial->instructor_name}}</h5>
+                <p class="card-intro">{{Str::limit($goal_detial->description, 100)}}</p>
+                <a data-id="{{ $goal_detial->id}}" @guest data-toggle="modal" data-target="#membershipModal" style="cursor: pointer" @endguest  class="achieve-btn @if(checkGoalAval($goal_detial->id) != 'yes')  achieve_goal @endif " >@if(checkGoalAval($goal_detial->id) == 'yes') Already Taken  @else Achieve This Goal @endif</a>
+              </div>
+            </div>
+          </div>
+          @endforeach
+          @else
+          <div class="cards col-lg-4 col-md-6">
+            <div class="card-item">
+              <div class="card-info">
+                <h3 class="card-title">No Goal Created Yet For This Subject</h3>
+                <p class="card-intro">Coming soon....</p>
+              </div>
+            </div>
+          </div>
         @endif
-        
-      </div>
-    </div>
-  </div>
-</section>
-  <!----------FOOTER-SECTION-START-HERE--------->
-  <section id="footer" class="footer-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-          <div class="footer-logo-area">
-            <a href="#">
-              <img class="img-fluid" src="{{URL::to('images/footer-logo.png')}}">
-            </a>
-            <p>Connect With Us</p>
-            <ul>
-              <li>
-                <a href="#">
-                  <img src="{{URL::to('images/facebook.png')}}">
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="{{URL::to('images/witter.png')}}">
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="{{URL::to('images/youtube.png')}}">
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-          <div class="links-area">
-            <h5>Links</h5>
-            <ul>
-              <li>
-                <a href="#">Quran Videos</a>
-              </li>
-              <li>
-                <a href="#">Hadith Videos</a>
-              </li>
-              <li>
-                <a href="#">Dhuas</a>
-              </li>
-              <li>
-                <a href="#">Quotes</a>
-              </li>
-              <li>
-                <a href="#">Articles</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-          <div class="google-add-image">
-            <img class="img-fluid" src="{{URL::to('images/google-add.png')}}">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <div class="copy-right-area">
-            <div class="border-line"></div>
-            <p>Copyright © 2022 islamicolc. All Rights Reserved</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
- 
+  
   @endsection
+  @push('js')
+    <script>
+      let achieve_goal = "{{route('student.goals.take_goal')}}";
+    </script>
+  @endpush
