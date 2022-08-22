@@ -20,7 +20,7 @@
 
            @if ($message = Session::get('success'))
            <div class="alert alert-success alert-block">
-               <button type="button" class="close" data-dismiss="alert">×</button>    
+               <button type="button" class="close" data-dismiss="alert">×</button>
                <strong>{{ $message }}</strong>
            </div>
            @endif
@@ -29,12 +29,12 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">My Goals</h1>
-                    
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">My Goals</h6>
-                           
+
                         </div>
                         <div class="card-body">
                             <div class="container">
@@ -46,7 +46,16 @@
                                         <div class="card-item">
                                           <div class="card-image">
                                             <img src="{{ Storage::url($detial->goal->image) }}" height="200" width="200"/>
-                                            <img src="{{ URL::to('/images/progress.png') }}" height="100" width="100"/>
+                                           <!-- <img src="{{ URL::to('/images/progress.png') }}" height="100" width="100"/> -->
+                                            <div class="progress-card">
+                                              <svg class="progress-circle" width="200px" height="200px" xmlns="http://www.w3.org/2000/svg">
+                                                <circle class="progress-circle-back"
+                                                      cx="100" cy="100" r="55"></circle>
+                                                  <circle class="progress-circle-prog"
+                                                          cx="100" cy="100" r="55"></circle>
+                                              </svg>
+                                              <div class="progress-text" data-progress="0">45%</div>
+                                          </div>
                                           </div>
                                           <div class="card-info">
                                             <h3 class="card-title">{{$detial->goal->unit->name}}</h3>
@@ -60,7 +69,7 @@
                                 </div>
                                 @endforeach
                                 @else
-                              
+
                                 <div class="cards col-lg-4 col-md-6">
                                     <div class="card-item">
                                       <div class="card-image">
@@ -81,7 +90,7 @@
             </div>
             <!-- End of Main Content -->
 
-           
+
         </div>
         <!-- End of Content Wrapper -->
 
@@ -98,3 +107,4 @@
    @push('js')
     <script src="{{URL::to('/admin-panel/js/all.js')}}"></script>
    @endpush
+

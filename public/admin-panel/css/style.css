@@ -460,7 +460,7 @@ label {
     align-items: stretch;
     align-content: stretch;
   }
-  
+
   .selct-plan .card.card-body h6{
     font-size: 14px;
     font-weight: 600;
@@ -477,4 +477,180 @@ label {
     position: relative;
     line-height: 1;
     width: 12.5rem;
+}
+
+/* card */
+.cards .card {
+  margin: 0 auto;
+  height: fit-content;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  color: #000;
+}
+.cards .card:hover {
+  cursor: pointer;
+  box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s, transform 0.3s;
+  transform: scale(1.05);
+  text-decoration: none;
+}
+.cards .card:hover .card-header h3 {
+  transition: color 0.3s;
+  color: royalblue;
+}
+.cards .card .card-hero img {
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.cards .card .card-header {
+  padding: 8px 16px;
+  background-color: transparent !important;
+  border-bottom: none !important;
+}
+.cards .card .card-body {
+  padding: 8px 16px;
+}
+
+@media only screen and (max-width: 1100px) {
+  .cards .card {
+    max-width: 280px;
+  }
+}
+@media only screen and (max-width: 920px) {
+  .cards {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    grid-template-columns: 1fr;
+  }
+  .cards .card {
+    max-width: 400px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .cards {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    grid-template-columns: 1fr;
+  }
+  .cards .card {
+    max-width: 320px;
+  }
+}
+
+
+
+.card-image img {
+    width: 100%;
+}
+.achieve-btn {
+    background: #fd5c26;
+    color: #fff;
+    padding: 14px;
+    border-radius: 5px;
+    margin-top: 30px;
+    display: block;
+    text-align: center;
+    margin: auto;
+}
+.achieve-btn:hover {
+    background-color: #0ebd18;
+    text-decoration: none;
+    color: #fff;
+}
+
+  .cards {
+    display: flex;
+  }
+
+  .cards .card-item {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    transition: transform 0.5s;
+    -webkit-transition: transform 0.5s;
+  }
+  .cards .card-item:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+  }
+  .cards .card-item:hover .card-image {
+    opacity: 1;
+  }
+  .cards .card-info {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: 1rem;
+    line-height: 1.5em;
+    text-align: center;
+  }
+  .cards .card-title {
+    font-size: 25px;
+    line-height: 1.1em;
+    color: #000000;
+    margin-bottom: 14px;
+    text-align: center;
+    font-weight: 600;
+  }
+/* card-progress-circle */
+
+.progress-card{
+  position: absolute;
+  height: 160px;
+  width: 160px;
+  cursor: pointer;
+  top: 45%;
+  left: 45%;
+  margin: -80px 0 0 -80px;
+}
+
+.progress-circle {
+  transform: rotate(-90deg);
+  margin-top: -4px;
+}
+
+.progress-circle-back {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 10px;
+}
+
+.progress-circle-prog {
+  fill: none;
+  stroke: #fd5c26;
+  stroke-width: 10px;
+  stroke-dasharray: 0 999;
+  stroke-dashoffset: 0px;
+  transition: stroke-dasharray 0.7s linear 0s;
+}
+
+.progress-text {
+  width: 100%;
+  position: absolute;
+  top: 73px;
+  text-align: center;
+  font-size: 2em;
+  left: 25px;
+  color: #fff;
+}
+.card-image {
+  position: relative;
+}
+.card-image::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0 0 0 / 60%);
 }

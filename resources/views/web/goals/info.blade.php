@@ -19,7 +19,7 @@
                 <h3 class="card-title">{{$detial->unit->name}}</h3>
                 <h5>Instructor:{{$detial->instructor_name}}</h5>
                 <p class="card-intro">{{Str::limit($detial->description, 100)}}</p>
-                <a data-id="{{ $detial->id}}" class="achieve-btn achieve_goal">@if(checkGoalAval($detial->id) == 'yes') Already Taken  @else Achieve This Goal @endif</a>
+                <a data-id="{{ $detial->id}}" class="achieve-btn achieve_goal @if(checkGoalAval($detial->id) == 'yes') already_taken @endif">@if(checkGoalAval($detial->id) == 'yes') Already Taken  @else Achieve This Goal @endif</a>
               </div>
             </div>
           </div>
@@ -38,12 +38,12 @@
     @endif
   </div>
   </section>
-  
+
   @endsection
   @push('js')
     <script>
       let check_auth = "{{route('check_auth')}}";
       let achieve_goal = "{{route('student.goals.take_goal')}}";
-      
+
     </script>
   @endpush

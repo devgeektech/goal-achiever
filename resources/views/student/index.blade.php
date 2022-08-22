@@ -1,20 +1,20 @@
 @extends('student.layouts.master')
 
 @section('content')
-   
+
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
         <!-- Main Content -->
         <div id="content">
            @include('student.layouts.topbar')
-            
-         
-           
+
+
+
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button>    
+                        <button type="button" class="close" data-dismiss="alert">×</button>
                         <strong>{{ $message }}</strong>
                     </div>
                  @endif
@@ -65,7 +65,7 @@
                                             </div>
                                             <div class="col">
                                                 <div class="progress progress-sm mr-2">
-                                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <!-- Content Row -->
-                <div class="row">
+                <div class="row d-block">
                     <div class="card shadow mb-12">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">My Goals Achieving Progress Chart</h6>
@@ -102,7 +102,7 @@
                                 <canvas id="myBarChart"></canvas>
                             </div>
                             <hr>
-                            
+
                         </div>
                     </div>
                 </div>

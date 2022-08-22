@@ -1,7 +1,7 @@
 /**
  * Update Goal Documents,Videos,Exam Documents
  */
-jQuery(".document_edit").on('click',function() { 
+jQuery(".document_edit").on('click',function() {
     jQuery("#doc_type").val($(this).attr('data-type'));
     jQuery("#doc_id").val($(this).attr('data-id'));
     jQuery('#add_doc').modal('show');
@@ -10,7 +10,7 @@ jQuery(".document_edit").on('click',function() {
 /**
  * Update Goal Image
  */
- jQuery(".goal_image_edit").on('click',function() { 
+ jQuery(".goal_image_edit").on('click',function() {
     jQuery("#goal_id").val($(this).attr('data-id'));
     jQuery('#edit_goal_image').modal('show');
 });
@@ -23,19 +23,19 @@ jQuery(".document_edit").on('click',function() {
  */
 
 $(document).ready(function () {
-    
+
     var is_plan = $('#is_plan').val();
     var is_plan_expire = $('#plan_expire').val();
     if((is_plan == 2) || (is_plan_expire == 1)){
         $('#myModal').modal('show');
     }
     $("#subject_id").val($('#subject').val());
-   
+
     $('#subject').on('change', function () {
         var subject_id = $(this).val();
         $("#subject_id").val(subject_id);
         $('#unit').html('');
-        
+
         $.ajaxSetup({
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -108,7 +108,7 @@ $(document).ready(function () {
         $("#plan_price").val(get_plan_price);
         $("#total_amount").text('$'+get_plan_price);
 
-        
+
 
     });
 /**
@@ -116,7 +116,7 @@ $(document).ready(function () {
  */
  // ------------step-wizard-------------
     $(document).ready(function () {
-        
+
         $('.nav-tabs > li a[title]').tooltip();
         //Wizard
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -148,7 +148,7 @@ $(document).ready(function () {
                 $('.plan_error').css('color','red').text("Please choose atleast one plan :)");
                 return false;
             }
-            
+
         });
         $(".prev-step").click(function (e) {
             var active = $('.wizard .nav-tabs li.active');
@@ -172,7 +172,7 @@ $(document).ready(function () {
           }
      });
 
-    
+
 });
 $(document).ready(function () {
     /*disable non active tabs*/
@@ -181,7 +181,7 @@ $(document).ready(function () {
     $('.nav-tabs li').not('.active').find('a').removeAttr("data-toggle");
 
     $('button').click(function () {
-        
+
         /*enable next tab*/
         $('.nav-tabs li.active').next('li').removeClass('disabled');
         $('.nav-tabs li.active').next('li').find('a').attr("data-toggle", "tab")
@@ -213,3 +213,28 @@ $(document).ready(function(){
       }
     });
   });
+
+
+
+   /*progress-circle*/
+   {
+    function progressBar(progressVal, totalPercentageVal = 100) {
+        var strokeVal = (20 * 100) / totalPercentageVal;
+        var x = document.querySelector(".progress-circle-prog");
+        x.style.strokeDasharray = progressVal * strokeVal + " 999";
+        var el = document.querySelector(".progress-text");
+        var from = $(".progress-text").data("progress");
+        $(".progress-text").data("progress", progressVal);
+        var start = new Date().getTime();
+
+        setTimeout(function () {
+          var now = new Date().getTime() - start;
+          var progress = now / 700;
+          el.innerHTML = (progressVal / totalPercentageVal) * 100 + "%";
+          if (progress < 1) setTimeout(arguments.callee, 10);
+        }, 10);
+      }
+
+      progressBar(10, 200);
+
+   }
