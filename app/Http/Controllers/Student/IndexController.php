@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Membership;
 use App\Models\Subject;
 use App\Models\Plan;
+use App\Models\TakenGoal;
 use Exception;
 use Illuminate\Support\Facades\Session;
 class IndexController extends Controller
@@ -51,6 +52,18 @@ class IndexController extends Controller
             
             if(count($plans) > 0){
                 $data['plans'] = $plans;
+            }
+
+            $my_goals = TakenGoal::where('student_id',Auth::user()->id)->with('goal')->get();
+            if(count($my_goals) > 0){
+                $goals = array();
+                foreach($my_goals as $goal) {
+                    $goals[] = $goal->goal->unit->name;
+                }
+                $data['my_goals'] = count($my_goals);
+                $data['goals'] = implode(', ', $goals);
+            }else{
+                $data['my_goals'] = '0';
             }
             return view('student.index',$data);
         }catch(Exception $e){

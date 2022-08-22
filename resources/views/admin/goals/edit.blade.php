@@ -74,6 +74,14 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                                    <label class="form-label d-flex" for="goalImage">Goal Image</label>
+                                    <div class="form-group videoImgBlock" style="display:inline-flex;">
+                                        <i class="fas fa-edit goal_image_edit" data-id="{{$goal->id}}" style="cursor:pointer"></i>
+                                        <img src="{{Storage::url($goal->image) ?? URL::to('/images/dummy.jpg')}}" height="100" widht="100">
+                                    </div>
+                                    @error('goal_image') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                                     <label class="form-label d-flex" for="customFile">Document</label>
                                     @foreach($media_document as $media)
                                         <div class="form-group videoImgBlock" style="display:inline-flex;">
@@ -110,14 +118,7 @@
                                         
                                         <input type="file" class="form-control" id="exam_document" name="exam_document[]" multiple accept="image/png, image/gif, image/jpeg"/>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                                    <label class="form-label d-flex" for="goalImage">Goal Image</label>
-                                    <div class="form-group videoImgBlock" style="display:inline-flex;">
-                                        <i class="fas fa-edit goal_image_edit" data-id="{{$goal->id}}" style="cursor:pointer"></i>
-                                        <img src="{{Storage::url($goal->image) ?? URL::to('/images/dummy.jpg')}}" height="100" widht="100">
-                                    </div>
-                                    @error('goal_image') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
-                                </div>
+                              
                                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                                     <div class="form-group">
                                         <strong>Goal End Date:</strong>

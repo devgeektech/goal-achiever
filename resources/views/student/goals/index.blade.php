@@ -72,7 +72,7 @@
                                                     <td>{{ $goal->creator_name}}</td>
                                                     <td>{{ $goal->instructor_name}}</td>
                                                     <td>
-                                                       <a href="{{ route('student.goals.info',$goal->id) }}" class="btn btn-warning">Info</a>
+                                                       <a href="{{-- {{ route('student.goals.info',$goal->id) }} --}}" class="btn btn-warning">Info</a>
                                                     </td>
                                                 </tr>
                                             @endforeach                                           

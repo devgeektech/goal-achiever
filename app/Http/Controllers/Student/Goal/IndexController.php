@@ -28,7 +28,6 @@ class IndexController extends Controller
      */
     public function show($id)
     {
-       
        $data = [];
        $data = getMembershipDetails();
        $goal = Goal::find($id);
@@ -68,7 +67,6 @@ class IndexController extends Controller
 
     public function take_goal(Request $request)
     {
-        
         $request->validate([
             'goal_id' => 'required',
         ]);
@@ -78,7 +76,7 @@ class IndexController extends Controller
             if(count($goals)> 0){
                 $data['goals'] = $goals;
             }
-            $get_info = TakenGoal::where('goal_id',$request->goal_id)->first();
+            $get_info = TakenGoal::where('goal_id',$request->goal_id)->where('student_id',Auth::user()->id)->first();
             if($get_info){
                 if($request->taken_from == 'front'){
                     return response()->json([ 'status' => 'already']);

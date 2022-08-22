@@ -15,10 +15,10 @@
         <a class="nav-link" href="{{route('student.goals.index') }}"> <i class="fas fa-fw fa-cog"></i> <span>All Goals</span></a>
     </li>
     <li class="nav-item {{ (request()->is('student/taken_goals*')) ? 'active' : '' }}">
-        <a class="nav-link" href="{{route('student.taken_goals.index') }}"> <i class="fas fa-fw fa-chart-area"></i> <span>Taken Goals</span></a>
+        <a class="nav-link" href="{{route('student.taken_goals.index') }}"> <i class="fas fa-fw fa-chart-area"></i> <span>My Goals</span></a>
     </li>
     <li class="nav-item {{ (request()->is('student/plans*')) ? 'active' : '' }}">
-        <a class="nav-link" href="{{route('student.plans.index') }}"> <i class="fas fa-fw fa-folder"></i> <span>Plans</span></a>
+        <a class="nav-link" href="{{route('student.plans.index') }}"> <i class="fas fa-fw fa-folder"></i> <span>My Payment Plans</span></a>
     </li>
     
     {{-- <li class="nav-item ">

@@ -40,19 +40,15 @@
             slidesToScroll: 1
           }
         }
-        // You can unslick at a given breakpoint now by adding:
-        // settings: "unslick"
-        // instead of a settings object
       ]
     });
   </script>
   <script>
     $(document).ready(function(){
-      //var xValues = [$('#students').val()];
-      var xValues = ['Aban Fajr', 'Athar Kairo', 'Safi Talal', 'Zayd Omar', 'Malik Kairo'];
+      var students = [$('#students').val()];
+      var xValues = students.toString().split(', ');
       var yValues = [55, 49, 44, 24, 30];
       var barColors = ["red", "green", "blue", "orange", "brown"];
-      setTimeout(() => {
         new Chart("myChart", {
         type: "bar",
         data: {
@@ -72,7 +68,6 @@
           }
         }
       });
-      }, 1000);
     });
   </script>
   <!-- JS Links End -->

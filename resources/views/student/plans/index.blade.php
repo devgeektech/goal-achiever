@@ -28,12 +28,12 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Plans</h1>
+                    <h1 class="h3 mb-2 text-gray-800">My Payment Plans</h1>
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Plans</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">My Payment Plans</h6>
                            
                         </div>
                         <div class="card-body">
@@ -44,8 +44,9 @@
                                             <th>Plan</th>
                                             <th>Price</th>
                                             <th>Type</th>
+                                            <th>Purchased Date</th>
+                                            <th>Expired Date</th>
                                             <th>Status</th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -53,8 +54,9 @@
                                             <th>Plan</th>
                                             <th>Price</th>
                                             <th>Type</th>
+                                            <th>Purchased Date</th>
+                                            <th>Expired Date</th>
                                             <th>Status</th>
-                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -63,11 +65,13 @@
                                                 <tr>
                                                     <td>{{ $membership->plan->name}}</td>
                                                     <td>${{ $membership->plan->price}}</td>
-                                                    <td>{{ ucfirst(trans($membership->subscription))}}</td>
+                                                    <td>{{ ucfirst(trans($membership->subscription)) }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($membership->created_at)->format('j F, Y') }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($membership->expiry_date)->format('j F, Y')  }}</td>
                                                     <td><a href="#" class="btn btn-success">@if(strtotime(now()) > strtotime($membership->expiry_date)) Deactivated @else Active @endif</a></td>
-                                                    <td>
+                                                   {{--  <td>
                                                        <a href="{{ route('student.plans.info',$membership->plan_id) }}" class="btn btn-warning">Info</a>
-                                                    </td>
+                                                    </td> --}}
                                                 </tr>
                                             @endforeach                                           
                                         @endisset

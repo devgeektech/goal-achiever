@@ -5,7 +5,6 @@ jQuery(".registerBtn").on('click',function() {
     var email = jQuery('#m_email').val() != "" ? jQuery('#m_email').val() : jQuery('#email').val();
     var password = jQuery('#m_pwd').val() != "" ? jQuery('#m_pwd').val() : jQuery('#password').val();
     var password_confirmation = jQuery('#m_confirm-pwd').val() != "" ? jQuery('#m_confirm-pwd').val() : jQuery('#confirm-pwd').val();
-    
     var country = jQuery('#m_country').val() != "" ? jQuery('#m_country').val() : jQuery('#country').val();
     var age = jQuery('#m_age').val() != "" ? jQuery('#m_age').val() : jQuery('#age').val();
     var register_from = 'plan';
@@ -35,16 +34,12 @@ jQuery(".registerBtn").on('click',function() {
     if (password_confirmation == '' || typeof password_confirmation === "undefined") {
         $(".confirm-pwd_error").html('Please re-enter your password.');
          con_password_error = false;
-    }else{
-        $(".confirm-pwd_error").html('');
-         con_password_error = true;
-    }
-    if (password != password_confirmation ) {
+    }else if(password != password_confirmation) {
         $(".confirm-pwd_error").html('Passwords do not match.');
-         password_match_error = false;
+        password_match_error = false;
     }else{
         $(".confirm-pwd_error").html('');
-        password_match_error = true;
+        password_match_error = con_password_error = true;
     }
     if(age == "" || typeof age === "undefined"){
         $(".age_error").html('Please enter age.');
@@ -74,7 +69,7 @@ jQuery(".registerBtn").on('click',function() {
                 age:age,
                 register_from:register_from
             },
-            beforeSend: function(msg){
+            beforeSend: function(){
                 jQuery('#registerBtn').html("Please wait....");
             },
             success: function (response) { 
@@ -94,7 +89,6 @@ jQuery(".registerBtn").on('click',function() {
             }
         });
     }else{
-       
         return false;
     }
 
@@ -205,6 +199,7 @@ jQuery('#purchase_plan').on('click', function(){
     var expiration_year = jQuery('#expiration_year').val();
     var subscription_type = jQuery('#option-1').val();
     var plan = jQuery('#plan_id').val();
+    var goal_id = jQuery('#goal_id').val();
     var user_id = jQuery('#user_id').val();
 
     var card_name_error = card_number_error = cvc_error = exp_month_error = exp_year_error = false;
@@ -264,21 +259,26 @@ jQuery('#purchase_plan').on('click', function(){
                     expiration_year:expiration_year,
                     subscription_type:subscription_type,
                     plan:plan,
-                    user_id:user_id
+                    user_id:user_id,
+                    goal_id:goal_id
                 },
             beforeSend: function(msg){
                 jQuery('#purchase_plan').html("Processing....");
             },
             success: function (response) {
+                if(response.status == 'already'){
+                    swal("Ooh!", "You have alreadyb taken this goal", "warning");
+                }
                 if (response.status == 'Success') {
                     jQuery("#membershipModal").hide();
-                    swal("Good!", "You have successfully purchased '" +plan_name+ "' plan!", "success");
+                    swal("Good!", "You have successfully purchased '" +plan_name+ "' plan!Now you are redirecting to Student Dashboard!", "success");
                     setTimeout(() => {
                         window.location.href = "/student/dashboard";
                     }, 5000);
                    
-                }else{
-                   
+                }
+                if(response.status == 'failed'){
+                    swal("Ooh!", "Something went wrong", "warning");
                 }
             },
             error: function(xhr){
@@ -296,6 +296,7 @@ jQuery('#purchase_plan').on('click', function(){
  */
 
 jQuery(".achieve_goal").on('click', function(){
+    
     swal("","Please wait......","warning");
     var goal_id = jQuery(this).data('id');
     setTimeout(() => {
@@ -306,18 +307,36 @@ jQuery(".achieve_goal").on('click', function(){
         });
         jQuery.ajax({
             type: "post",
-            url: achieve_goal,
+            url: check_auth,
             data:{
                 goal_id:goal_id,
                 taken_from:'front'
             },
             
             success: function (response) { 
-                if (response.status == 'Success') {
-                    swal("Yeah!", "Goal is taken successfully!", "success");
-                }
-                if (response.status == 'already') {
-                    swal("ooh!", "Goal is already taken !", "warning");
+                if(response.status == 'unauthenticated'){
+                    jQuery("#goal_id").val(goal_id);
+                    jQuery("#membershipModal").modal('show');
+                }else{
+                    jQuery.ajax({
+                        type: "post",
+                        url: achieve_goal,
+                        data:{
+                            goal_id:goal_id,
+                            taken_from:'front'
+                        },
+                        success: function (response) { 
+                            if (response.status == 'Success') {
+                                swal("Yeah!", "Goal is taken successfully!", "success");
+                            }
+                            if (response.status == 'already') {
+                                swal("ooh!", "Goal is already taken !", "warning");
+                            }
+                        },
+                        error: function(xhr){
+                            console.error('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+                        }
+                    });
                 }
             },
             error: function(xhr){

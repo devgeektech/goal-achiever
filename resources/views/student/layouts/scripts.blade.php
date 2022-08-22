@@ -10,6 +10,7 @@
 <!-- Page level custom scripts -->
 <script src="{{URL::to('/admin-panel/js/demo/chart-area-demo.js')}}"></script>
 <script src="{{URL::to('/admin-panel/js/demo/chart-pie-demo.js')}}"></script>
+<script src="{{URL::to('/admin-panel/js/demo/chart-bar-demo.js')}}"></script>
 
 <!-- Page level plugins -->
 <script src="{{URL::to('/admin-panel/vendor/datatables/jquery.dataTables.min.js')}}"></script>

@@ -187,3 +187,29 @@ $(document).ready(function () {
         $('.nav-tabs li.active').next('li').find('a').attr("data-toggle", "tab")
     });
 });
+
+$(document).ready(function(){
+    var students = [$('#students').val()];
+    var xValues = students.toString().split(', ');
+    var yValues = [40, 50, 100, 30, 20];
+    var barColors = ["red", "green", "blue", "orange", "brown"];
+      new Chart("myChart", {
+      type: "bar",
+      data: {
+        labels: xValues,
+        datasets: [{
+          backgroundColor: barColors,
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          text: ""
+        }
+      }
+    });
+  });

@@ -82,23 +82,23 @@
                           <form action="#" method="post" id="membership_form">
                             <div class="row">
                             <div class="form-group col-lg-6 col-md-6 col-12">
-                              <input type="text" class="form-control px-3 py-3" placeholder="Username" id="m_name" name="name">
+                              <input type="text" class="form-control px-3 py-3" placeholder="Username" id="m_name" name="name" autocomplete="off">
                               <span class="username_error error"></span>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-12">
-                              <input type="email" class="form-control px-3 py-3" placeholder="Email Address" id="m_email" name="email">
+                              <input type="email" class="form-control px-3 py-3" placeholder="Email Address" id="m_email" name="email" autocomplete="off">
                               <span class="email_error error"></span>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-12">
-                              <input type="password" class="form-control px-3 py-3" placeholder="Password" id="m_pwd" name="password">
+                              <input type="password" class="form-control px-3 py-3" placeholder="Password" id="m_pwd" name="password" autocomplete="off">
                               <span class="password_error error"></span>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-12">
-                              <input type="password" class="form-control px-3 py-3" placeholder="Confirm Password" id="m_confirm-pwd" name="password_confirmation">
+                              <input type="password" class="form-control px-3 py-3" placeholder="Confirm Password" id="m_confirm-pwd" name="password_confirmation" autocomplete="off">
                               <span class="confirm-pwd_error error"></span>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-12">
-                              <input type="number" class="form-control px-3 py-3" placeholder="Age" id="m_age" name="age">
+                              <input type="number" class="form-control px-3 py-3" placeholder="Age" id="m_age" name="age" autocomplete="off">
                               <span class="age_error error"></span>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-12">
@@ -121,6 +121,7 @@
                                 <input type="hidden" name="plan_price" id="plan_price" value=""> 
                                 <input type="hidden" name="plan_id" id="plan_id" value=""> 
                                 <input type="hidden" name="user_id" id="user_id" value="">
+                                <input type="hidden" name="goal_id" id="goal_id" value="">
                                   @foreach ($plans as $plan) 
                                   <div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
                                     <label>

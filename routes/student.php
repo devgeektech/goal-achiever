@@ -33,6 +33,7 @@ Route::group([
         Route::group(['prefix' => 'taken_goals','as' => 'taken_goals.'], function ($router) {
             Route::get('/', [App\Http\Controllers\Student\TakenGoal\IndexController::class,'index'])->name('index');
             Route::get('/submit_papers/{id}', [App\Http\Controllers\Student\TakenGoal\IndexController::class,'submit_papers'])->name('submit_papers');
+            Route::get('/info/{id}', [App\Http\Controllers\Student\TakenGoal\IndexController::class,'show'])->name('info');
         });
         Route::group(['prefix' => 'plans','as' => 'plans.'], function ($router) {
             Route::get('/', [App\Http\Controllers\Student\Plans\IndexController::class,'index'])->name('index');

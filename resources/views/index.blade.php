@@ -35,23 +35,23 @@
               <form action="{{route('register')}}" method="post" id="register_form">
                 @csrf
                 <div class="form-group">
-                  <input type="text" class="form-control px-4 py-4" placeholder="Username" id="name" name="name">
+                  <input type="text" class="form-control px-4 py-4" placeholder="Username" id="name" name="name" autocomplete="off">
                   <span class="username_error error"></span>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control px-4 py-4" placeholder="Email Address" id="email" name="email">
+                  <input type="email" class="form-control px-4 py-4" placeholder="Email Address" id="email" name="email" autocomplete="off">
                   <span class="email_error error"></span>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control px-4 py-4" placeholder="Password" id="password" name="password">
+                  <input type="password" class="form-control px-4 py-4" placeholder="Password" id="password" name="password" autocomplete="off">
                   <span class="password_error error"></span>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control px-4 py-4" placeholder="Confirm Password" id="confirm-pwd" name="password_confirmation">
+                  <input type="password" class="form-control px-4 py-4" placeholder="Confirm Password" id="confirm-pwd" name="password_confirmation" autocomplete="off">
                   <span class="confirm-pwd_error error"></span>
                 </div>
                 <div class="form-group">
-                  <input type="number" class="form-control px-4 py-4" placeholder="Age" id="age" name="age">
+                  <input type="number" class="form-control px-4 py-4" placeholder="Age" id="age" name="age" autocomplete="off">
                   <span class="age_error error"></span>
                 </div>
                 <div class="form-group">
@@ -71,10 +71,10 @@
               <form action="{{route('login')}}" method="post">
                 @csrf
                 <div class="form-group">
-                  <input type="email" class="form-control px-4 py-4" placeholder="Email" id="email" name="email">
+                  <input type="email" class="form-control px-4 py-4" placeholder="Email" id="email" name="email" autocomplete="off">
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control px-4 py-4" placeholder="Password" id="pwd" name="password">
+                  <input type="password" class="form-control px-4 py-4" placeholder="Password" id="pwd" name="password" autocomplete="off">
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Login</button>
               </form>
@@ -148,7 +148,7 @@
     </div>
   </section>
   <section id="progress-chart" class="progress-chart-section py-5">
-    <input type="hidden" id="students" name="students" value="'Aban Fajr', 'Athar Kairo', 'Safi Talal', 'Zayd Omar', 'Malik Kairo'">
+    <input type="hidden" id="students" name="students" value='Aban Fajr, Athar Kairo, Safi Talal, Zayd Omar, Malik Kairo'>
     <div class="container">
       <h2>Progress Chart Of The Active Student</h2>
       <div class="graph-chart d-flex">

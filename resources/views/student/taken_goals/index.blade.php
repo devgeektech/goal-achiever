@@ -28,58 +28,53 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Taken Goals</h1>
+                    <h1 class="h3 mb-2 text-gray-800">My Goals</h1>
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Taken Goals</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">My Goals</h6>
                            
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Subject</th>
-                                            <th>Unit</th>
-                                            <th>Topic</th>
-                                            <th>Goal Start Date</th>
-                                            <th>Goal End Date</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Subject</th>
-                                            <th>Unit</th>
-                                            <th>Topic</th>
-                                            <th>Goal Start Date</th>
-                                            <th>Goal End Date</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        @isset($taken_goals)
-                                            @foreach ($taken_goals as $taken_goal)                                            
-                                                <tr>
-                                                    <td>{{ $taken_goal->goal->subject->title}}</td>
-                                                    <td>{{ $taken_goal->goal->unit->name}}</td>
-                                                    <td>{{ $taken_goal->goal->topic->name}}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($taken_goal->created_at)->format('j F, Y') }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($taken_goal->goal->end_date)->format('j F, Y') }}</td>
-                                                    <td>
-                                                       <a href="{{ route('student.taken_goals.submit_papers',$taken_goal->id) }}" class="btn btn-warning">Submit Papers</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach                                           
-                                        @endisset
-                                    </tbody>
-                                </table>
-                            </div>
+                            <div class="container">
+                                @isset($goal_detials)
+                                @foreach($goal_detials->chunk(3) as $goal_detial)
+                                <div class="row justify-content-center pt-5">
+                                    @foreach($goal_detial as $detial)
+                                      <div class="cards col-lg-4 col-md-6">
+                                        <div class="card-item">
+                                          <div class="card-image">
+                                            <img src="{{ Storage::url($detial->goal->image) }}" height="200" width="200"/>
+                                            <img src="{{ URL::to('/images/progress.png') }}" height="100" width="100"/>
+                                          </div>
+                                          <div class="card-info">
+                                            <h3 class="card-title">{{$detial->goal->unit->name}}</h3>
+                                            <h5>Instructor:{{$detial->goal->instructor_name}}</h5>
+                                            <p class="card-intro">{{Str::limit($detial->goal->description, 100)}}</p>
+                                            <a href="{{ route('student.taken_goals.info',$detial->goal->id) }}" class="btn btn-warning">Details</a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      @endforeach
+                                </div>
+                                @endforeach
+                                @else
+                              
+                                <div class="cards col-lg-4 col-md-6">
+                                    <div class="card-item">
+                                      <div class="card-image">
+                                        <img src="{{ URL::to('/images/no_goal.png') }}" height="100" width="100"/>
+                                      </div>
+                                      <div class="card-info">
+                                        <h3 class="card-title">No goal taken yet!</h3>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              @endisset
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 

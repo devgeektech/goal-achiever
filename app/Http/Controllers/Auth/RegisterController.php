@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Payment;
 use App\Models\Membership;
+use App\Models\TakenGoal;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -155,11 +156,36 @@ class RegisterController extends Controller
                 if(intval($membership->id) > 0){
                     $user = User::find($request->user_id);
                     Auth::login($user);
-                    return response()->json([ 'status' => 'Success', 'message' => 'true']);
+                    if(isset($request->goal_id)){
+                        $get_info = TakenGoal::where('goal_id',$request->goal_id)->where('student_id',Auth::user()->id)->first();
+                        if($get_info){
+                            return response()->json([ 'status' => 'already']);
+                        }
+                        $taken_goal = new TakenGoal;
+                        $taken_goal->goal_id = $request->goal_id;
+                        $taken_goal->student_id = Auth::user()->id;
+                        $taken_goal->status = 'inprogress';
+                        $taken_goal->save();
+                        if(intval($taken_goal->id) > 0){
+                            return response()->json([ 'status' => 'Success']);
+                        }else{
+                            return response()->json([ 'status' => 'failed']);
+                        }
+                    }
+                    return response()->json([ 'status' => 'Success', 'message' => 'true','user_id' => Auth::user()->id]);
                 }
             }
         }catch(Exception $e){
             return response()->json([ 'status' => 'false', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function check_auth()
+    {
+        if(!Auth::check()){
+            return response()->json([ 'status' => 'unauthenticated']);
+        }else{
+            return response()->json([ 'status' => 'authenticated']);
         }
     }
 }

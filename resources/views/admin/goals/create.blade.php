@@ -60,7 +60,11 @@
                                     </select>
                                     @error('topic') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                 </div>
-
+                                <div class="form-group">
+                                    <label class="form-label" for="goalImage">Goal Image</label>
+                                    <input type="file" class="form-control"  name="goal_image" accept="image/png, image/gif, image/jpeg"/>
+                                    @error('goal_image') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
+                                </div>
                                 <div class="form-group">
                                     <label class="form-label"  for="goalDocuments">Documents</label>
                                     <input type="file" class="form-control"  name="document[]" multiple accept="image/png, image/gif, image/jpeg"/>
@@ -76,11 +80,7 @@
                                     <input type="file" class="form-control"  name="exam_document[]" multiple accept="image/png, image/gif, image/jpeg"/>
                                     @error('exam_document') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="goalImage">Goal Image</label>
-                                    <input type="file" class="form-control"  name="goal_image" accept="image/png, image/gif, image/jpeg"/>
-                                    @error('goal_image') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
-                                </div>
+                                
                                 <div class="form-group">
                                     <label for="goalEndDate">Goal End Name</label>
                                     <input type="date" class="form-control" name="end_date" id="datepicker" placeholder="Goal End Date">

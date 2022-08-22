@@ -27,4 +27,5 @@ Route::get('/info/{id}', [App\Http\Controllers\Web\Goals\IndexController::class,
 Route::get('/description/{id}', [App\Http\Controllers\Web\Goals\IndexController::class,'description'])->name('description');
 
 Route::post('/payment-store', [App\Http\Controllers\Auth\RegisterController::class,'paymentStore'])->name('payment_store');
+Route::post('/check_auth', [App\Http\Controllers\Auth\RegisterController::class,'check_auth'])->name('check_auth');
 
