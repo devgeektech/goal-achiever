@@ -28,12 +28,12 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">My Goals</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Unit Topics</h1>
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">My Goals</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Unit Topics</h6>
                            
                         </div>
                         <div class="card-body">
@@ -41,24 +41,18 @@
                                 @isset($goal_detials)
                                 @foreach($goal_detials->chunk(3) as $goal_detial)
                                 <div class="row justify-content-center pt-5">
-                                    @foreach($goal_detial as $detial)
+                                    @foreach($goal_detial as $detail)
                                       <div class="cards col-lg-4 col-md-6">
                                         <div class="card-item">
                                           <div class="card-image">
-                                            <img src="{{ Storage::url($detial[0]->goal->image) }}" height="200" width="200"/>
+                                            <img src="{{ Storage::url($detail->image) }}" height="200" width="200"/>
                                             
                                           </div>
                                           <div class="card-info">
-                                            <h3 class="card-title">{{$detial[0]->goal->unit->name}}</h3>
-                                            <h5>Instructor:{{$detial[0]->goal->instructor_name}}</h5>
-                                            <p class="card-intro">{{Str::limit($detial[0]->goal->description, 100)}}</p>
-                                            <a href="{{ route('student.taken_goals.unit_details',$detial[0]->goal->unit_id) }}" class="btn btn-warning">Details</a>
-                                            <div class="progress progress-sm mr-2">
-                                              @php
-                                                $percentage = get_percentage($detial[0]->goal->unit_id,$detial[0]->student_id);
-                                              @endphp
-                                              <div class="progress-bar bg-info" role="progressbar" style="width: {{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100">{{ $percentage }}</div>
-                                          </div>
+                                            <h3 class="card-title">{{$detail->topic->name}}</h3>
+                                            <h5>Instructor:{{$detail->instructor_name}}</h5>
+                                            <p class="card-intro">{{Str::limit($detail->description, 100)}}</p>
+                                            <a href="{{ route('student.taken_goals.info',$detail->id) }}" class="btn btn-warning">Details</a>
                                           </div>
                                         </div>
                                       </div>

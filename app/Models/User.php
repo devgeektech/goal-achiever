@@ -24,7 +24,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property Carbon|null $updated_at
  * @property int $role
  * @property string|null $profile_image
+ * @property string|null $country
+ * @property string|null $age
  * 
+ * @property Collection|GoalAssignment[] $goal_assignments
  * @property Collection|Goal[] $goals
  * @property Collection|Membership[] $memberships
  * @property Collection|Payment[] $payments
@@ -32,8 +35,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *
  * @package App\Models
  */
-
-
 class User extends Authenticatable
 {
 	protected $table = 'users';
@@ -62,6 +63,11 @@ class User extends Authenticatable
 		'country',
 		'age'
 	];
+
+	public function goal_assignments()
+	{
+		return $this->hasMany(GoalAssignment::class, 'student_id');
+	}
 
 	public function goals()
 	{

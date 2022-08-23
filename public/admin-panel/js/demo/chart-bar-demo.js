@@ -29,25 +29,24 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 
 // Bar Chart Example
-var my_goals = new Array(document.getElementById("my_goals").value);
-var xValues = my_goals.toString().split(', ');
+var my_goals = document.getElementById("my_goals").value;
+my_goals = JSON.parse(my_goals.replace(/&quot;/g,'"'));
 if(my_goals != ""){
-  var goal_percentage = [40, 50, 60, 70, 80];
-}else{
-  goal_percentage = [];
+  var goals_percentage = document.getElementById("goals_percentage").value;
+  goals_percentage = JSON.parse(goals_percentage.replace(/&quot;/g,'"'));
 }
 
 var ctx = document.getElementById("myBarChart");
 var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: xValues,
+    labels: my_goals,
     datasets: [{
       label: "Percentage",
       backgroundColor: "#4e73df",
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
-      data: goal_percentage,
+      data: goals_percentage,
     }],
   },
   options: {

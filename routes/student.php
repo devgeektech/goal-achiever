@@ -32,8 +32,11 @@ Route::group([
         });
         Route::group(['prefix' => 'taken_goals','as' => 'taken_goals.'], function ($router) {
             Route::get('/', [App\Http\Controllers\Student\TakenGoal\IndexController::class,'index'])->name('index');
-            Route::get('/submit_papers/{id}', [App\Http\Controllers\Student\TakenGoal\IndexController::class,'submit_papers'])->name('submit_papers');
+            Route::post('/upload_assignments', [App\Http\Controllers\Student\TakenGoal\IndexController::class,'upload_assignments'])->name('upload_assignments');
             Route::get('/info/{id}', [App\Http\Controllers\Student\TakenGoal\IndexController::class,'show'])->name('info');
+            Route::get('/unit_details/{id}', [App\Http\Controllers\Student\TakenGoal\IndexController::class,'unit_details'])->name('unit_details');
+          
+            
         });
         Route::group(['prefix' => 'plans','as' => 'plans.'], function ($router) {
             Route::get('/', [App\Http\Controllers\Student\Plans\IndexController::class,'index'])->name('index');

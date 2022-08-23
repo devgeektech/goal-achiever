@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Goal;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GoalMedia;
+use App\Models\Unit;
+use App\Models\Topic;
 use App\Models\TakenGoal;
 use Exception;
 class IndexController extends Controller
@@ -76,18 +78,27 @@ class IndexController extends Controller
             if(count($goals)> 0){
                 $data['goals'] = $goals;
             }
-            $get_info = TakenGoal::where('goal_id',$request->goal_id)->where('student_id',Auth::user()->id)->first();
+            $get_info = TakenGoal::where('unit_id',$request->unit_id)->where('student_id',Auth::user()->id)->first();
             if($get_info){
                 if($request->taken_from == 'front'){
                     return response()->json([ 'status' => 'already']);
                 }
                 return redirect()->route('student.goals.index',$data)->with('error','Goal is already taken :(');
             }
-            $taken_goal = new TakenGoal;
-            $taken_goal->goal_id = $request->goal_id;
-            $taken_goal->student_id = Auth::user()->id;
-            $taken_goal->status = 'inprogress';
-            $taken_goal->save();
+
+            $topics = Topic::where('unit_id',$request->unit_id)->get();
+           
+            foreach($topics as $topic){
+                $taken_goal = new TakenGoal;
+                $taken_goal->goal_id = $request->goal_id;
+                $taken_goal->student_id = Auth::user()->id;
+                $taken_goal->status = 'inprogress';
+                $taken_goal->subject_id = $topic->subject_id;
+                $taken_goal->unit_id = $topic->unit_id;
+                $taken_goal->topic_id = $topic->id;
+                $taken_goal->end_date = $request->end_date;
+                $taken_goal->save();
+            }
             if(intval($taken_goal->id) > 0){
                 if($request->taken_from == 'front'){
                     return response()->json([ 'status' => 'Success']);
@@ -96,6 +107,7 @@ class IndexController extends Controller
             }else{
                 return redirect()->route('student.goals.index',$data)->with('error','Something wnet wrong :(');
             }
+            
         }catch(Exception $e){
             return redirect()->route('student.goals.index',$data)->with('error',$e->getMessage());
         }

@@ -16,6 +16,7 @@ class IndexController extends Controller
     public function index()
     {
         try{
+            
             $data = [];
             //Get plan details
             $plan_details = Membership::where('student_id',Auth::user()->id)->get();
@@ -49,24 +50,42 @@ class IndexController extends Controller
             }else{
                 $plans = DB::table('plans')->get();
             }
-            
             if(count($plans) > 0){
                 $data['plans'] = $plans;
             }
 
-            $my_goals = TakenGoal::where('student_id',Auth::user()->id)->with('goal')->get();
-            if(count($my_goals) > 0){
-                $goals = array();
-                foreach($my_goals as $goal) {
-                    $goals[] = $goal->goal->unit->name;
+           
+            $all_goals = TakenGoal::where('student_id',Auth::user()->id)->get();
+            if(count($all_goals) > 0){
+                foreach($all_goals as $goal) {
+                    $goals[] = getTopicName($goal->topic_id);
                 }
-                $data['my_goals'] = count($my_goals);
-                $data['goals'] = implode(', ', $goals);
+                $data['all_goals'] = count($all_goals);
+                
             }else{
-                $data['my_goals'] = '0';
+                $data['all_goals'] = 0;
             }
+            
+            $comp_goals = TakenGoal::where('student_id',Auth::user()->id)->where('status','completed')->with('goal')->get();
+            if(count($comp_goals)){
+                $data['comp_goals'] =  $comp_goals->count();
+            }else{
+                $data['comp_goals'] = 0;
+            }
+
+            $get_units = DB::table('taken_goals')->where('student_id',Auth::user()->id)->distinct('unit_id')->pluck('student_id','unit_id')->toArray();
+            $get_units_name = $get_units_percentage = [];
+            if(count($get_units)>0){          
+                foreach($get_units as $unit => $student_id){  
+                    $get_units_name[] = getUnitName($unit);
+                    $get_units_percentage[] = get_percentage($unit,$student_id);
+                }
+            } 
+            $data['get_units'] = $get_units_name;
+            $data['get_percentage'] = $get_units_percentage;
             return view('student.index',$data);
         }catch(Exception $e){
+            
             return view('student.index')->with('error',$e->getMessage());
          
         }

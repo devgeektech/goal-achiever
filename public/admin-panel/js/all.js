@@ -1,3 +1,5 @@
+
+
 /**
  * Update Goal Documents,Videos,Exam Documents
  */
@@ -188,6 +190,9 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * Chart display in student dashboard
+ */
 $(document).ready(function(){
     var students = [$('#students').val()];
     var xValues = students.toString().split(', ');
@@ -213,3 +218,15 @@ $(document).ready(function(){
       }
     });
   });
+  
+/**
+ * Uplad Assignments functionality
+ */
+$(document).ready(function(){
+    $('#submit_papers').on('click', function(){
+        var get_goal_id = $('#goal_id').val();
+        $('#assign_goal_id').val(get_goal_id);
+        $('#uploadAssignmentsModal').modal('show');
+    });
+});
+

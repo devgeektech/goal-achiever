@@ -35,7 +35,8 @@ function deleteImageFromS3($file){
 
 //Get unit name by unit id
 function getUnitName($id){
-    $getUnitName = Unit::where('id',$id)->first();
+    $getUnitName = Unit::find($id);
+    
     if($getUnitName){
         return $getUnitName->name;
     }
@@ -144,11 +145,29 @@ function getAdminInfo(){
 }
 
 function checkGoalAval($id){
-    $get_aval = TakenGoal::where('goal_id',$id)->first();
+    $get_aval = TakenGoal::where('goal_id',$id)->where('student_id', Auth::user()->id)->first();
     if($get_aval){
         return 'yes';
     }else{
         return 'no';
     }
+}
+
+/**
+ * Get Percentage of Goals
+ */
+function get_percentage($unit_id,$student_id){
+    $all_topics = TakenGoal::where('student_id',$student_id)->where('unit_id',$unit_id)->get()->count();
+    if($all_topics){
+        $completed_topics = TakenGoal::where('student_id',$student_id)->where('unit_id',$unit_id)->where('status','completed')->get()->count();
+        if($completed_topics){
+            $cal_percentage = ($completed_topics/$all_topics)*100;
+            return $cal_percentage;
+        }else{
+            return 0;
+        }
+       
+    }
+    
 }
 ?>

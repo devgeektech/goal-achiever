@@ -8,6 +8,9 @@ use App\Models\Goal;
 use App\Models\Subject;
 use App\Models\Country;
 use App\Models\Plan;
+use App\Models\TakenGoal;
+use App\Models\Unit;
+use Illuminate\Support\Facades\Auth;
 use Exception;
 class IndexController extends Controller
 {
@@ -36,7 +39,7 @@ class IndexController extends Controller
     public function show($id)
     {
         try{
-            $goal_detials = Goal::where('subject_id',$id)->get();
+            $goal_detials = Goal::where('subject_id',$id)->get()->groupBy('unit_id');
             if(count($goal_detials)> 0){
                 $data['goal_detials'] = $goal_detials;
             }
@@ -48,6 +51,7 @@ class IndexController extends Controller
             if($plans){
                 $data['plans'] = $plans;
             }
+
             $get_subject_title = Subject::where('id',$id)->first();
             if($get_subject_title){
                 $data['get_subject_title'] = $get_subject_title->title;
@@ -61,7 +65,7 @@ class IndexController extends Controller
     public function description($id)
     {
         try{
-            $goal_detials = Goal::where('id',$id)->get();
+            $goal_detials = Goal::where('unit_id',$id)->get();
             if(count($goal_detials)> 0){
                 $data['goal_detials'] = $goal_detials;
             }
@@ -72,6 +76,10 @@ class IndexController extends Controller
             $plans = Plan::get();
             if($plans){
                 $data['plans'] = $plans;
+            }
+            $get_subject_title = Unit::where('id',$id)->first();
+            if($get_subject_title){
+                $data['get_subject_title'] = $get_subject_title->name;
             }
             return view('web.goals.description',$data);
         }catch(Exception $e){

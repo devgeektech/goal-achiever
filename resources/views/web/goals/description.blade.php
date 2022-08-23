@@ -1,32 +1,49 @@
 @extends('web.layouts.master')
 @section('content')
 
+<section id="islam" class="islam my-5 py-4">
+
   <div class="container">
-    <div class="row align-items-center pt-5">
-    
-<section id="edu-goals" class="education-goals">
-  <div class="container">
-    <h2>Our Educational Goals To Achieve</h2>
-    <div class="container">
-      <div class="">
-        @if(isset($goal_detials))
-            @foreach($goal_detials as $goal_detial)
-              <span>{{ $goal_detial->subject->title}}</span>
-              <span>{{ $goal_detial->unit->name}}</span>
-              <span>{{ $goal_detial->topic->name}}</span>
-              <span>{{ \Carbon\Carbon::parse($goal_detial->end_date)->format('j F, Y') }}</span>
-              <span>{{ $goal_detial->creator_name}}</span>
-              <span>{{ $goal_detial->instructor_name}}</span>
-              <button class="btn btn-primary" @guest data-toggle="modal" data-target="#membershipModal" style="cursor: pointer" @endguest >Achieve this Goal</button>     
-            @endforeach
-        @else
-        <div class="box mb-2 text-white">
-            <h3>No Goal Found</h3>
-        </div>
-        @endif
-        
-      </div>
+    <h2>{{ $get_subject_title }}</h2>
+    @if(isset($goal_detials))
+    <input type="hidden" name="user_id" id="user_id">
+    @foreach($goal_detials->chunk(3) as $goal_detial)
+    <div class="row justify-content-center pt-5">
+        @foreach($goal_detial as $detial)
+          <div class="cards col-lg-4 col-md-6">
+            <div class="card-item">
+              <div class="card-image">
+                <img src="{{ Storage::url($detial->image) }}" class="img-fluid" />
+              </div>
+              <div class="card-info">
+                <h3 class="card-title">{{$detial->topic->name}}</h3>
+                <h5>Instructor:{{$detial->instructor_name}}</h5>
+                <p class="card-intro">{{Str::limit($detial->description, 100)}}</p>
+                
+              </div>
+            </div>
+          </div>
+          @endforeach
     </div>
+    @endforeach
+    @else
+      <div class="cards col-lg-4 col-md-6">
+        <div class="card-item">
+          <div class="card-info">
+            <h3 class="card-title">No Goal Created Yet For This Subject</h3>
+            <p class="card-intro">Coming soon....</p>
+          </div>
+        </div>
+      </div>
+    @endif
   </div>
-</section>
+  </section>
+  
   @endsection
+  @push('js')
+    <script>
+      let check_auth = "{{route('check_auth')}}";
+      let achieve_goal = "{{route('student.goals.take_goal')}}";
+      
+    </script>
+  @endpush

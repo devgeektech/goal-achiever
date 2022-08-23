@@ -299,6 +299,8 @@ jQuery(".achieve_goal").on('click', function(){
     
     swal("","Please wait......","warning");
     var goal_id = jQuery(this).data('id');
+    var unit_id = jQuery(this).data('unit-id');
+    var end_date = jQuery(this).data('end-date');
     setTimeout(() => {
         jQuery.ajaxSetup({
             headers: {
@@ -323,9 +325,12 @@ jQuery(".achieve_goal").on('click', function(){
                         url: achieve_goal,
                         data:{
                             goal_id:goal_id,
+                            unit_id:unit_id,
+                            end_date:end_date,
                             taken_from:'front'
                         },
                         success: function (response) { 
+                          
                             if (response.status == 'Success') {
                                 swal("Yeah!", "Goal is taken successfully!", "success");
                             }
