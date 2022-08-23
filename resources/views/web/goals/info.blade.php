@@ -18,7 +18,7 @@
               <div class="card-info">
                 <h3 class="card-title">{{$detial->unit->name}}</h3>
                 <h5>Instructor:{{$detial->instructor_name}}</h5>
-                <p class="card-intro">{{Str::limit($detial->description, 100)}}</p>
+                <p class="card-intro h-100">{{Str::limit($detial->description, 100)}}</p>
                 <a data-id="{{ $detial->id}}" class="achieve-btn achieve_goal @if(checkGoalAval($detial->id) == 'yes') already_taken @endif">@if(checkGoalAval($detial->id) == 'yes') Already Taken  @else Achieve This Goal @endif</a>
               </div>
             </div>

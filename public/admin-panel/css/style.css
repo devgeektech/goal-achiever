@@ -690,6 +690,9 @@ label {
   font-size: 15px;
   text-align: center;
   color: #fff;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
 }
 .goals-info-box input:focus {
   color: #fff !important;
@@ -727,4 +730,52 @@ label {
   max-height: 64px;
   max-width: 64px;
   margin: 0px auto 12px;
+}
+label[for=forDocuments], label[for=forVideos], label[for=forExam] {
+  font-size: 28px;
+  justify-content: center;
+}
+.row.goalWrap .form-group.videoImgBlock {
+  border: 1px solid #ededed;
+  flex-direction: column;
+  display: inline-flex;
+  cursor: pointer;
+  flex-wrap: wrap;
+  padding: 0px;
+  width: 22%;
+}
+.row.goalWrap .form-group.videoImgBlock h5 {
+  text-align: center;
+  color: #000;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.row.goalWrap .form-group.videoImgBlock video {
+  width: 100%;
+  max-width: 230px;
+  height: 100%;
+  max-height: 214px;
+  padding: 18px 10px;
+}
+.goal-info-section {
+  padding:30px 50px !important;
+}
+.goal-info-img {
+  width: 100%;
+  max-width: 170px;
+  height: 100%;
+  max-height: 170px;
+  padding: 20px;
+  margin: 0px auto;
+}
+.download {
+  background-color: #4e73df;
+  color: #fff;
+  padding: 6px 10px;
+}
+.download span, .download i {
+  font-size: 14px;
+}
+.download:hover {
+  background: #2e59d9;
 }

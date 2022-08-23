@@ -40,7 +40,7 @@
                             <div class="container">
                                 @isset($goal_detials)
                                 @foreach($goal_detials->chunk(3) as $goal_detial)
-                                <div class="row justify-content-center pt-5">
+                                <div class="row pt-5">
                                     @foreach($goal_detial as $detial)
                                       <div class="cards col-lg-4 col-md-6">
                                         <div class="card-item">
@@ -60,7 +60,7 @@
                                           <div class="card-info justify-content-between">
                                             <h3 class="card-title">{{$detial->goal->unit->name}}</h3>
                                             <h5>Instructor:{{$detial->goal->instructor_name}}</h5>
-                                            <p class="card-intro">{{Str::limit($detial->goal->description, 100)}}</p>
+                                            <p class="card-intro h-100">{{Str::limit($detial->goal->description, 100)}}</p>
                                             <a href="{{ route('student.taken_goals.info',$detial->goal->id) }}" class="btn btn-warning details-btn">Details</a>
                                           </div>
                                         </div>
