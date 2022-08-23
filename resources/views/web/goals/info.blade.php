@@ -27,11 +27,11 @@
     </div>
     @endforeach
     @else
-      <div class="cards col-lg-4 col-md-6">
-        <div class="card-item">
+      <div class="cards col-lg-6 col-md-6 mx-auto mt-5">
+        <div class="card-item no-goals-created">
           <div class="card-info">
-            <h3 class="card-title">No Goal Created Yet For This Subject</h3>
-            <p class="card-intro">Coming soon....</p>
+            <h3 class="card-title text-white">No Goal Created Yet For This Subject</h3>
+            <p class="card-intro text-white">Coming soon....</p>
           </div>
         </div>
       </div>

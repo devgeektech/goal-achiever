@@ -44,24 +44,24 @@
                                     @foreach($goal_detial as $detial)
                                       <div class="cards col-lg-4 col-md-6">
                                         <div class="card-item">
-                                          <div class="card-image">
+                                          <div class="card-image taken-goals">
                                             <img src="{{ Storage::url($detial->goal->image) }}" height="200" width="200"/>
                                            <!-- <img src="{{ URL::to('/images/progress.png') }}" height="100" width="100"/> -->
                                             <div class="progress-card">
                                               <svg class="progress-circle" width="200px" height="200px" xmlns="http://www.w3.org/2000/svg">
                                                 <circle class="progress-circle-back"
-                                                      cx="100" cy="100" r="55"></circle>
+                                                      cx="100" cy="100" r="45"></circle>
                                                   <circle class="progress-circle-prog"
-                                                          cx="100" cy="100" r="55"></circle>
+                                                          cx="100" cy="100" r="45"></circle>
                                               </svg>
                                               <div class="progress-text" data-progress="0">45%</div>
                                           </div>
                                           </div>
-                                          <div class="card-info">
+                                          <div class="card-info justify-content-between">
                                             <h3 class="card-title">{{$detial->goal->unit->name}}</h3>
                                             <h5>Instructor:{{$detial->goal->instructor_name}}</h5>
                                             <p class="card-intro">{{Str::limit($detial->goal->description, 100)}}</p>
-                                            <a href="{{ route('student.taken_goals.info',$detial->goal->id) }}" class="btn btn-warning">Details</a>
+                                            <a href="{{ route('student.taken_goals.info',$detial->goal->id) }}" class="btn btn-warning details-btn">Details</a>
                                           </div>
                                         </div>
                                       </div>
@@ -70,10 +70,10 @@
                                 @endforeach
                                 @else
 
-                                <div class="cards col-lg-4 col-md-6">
-                                    <div class="card-item">
-                                      <div class="card-image">
-                                        <img src="{{ URL::to('/images/no_goal.png') }}" height="100" width="100"/>
+                                <div class="cards col-lg-6 col-md-6 mx-auto">
+                                    <div class="card-item no-goal text-center">
+                                      <div class="card-image goal-img pt-4">
+                                        <img src="{{ URL::to('/images/no-goals-taken.png') }}" height="100" width="100"/>
                                       </div>
                                       <div class="card-info">
                                         <h3 class="card-title">No goal taken yet!</h3>

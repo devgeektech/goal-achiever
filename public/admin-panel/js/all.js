@@ -219,7 +219,7 @@ $(document).ready(function(){
    /*progress-circle*/
    {
     function progressBar(progressVal, totalPercentageVal = 100) {
-        var strokeVal = (20 * 100) / totalPercentageVal;
+        var strokeVal = (8 * 100) / totalPercentageVal;
         var x = document.querySelector(".progress-circle-prog");
         x.style.strokeDasharray = progressVal * strokeVal + " 999";
         var el = document.querySelector(".progress-text");
