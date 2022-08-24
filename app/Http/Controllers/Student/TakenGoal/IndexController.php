@@ -75,23 +75,21 @@ class IndexController extends Controller
 
 
     /**
-     * UNit Details
+     * Unit Details
      */
 
      public function unit_details($id)
      {
         $data = [];
         $data = getMembershipDetails();
-        $goal_detials = Goal::where('unit_id',$id)->get();
+        $goal_detials = Goal::orderBy('status', 'ASC')->where('unit_id',$id)->get();
         if(count($goal_detials)> 0){
             $data['goal_detials'] = $goal_detials;
         }
-        
         return view('student.taken_goals.unit-details',$data);
      }
 
     
-
     /**
      * Goal Details
      */

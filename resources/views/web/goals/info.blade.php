@@ -20,7 +20,7 @@
                 <h5>Instructor:{{$detial[0]->instructor_name}}</h5>
                 <p class="card-intro">{{Str::limit($detial[0]->description, 100)}}</p>
                 <a href="{{ route('description',$detial[0]->unit_id) }}" class="achieve-btn">Details</a>
-                <a data-id="{{ $detial[0]->id}}" data-end-date="{{$detial[0]->end_date}}" data-unit-id="{{$detial[0]->unit_id}}" class="achieve-btn @if(checkGoalAval($detial[0]->id) == 'yes') already_taken @endif achieve_goal">@if(checkGoalAval($detial[0]->id) == 'yes') Already Taken  @else Achieve This Goal @endif</a>
+                <a data-id="{{$detial[0]->id}}" data-end-date="{{$detial[0]->end_date}}" data-unit-id="{{$detial[0]->unit_id}}" class="achieve-btn @if(checkGoalAval($detial[0]->id) == 'yes') already_taken @endif achieve_goal">@if(checkGoalAval($detial[0]->id) == 'yes') Already Taken  @else Achieve This Goal @endif</a>
               </div>
             </div>
           </div>

@@ -230,3 +230,10 @@ $(document).ready(function(){
     });
 });
 
+/**
+ * Download Document
+ */
+ $("#goal_document").on('click', function(){
+    console.log('clicked');
+    return false;
+});

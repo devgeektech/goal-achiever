@@ -145,12 +145,17 @@ function getAdminInfo(){
 }
 
 function checkGoalAval($id){
-    $get_aval = TakenGoal::where('goal_id',$id)->where('student_id', Auth::user()->id)->first();
-    if($get_aval){
-        return 'yes';
+    if(Auth::check()){
+        $get_aval = TakenGoal::where('goal_id',$id)->where('student_id', Auth::user()->id)->first();
+        if($get_aval){
+            return 'yes';
+        }else{
+            return 'no';
+        }
     }else{
         return 'no';
     }
+    
 }
 
 /**
@@ -166,8 +171,19 @@ function get_percentage($unit_id,$student_id){
         }else{
             return 0;
         }
-       
     }
-    
+}
+
+
+/**
+ * Check Goal Status From Goal Taken Table
+ */
+function checkGoalStatus($unit_id,$topic_id){
+    $get_status = TakenGoal::where('unit_id',$unit_id)->where('topic_id',$topic_id)->where('status','completed')->where('student_id',Auth::user()->id)->first();
+    if($get_status){
+        return 'completed';
+    }else{
+        return 'inprogress';
+    }
 }
 ?>

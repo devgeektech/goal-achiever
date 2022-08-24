@@ -46,13 +46,15 @@
                                         <div class="card-item">
                                           <div class="card-image">
                                             <img src="{{ Storage::url($detail->image) }}" height="200" width="200"/>
-                                            
                                           </div>
                                           <div class="card-info">
                                             <h3 class="card-title">{{$detail->topic->name}}</h3>
                                             <h5>Instructor:{{$detail->instructor_name}}</h5>
                                             <p class="card-intro">{{Str::limit($detail->description, 100)}}</p>
                                             <a href="{{ route('student.taken_goals.info',$detail->id) }}" class="btn btn-warning">Details</a>
+                                            @if($detail->status == '2')
+                                            <button class="btn btn-success">Completed</button>
+                                            @endif
                                           </div>
                                         </div>
                                       </div>

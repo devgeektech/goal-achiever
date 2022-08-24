@@ -16,14 +16,20 @@ class IndexController extends Controller
         if(count($plans)> 0){
             $data['plans'] = $plans;
         }
-        $goals = Goal::latest()->get();
+        $goals = Goal::all();
         if(count($goals)> 0){
-            $data['goals'] = $goals;
+            $data['goals'] = $goals->count();
+        }
+        $completed_goals = Goal::where('status',2)->get();
+        if(count($completed_goals)> 0){
+            $data['completed_goals'] = $completed_goals->count();
         }
 
+        $data['cal_percentage'] = ($data['completed_goals']/$data['goals'])*100;
+        
         $students = User::where('role','3')->get();
         if(count($students)> 0){
-            $data['students'] = $students;
+            $data['students'] = $students->count();
         }
         return view('admin.index',$data);
     }

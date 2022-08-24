@@ -43,6 +43,7 @@ class IndexController extends Controller
             if(count($goal_detials)> 0){
                 $data['goal_detials'] = $goal_detials;
             }
+            
             $countries = Country::latest()->get();
             if(count($countries)> 0){
                 $data['countries'] = $countries;

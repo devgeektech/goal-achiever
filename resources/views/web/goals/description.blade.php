@@ -19,7 +19,6 @@
                 <h3 class="card-title">{{$detial->topic->name}}</h3>
                 <h5>Instructor:{{$detial->instructor_name}}</h5>
                 <p class="card-intro">{{Str::limit($detial->description, 100)}}</p>
-                
               </div>
             </div>
           </div>

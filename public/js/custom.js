@@ -351,4 +351,6 @@ jQuery(".achieve_goal").on('click', function(){
     }, 2000);
     
 });
+
+
  

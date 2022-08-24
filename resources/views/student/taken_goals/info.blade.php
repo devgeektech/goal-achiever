@@ -41,7 +41,7 @@
                                         @foreach($media_document as $media)
                                             <div class="form-group videoImgBlock" style="display:inline-flex; cursor:pointer;">
                                             <img src="{{Storage::url($media->media) ?? URL::to('/images/dummy.jpg')}}" height="100" widht="100">
-                                            <a download="Goal_Document" href="{{Storage::url($media->media) }}" title="Goal_Document"><i class="fa fa-download" aria-hidden="true" title="Download"></i></a>
+                                            {{-- <a download="Goal_Document" id="goal_document" href="{{Storage::url($media->media) }}" title="Goal_Document"> --}}<i class="fa fa-download" data-doc="{{Storage::url($media->media) }}" aria-hidden="true" id="goal_document" title="Download"></i>{{-- </a> --}}
                                             </div>
                                         @endforeach
                                     </div>
