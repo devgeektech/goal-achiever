@@ -50,11 +50,13 @@
                                           <div class="card-info">
                                             <h3 class="card-title">{{$detail->topic->name}}</h3>
                                             <h5>Instructor:{{$detail->instructor_name}}</h5>
-                                            <p class="card-intro">{{Str::limit($detail->description, 100)}}</p>
+                                            <p class="card-intro h-100">{{Str::limit($detail->description, 100)}}</p>
+                                            <div class="complete-butn d-flex">
                                             <a href="{{ route('student.taken_goals.info',$detail->id) }}" class="btn btn-warning">Details</a>
-                                            @if($detail->status == '2')
+                                            @if($detail->status == '2' && (checkGoalStatus($detail->unit->id,$detail->topic->id) == 'completed'))
                                             <button class="btn btn-success">Completed</button>
                                             @endif
+                                            </div>
                                           </div>
                                         </div>
                                       </div>

@@ -20,7 +20,7 @@
 
            @if ($message = Session::get('success'))
            <div class="alert alert-success alert-block">
-               <button type="button" class="close" data-dismiss="alert">×</button>    
+               <button type="button" class="close" data-dismiss="alert">×</button>
                <strong>{{ $message }}</strong>
            </div>
            @endif
@@ -29,48 +29,58 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">My Goals</h1>
-                    
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">My Goals</h6>
-                           
+
                         </div>
                         <div class="card-body">
                             <div class="container">
                                 @isset($goal_detials)
                                 @foreach($goal_detials->chunk(3) as $goal_detial)
-                                <div class="row justify-content-center pt-5">
+                                <div class="row pt-5">
+                                  @php
+                                      $i = 0;
+                                  @endphp
                                     @foreach($goal_detial as $detial)
                                       <div class="cards col-lg-4 col-md-6">
                                         <div class="card-item">
-                                          <div class="card-image">
+                                          <div class="card-image taken-goals">
                                             <img src="{{ Storage::url($detial[0]->goal->image) }}" height="200" width="200"/>
                                             
+                                            <div class="progress-card">
+                                              <svg class="progress-circle" width="200px" height="200px" xmlns="http://www.w3.org/2000/svg">
+                                                <circle class="progress-circle-back"
+                                                      cx="100" cy="100" r="45"></circle>
+                                                  <circle class="progress-circle-prog progress_circle_prog_{{ $i }}"
+                                                          cx="100" cy="100" r="45"></circle>
+                                              </svg>
+                                              <div class="progress-text total_percentage progress_text_{{ $i }}" data-progress="0" data-percentage_id="{{ $i }}">{{ get_percentage($detial[0]->goal->unit_id,$detial[0]->student_id) }}</div>
                                           </div>
-                                          <div class="card-info">
+                                          </div>
+                                          <div class="card-info justify-content-between">
                                             <h3 class="card-title">{{$detial[0]->goal->unit->name}}</h3>
                                             <h5>Instructor:{{$detial[0]->goal->instructor_name}}</h5>
-                                            <p class="card-intro">{{Str::limit($detial[0]->goal->description, 100)}}</p>
-                                            <a href="{{ route('student.taken_goals.unit_details',$detial[0]->goal->unit_id) }}" class="btn btn-warning">Details</a>
-                                            <div class="progress progress-sm mr-2">
-                                              @php
-                                                $percentage = get_percentage($detial[0]->goal->unit_id,$detial[0]->student_id);
-                                              @endphp
-                                              <div class="progress-bar bg-info" role="progressbar" style="width: {{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100">{{ $percentage }}</div>
-                                          </div>
-                                          </div>
+                                            <p class="card-intro h-100">{{Str::limit($detial[0]->goal->description, 100)}}</p>
+                                            <a href="{{ route('student.taken_goals.unit_details',$detial[0]->goal->unit_id) }}" class="btn btn-warning details-btn">Details</a>
                                         </div>
                                       </div>
+                                      </div>
+                                      @php
+                                          $i++;
+                                      @endphp
+
                                       @endforeach
                                 </div>
                                 @endforeach
                                 @else
-                              
-                                <div class="cards col-lg-4 col-md-6">
-                                    <div class="card-item">
-                                      <div class="card-image">
-                                        <img src="{{ URL::to('/images/no_goal.png') }}" height="100" width="100"/>
+
+                                <div class="cards col-lg-6 col-md-6 mx-auto">
+                                    <div class="card-item no-goal text-center">
+                                      <div class="card-image goal-img pt-4">
+                                        <img src="{{ URL::to('/images/no-goals-taken.png') }}" height="100" width="100"/>
                                       </div>
                                       <div class="card-info">
                                         <h3 class="card-title">No goal taken yet!</h3>
@@ -87,7 +97,7 @@
             </div>
             <!-- End of Main Content -->
 
-           
+
         </div>
         <!-- End of Content Wrapper -->
 
@@ -104,3 +114,4 @@
    @push('js')
     <script src="{{URL::to('/admin-panel/js/all.js')}}"></script>
    @endpush
+

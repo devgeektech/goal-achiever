@@ -1,7 +1,7 @@
 @extends('student.layouts.master')
 
 @section('content')
-   
+
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
         <!-- Main Content -->
@@ -14,7 +14,7 @@
             <div class="container-fluid">
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button>    
+                        <button type="button" class="close" data-dismiss="alert">×</button>
                         <strong>{{ $message }}</strong>
                     </div>
                  @endif
@@ -44,7 +44,7 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1"> Goals Pending</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $all_goals - $comp_goals }} </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">@if($comp_goals){{ $all_goals - $comp_goals }} @else 0 @endif </div>
                                     </div>
                                     <div class="col-auto"> <i class="fas fa-dollar-sign fa-2x text-gray-300"></i> </div>
                                 </div>
@@ -62,11 +62,7 @@
                                             <div class="col-auto">
                                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $comp_goals }}</div>
                                             </div>
-                                            <div class="col">
-                                                <div class="progress progress-sm mr-2">
-                                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                     <div class="col-auto"> <i class="fas fa-clipboard-list fa-2x text-gray-300"></i> </div>
@@ -90,7 +86,7 @@
                     </div>
                 </div>
                 <!-- Content Row -->
-                <div class="row">
+                <div class="row d-block">
                     <div class="card shadow mb-12">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">My Goals Achieving Progress Chart</h6>

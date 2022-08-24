@@ -119,7 +119,7 @@ function getNewExpiryDate($plan_id,$expiry_date){
 
 //Get total number of students participated in goal
 function getTotalParticipants($goal_id){
-    $get_total_participants = TakenGoal::where('goal_id', $goal_id)->count();
+    $get_total_participants = TakenGoal::where('goal_id', $goal_id)->groupBy('goal_id')->pluck('goal_id')->count();
     if(!empty($get_total_participants)){
         return $get_total_participants;
     }else{
@@ -129,9 +129,36 @@ function getTotalParticipants($goal_id){
 
 //Get total number of goals taken by student
 function getTotalGoalsTaken($id){
-    $get_total_goals_taken = TakenGoal::where('student_id', $id)->count();
+    $get_total_goals_taken = TakenGoal::where('student_id', $id)->get();
     if(!empty($get_total_goals_taken)){
-        return $get_total_goals_taken;
+        return $get_total_goals_taken->count();
+    }else{
+        return 0;
+    }
+}
+
+/**
+ * Get Total Goals Achieved
+ */
+function getTotalGoalsAchieved($id){
+    $get_goals_achieved = TakenGoal::where('student_id',$id)->where('status','completed')->get();
+    $get_count = $get_goals_achieved->count();
+    if($get_count > 0){
+        return $get_count;
+    }else{
+        return 0;
+    }
+}
+
+/**
+ * Get Pending Goals
+ */
+function getPendingGoals($id){
+    $get_pending_goals = getTotalGoalsTaken($id) - getTotalGoalsAchieved($id);
+    if(intval($get_pending_goals)){
+        return $get_pending_goals;
+    }else{
+        return 0;
     }
 }
 

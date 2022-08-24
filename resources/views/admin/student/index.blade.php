@@ -43,9 +43,9 @@
                                         @foreach($students as $student)
                                         <tr>
                                             <td>{{ $student->name}}</td>
-                                            <td>{{ $student->id+2}}</td>
+                                            <td>{{ getTotalGoalsAchieved($student->id)}}</td>
                                             <td>{{ getTotalGoalsTaken($student->id)}}</td>
-                                            <td>{{ ($student->id+5) - ($student->id+2)}}</td>
+                                            <td>{{ getPendingGoals($student->id)}}</td>
                                             <td>
                                                 <a href="{{ route('admin.students.info',$student->id) }}" class="btn btn-primary">Info</a>
                                             </td>

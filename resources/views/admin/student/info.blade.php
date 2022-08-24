@@ -35,15 +35,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="forGoalsAchieved">Goals Achieved</label>
-                                    <input type="text" class="form-control" name="goal_achieved" id="goal_achieved" value="{{ $student->id+2 }}" readonly>
+                                    <input type="text" class="form-control" name="goal_achieved" id="goal_achieved" value="{{ getTotalGoalsAchieved($student->id) }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="forGoalsTaken">Paricipated in Goals</label>
-                                    <input type="text" class="form-control" name="goal_taken" id="goal_taken" value="{{ $student->id+5 }}" readonly>
+                                    <input type="text" class="form-control" name="goal_taken" id="goal_taken" value="{{ getTotalGoalsTaken($student->id) }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="forGoalsPending">Goals Pending</label>
-                                    <input type="text" class="form-control" name="goal_pending" id="goal_pending" value="{{ ($student->id+5) - ($student->id+2) }}" readonly>
+                                    <input type="text" class="form-control" name="goal_pending" id="goal_pending" value="{{ getPendingGoals($student->id) }}" readonly>
                                 </div>
                             </div>
                         </div>
