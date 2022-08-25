@@ -51,11 +51,11 @@
                                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1"> Goals Completed </div>
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@isset($cal_percentage) {{ $cal_percentage }}% @endisset</div>
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@isset($cal_percentage) {{ round($cal_percentage) }}% @endisset</div>
                                             </div>
                                             <div class="col">
                                                 <div class="progress progress-sm mr-2">
-                                                    <div class="progress-bar bg-info" role="progressbar" style="width: {{ $cal_percentage }}%" aria-valuenow="{{ $cal_percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div class="progress-bar bg-info" role="progressbar" style="width: {{ round($cal_percentage) }}%" aria-valuenow="{{ round($cal_percentage) }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
                                             </div>
                                         </div>

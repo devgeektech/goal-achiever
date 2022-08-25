@@ -45,15 +45,26 @@
                                       <div class="cards col-lg-4 col-md-6">
                                         <div class="card-item">
                                           <div class="card-image">
-                                            <img src="{{ Storage::url($detail->image) }}" height="200" width="200"/>
+                                            <img src="{{ Storage::url($detail->goal->image) }}" height="200" width="200"/>
                                           </div>
                                           <div class="card-info">
-                                            <h3 class="card-title">{{$detail->topic->name}}</h3>
-                                            <h5>Instructor:{{$detail->instructor_name}}</h5>
-                                            <p class="card-intro h-100">{{Str::limit($detail->description, 100)}}</p>
+                                            <h3 class="card-title">{{$detail->goal->topic->name}}</h3>
+                                            <h5>Instructor:{{$detail->goal->instructor_name}}</h5>
+                                            <p class="card-intro h-100">{{Str::limit($detail->goal->description, 100)}}</p>
                                             <div class="complete-butn d-flex">
-                                            <a href="{{ route('student.taken_goals.info',$detail->id) }}" class="btn btn-warning">Details</a>
-                                            @if($detail->status == '2' && (checkGoalStatus($detail->unit->id,$detail->topic->id) == 'completed'))
+                                            @if($detail->status == 2)
+                                              <a href="{{ route('student.taken_goals.info',$detail->goal->id) }}" class="btn btn-warning">Details</a>
+                                            @endif
+                                            @php
+                                                $end_date = $detail->end_date;
+                                                $current_date = Date('Y-m-d');
+                                                $datetime1 = new DateTime($end_date);
+                                                $datetime2 = new DateTime($current_date);
+                                                $interval = $datetime2->diff($datetime1);
+                                                $days = $interval->format('%R%a');
+                                            @endphp  
+                                            @if($days < 0) Expired @else {{ str_replace('+', ' ', $days) }} Days Left @endif   
+                                            @if( checkGoalStatus($detail->unit_id,$detail->topic_id) == 1)
                                             <button class="btn btn-success">Completed</button>
                                             @endif
                                             </div>

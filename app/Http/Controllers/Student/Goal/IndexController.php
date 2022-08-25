@@ -72,12 +72,14 @@ class IndexController extends Controller
         $request->validate([
             'goal_id' => 'required',
         ]);
+        
         try{
             $data = getMembershipDetails();
             $goals = Goal::latest()->get();
             if(count($goals)> 0){
                 $data['goals'] = $goals;
             }
+            
             $get_info = TakenGoal::where('unit_id',$request->unit_id)->where('student_id',Auth::user()->id)->first();
             if($get_info){
                 if($request->taken_from == 'front'){
@@ -85,28 +87,37 @@ class IndexController extends Controller
                 }
                 return redirect()->route('student.goals.index',$data)->with('error','Goal is already taken :(');
             }
-
-            $topics = Topic::where('unit_id',$request->unit_id)->get();
-           
-            foreach($topics as $topic){
-                $taken_goal = new TakenGoal;
-                $taken_goal->goal_id = $request->goal_id;
-                $taken_goal->student_id = Auth::user()->id;
-                $taken_goal->status = 'inprogress';
-                $taken_goal->subject_id = $topic->subject_id;
-                $taken_goal->unit_id = $topic->unit_id;
-                $taken_goal->topic_id = $topic->id;
-                $taken_goal->end_date = $request->end_date;
-                $taken_goal->save();
-            }
-            if(intval($taken_goal->id) > 0){
-                if($request->taken_from == 'front'){
-                    return response()->json([ 'status' => 'Success']);
+            
+            $goal_ids = Goal::select('id')->where('unit_id',$request->unit_id)->pluck('id')->toArray();      
+            if(count($goal_ids)>0)      {
+                $topics = Topic::where('unit_id',$request->unit_id)->get();
+                $i = 0;
+               
+                foreach($topics as $topic){
+                    $taken_goal = new TakenGoal;
+                    $taken_goal->goal_id = $goal_ids[$i];
+                    $taken_goal->student_id = Auth::user()->id;
+                    $taken_goal->status = ($i == 0) ? '2' : '3';
+                    $taken_goal->subject_id = $topic->subject_id;
+                    $taken_goal->unit_id = $topic->unit_id;
+                    $taken_goal->topic_id = $topic->id;
+                    $taken_goal->end_date = $request->end_date;
+                    $taken_goal->save();
+                    $i++;
                 }
-                return redirect()->route('student.goals.index',$data)->with('success','Thanks for taking a goal to achieve :)');
-            }else{
-                return redirect()->route('student.goals.index',$data)->with('error','Something wnet wrong :(');
-            }
+              
+                if(intval($taken_goal->id) > 0){
+                    if($request->taken_from == 'front'){
+                        return response()->json([ 'status' => 'Success']);
+                    }
+                    return redirect()->route('student.goals.index',$data)->with('success','Thanks for taking a goal to achieve :)');
+                }else{
+                    return redirect()->route('student.goals.index',$data)->with('error','Something went wrong :(');
+                }
+            } 
+            
+            return redirect()->route('student.goals.index',$data)->with('error','Not goals found :(');
+            
             
         }catch(Exception $e){
             return redirect()->route('student.goals.index',$data)->with('error',$e->getMessage());

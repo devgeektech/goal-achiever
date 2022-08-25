@@ -55,7 +55,8 @@
                                             <h5>Documents</h5>
                                             <div class="download d-flex justify-content-between align-items-center ">
                                                 <span>Download</span>
-                                            <i class="fa fa-download mr-0" aria-hidden="true" title="Download"></i>
+                                                <a download="Document" href="{{ Storage::url($media->media) }}" title="{{ Storage::url($media->media) }}"><i class="fa fa-download mr-0" aria-hidden="true" title="Download"></i></a>
+                                            
                                             </div>
                                             </div>
                                         @endforeach
@@ -70,7 +71,7 @@
                                                 <h5>Videos</h5>
                                                 <div class="download d-flex justify-content-between align-items-center">
                                                 <span>Download</span>
-                                            <i class="fa fa-download mr-0" aria-hidden="true" title="Download"></i>
+                                                <a download="Document" href="{{ Storage::url($vid_media->media) }}" title="{{ Storage::url($vid_media->media) }}"><i class="fa fa-download mr-0" aria-hidden="true" title="Download"></i></a>
                                             </div>
                                             </div>
                                         @endforeach
@@ -84,7 +85,7 @@
                                                 <h5>Documents</h5>
                                                 <div class="download d-flex justify-content-between align-items-center">
                                                 <span>Download</span>
-                                            <i class="fa fa-download mr-0" aria-hidden="true" title="Download"></i>
+                                                <a download="Document" href="{{ Storage::url($exam_doc->media) }}" title="{{ Storage::url($exam_doc->media) }}"><i class="fa fa-download mr-0" aria-hidden="true" title="Download"></i></a>
                                             </div>
                                             </div>
                                         @endforeach
@@ -93,7 +94,7 @@
                                     <hr>
                                 </div>
                                 <div class="submit-paper mx-auto">
-                                <button type="submit" class="btn btn-primary ml-3" id="submit_papers">Submit Papers</button>
+                                <button type="button" class="btn btn-primary ml-3" id="submit_papers">Submit Papers</button>
                                 </div>
                             </div>
                         </form>
@@ -133,7 +134,9 @@
         <div class="modal-body">
             <input type="hidden" name="assign_goal_id" id="assign_goal_id">
             <input type="file"  name="goal_assignment[]" multiple accept="image/png, image/gif, image/jpeg">
-            @error('goal_assignment') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror      
+            @error('goal_assignment') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror     
+            <label for="markCompleted">Mark Completed</label>
+            <input type="checkbox" name="mark_goal_completed" id="mark_completed">Completed 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

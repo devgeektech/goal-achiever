@@ -17,6 +17,8 @@ class CreateGoalAssignmentsMediaTable extends Migration
             $table->id();
             $table->bigInteger('goal_id')->unsigned();
             $table->foreign('goal_id')->references('id')->on('goals')->onDelete('cascade');
+            $table->bigInteger('goal_assignment_id')->unsigned();
+            $table->foreign('goal_assignment_id')->references('id')->on('goal_assignments')->onDelete('cascade');
             $table->string('media')->nullable();
             $table->string('ext')->nullable();
             $table->string('type')->nullable();

@@ -19,7 +19,14 @@ class CreateTakenGoalsTable extends Migration
             $table->foreign('goal_id')->references('id')->on('goals')->onDelete('cascade');
             $table->bigInteger('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('status')->nullable();
+            $table->integer('status')->nullable()->comment("1=completed,2=inprogress,3=not_active");
+            $table->bigInteger('subject_id')->unsigned();
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            $table->bigInteger('unit_id')->unsigned();
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
+            $table->bigInteger('topic_id')->unsigned();
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
+            $table->string('end_date')->nullable();
             $table->timestamps();
         });
     }

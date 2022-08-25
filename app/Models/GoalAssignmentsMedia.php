@@ -34,6 +34,7 @@ class GoalAssignmentsMedia extends Model
 
 	protected $fillable = [
 		'goal_id',
+		'goal_assignment_id',
 		'media',
 		'ext',
 		'type'

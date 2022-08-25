@@ -66,7 +66,7 @@ class IndexController extends Controller
                 $data['all_goals'] = 0;
             }
             
-            $comp_goals = TakenGoal::where('student_id',Auth::user()->id)->where('status','completed')->with('goal')->get();
+            $comp_goals = TakenGoal::where('student_id',Auth::user()->id)->where('status','1')->with('goal')->get();
             if(count($comp_goals) > 0){
                 $data['comp_goals'] =  $comp_goals->count();
             }else{

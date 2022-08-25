@@ -23,12 +23,13 @@ class IndexController extends Controller
     {  
         $data = [];
         $data = getMembershipDetails();
-        $goal_detials = TakenGoal::where('student_id', Auth::user()->id)->with('goal')->get()->groupBy('unit_id');
+        $goal_detials = TakenGoal::where('student_id', Auth::user()->id)
+                                    ->with('goal')
+                                    ->get()
+                                    ->groupBy('unit_id');
         if(count($goal_detials)> 0){
             $data['goal_detials'] = $goal_detials;
         }
-
-        
         return view('student.taken_goals.index',$data);
     }
 
@@ -37,6 +38,7 @@ class IndexController extends Controller
         $request->validate([
             'goal_assignment' => 'required'
         ]);
+        
         try{
             $medias = array();
             if($request->hasFile('goal_assignment')){ 
@@ -48,7 +50,6 @@ class IndexController extends Controller
                     $medias['goal_assignment'][$k]['type'] = 'document';
                 }
             }
-           
             $goalAssignment = new GoalAssignment();
             $goalAssignment->goal_id = $request->assign_goal_id;
             $goalAssignment->student_id = Auth::user()->id;
@@ -59,10 +60,32 @@ class IndexController extends Controller
                         foreach($media as $doc){                            
                             $goal_media = new GoalAssignmentsMedia();
                             $goal_media->goal_id = $request->assign_goal_id;
+                            $goal_media->goal_assignment_id = $goalAssignment->id;
                             $goal_media->media = $doc['path'];
                             $goal_media->ext = $doc['ext'];
                             $goal_media->type = $doc['type']; 
                             $goal_media->save();
+                        }
+                    }
+                }
+            }
+            
+            if($request->mark_goal_completed == 'on'){
+                $goal = Goal::find($request->assign_goal_id);
+                if($goal->id){
+                    $goal_taken = TakenGoal::where('student_id',Auth::user()->id)
+                                            ->where('subject_id',$goal->subject_id)
+                                            ->where('unit_id',$goal->unit_id)
+                                            ->where('topic_id',$goal->topic_id)
+                                            ->firstOrFail();
+                    $goal_taken->status = 1;
+                    $goal_taken->save();
+                    if(intval($goal_taken->id) > 0){
+                        $goal_next_id = $goal_taken->id+1;
+                        $next_id = TakenGoal::find($goal_next_id);
+                        if(($next_id->student_id == $goal_taken->student_id) && ($next_id->subject_id == $goal_taken->subject_id) && ($next_id->unit_id == $goal_taken->unit_id)){
+                           $next_id->status = 2;
+                           $next_id->save(); 
                         }
                     }
                 }
@@ -82,7 +105,7 @@ class IndexController extends Controller
      {
         $data = [];
         $data = getMembershipDetails();
-        $goal_detials = Goal::orderBy('status', 'ASC')->where('unit_id',$id)->get();
+        $goal_detials = TakenGoal::where('unit_id',$id)->get();
         if(count($goal_detials)> 0){
             $data['goal_detials'] = $goal_detials;
         }

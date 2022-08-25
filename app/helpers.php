@@ -141,7 +141,7 @@ function getTotalGoalsTaken($id){
  * Get Total Goals Achieved
  */
 function getTotalGoalsAchieved($id){
-    $get_goals_achieved = TakenGoal::where('student_id',$id)->where('status','completed')->get();
+    $get_goals_achieved = TakenGoal::where('student_id',$id)->where('status','1')->get();
     $get_count = $get_goals_achieved->count();
     if($get_count > 0){
         return $get_count;
@@ -191,7 +191,7 @@ function checkGoalAval($id){
 function get_percentage($unit_id,$student_id){
     $all_topics = TakenGoal::where('student_id',$student_id)->where('unit_id',$unit_id)->get()->count();
     if($all_topics){
-        $completed_topics = TakenGoal::where('student_id',$student_id)->where('unit_id',$unit_id)->where('status','completed')->get()->count();
+        $completed_topics = TakenGoal::where('student_id',$student_id)->where('unit_id',$unit_id)->where('status','1')->get()->count();
         if($completed_topics){
             $cal_percentage = ($completed_topics/$all_topics)*100;
             return $cal_percentage;
@@ -206,11 +206,11 @@ function get_percentage($unit_id,$student_id){
  * Check Goal Status From Goal Taken Table
  */
 function checkGoalStatus($unit_id,$topic_id){
-    $get_status = TakenGoal::where('unit_id',$unit_id)->where('topic_id',$topic_id)->where('status','completed')->where('student_id',Auth::user()->id)->first();
+    $get_status = TakenGoal::where('unit_id',$unit_id)->where('topic_id',$topic_id)->where('status','1')->where('student_id',Auth::user()->id)->first();
     if($get_status){
-        return 'completed';
+        return '1';
     }else{
-        return 'inprogress';
+        return '2';
     }
 }
 ?>

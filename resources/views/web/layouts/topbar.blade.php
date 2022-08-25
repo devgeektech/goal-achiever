@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse justify-content-end menu-navigation" id="navbarSupportedContent">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link mr-4" href="#">HOME</a>
+              <a class="nav-link mr-4" href="{{ route('index')}}">HOME</a>
             </li>
             <li class="nav-item">
               <a class="nav-link goals mr-4" href="{{ route('goals')}}">GOALS <span>|</span>
