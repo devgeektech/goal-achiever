@@ -26,6 +26,7 @@ Route::group([
         Route::group(['prefix' => 'goals','as' => 'goals.'], function ($router) {
             Route::get('/', [App\Http\Controllers\Student\Goal\IndexController::class,'index'])->name('index');
             Route::get('/info/{id}', [App\Http\Controllers\Student\Goal\IndexController::class,'show'])->name('info');
+            Route::get('/details/{id}', [App\Http\Controllers\Student\Goal\IndexController::class,'details'])->name('details');
             Route::get('/download/{filename}', [App\Http\Controllers\Student\Goal\IndexController::class,'doc_download'])->name('download');
             Route::post('/take_goal', [App\Http\Controllers\Student\Goal\IndexController::class,'take_goal'])->name('take_goal');
 

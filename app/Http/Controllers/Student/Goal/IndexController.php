@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\GoalMedia;
 use App\Models\Unit;
 use App\Models\Topic;
+use App\Models\Country;
+use App\Models\Plan;
 use App\Models\TakenGoal;
 use Exception;
 class IndexController extends Controller
@@ -17,7 +19,7 @@ class IndexController extends Controller
     {   
         $data = [];
         $data = getMembershipDetails();
-        $goals = Goal::latest()->get();
+        $goals = Goal::latest()->get()->groupBy('unit_id');
         if(count($goals)> 0){
             $data['goals'] = $goals;
         }
@@ -54,6 +56,24 @@ class IndexController extends Controller
     }
 
     /**
+     * Unit Info
+     */
+    public function details($id)
+    {
+        try{
+            $data = [];
+            $data = getMembershipDetails();
+            $unit_detials = Goal::where('unit_id',$id)->get();
+            if(count($unit_detials)> 0){
+                $data['unit_detials'] = $unit_detials;
+            }
+            return view('student.goals.details',$data);
+        }catch(Exception $e){
+            return redirect()->route('student.goals.details',$data)->with('error',$e->getMessage());
+        }
+    }
+
+    /**
      * Download Documents
      */
     public function doc_download($filename)
@@ -72,7 +92,7 @@ class IndexController extends Controller
         $request->validate([
             'goal_id' => 'required',
         ]);
-        
+       
         try{
             $data = getMembershipDetails();
             $goals = Goal::latest()->get();

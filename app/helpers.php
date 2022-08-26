@@ -49,6 +49,13 @@ function getTopicName($id){
     }
 }
 
+
+function getSubjectName($id){
+    $getSubjectName = Subject::where('id',$id)->first();
+    if($getSubjectName){
+        return $getSubjectName->title;
+    }
+}
 //Get Membership details
 function getMembershipDetails(){
         //Get plan details

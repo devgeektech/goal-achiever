@@ -39,11 +39,12 @@
                         <div class="card-body">
                             <div class="container">
                                 @isset($goal_detials)
+                                @php
+                                  $i = 0;
+                                @endphp
                                 @foreach($goal_detials->chunk(3) as $goal_detial)
                                 <div class="row pt-5">
-                                  @php
-                                      $i = 0;
-                                  @endphp
+                                 
                                     @foreach($goal_detial as $detial)
                                       <div class="cards col-lg-4 col-md-6">
                                         <div class="card-item">
@@ -108,8 +109,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-
    @endsection
    @push('js')
     <script src="{{URL::to('/admin-panel/js/all.js')}}"></script>

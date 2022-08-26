@@ -105,7 +105,7 @@ class IndexController extends Controller
      {
         $data = [];
         $data = getMembershipDetails();
-        $goal_detials = TakenGoal::where('unit_id',$id)->get();
+        $goal_detials = TakenGoal::where('unit_id',$id)->where('student_id',Auth::user()->id)->get();
         if(count($goal_detials)> 0){
             $data['goal_detials'] = $goal_detials;
         }
