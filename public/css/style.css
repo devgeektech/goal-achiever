@@ -103,6 +103,9 @@ body {
 .LeftContent i {
     font-weight: 900;
 }
+.education-slider .slick-prev {
+  left: -42px !important;
+}
 .slick-slide:nth-child(1) div .box,
 .slick-slide:nth-child(2) div .box,
 .slick-slide:nth-child(3) div .box,
@@ -761,7 +764,10 @@ ul li:nth-child(4)::marker {
     }
 
     .nav-heading {
-        font-size: 27px;
+        font-size: 20px;
+    }
+    .navbar-brand {
+      margin-right: 10px !important;
     }
 }
 
@@ -1374,12 +1380,18 @@ label {
       text-align: center;
     }
     .cards .card-title {
-      font-size: 25px;
+      font-size: 20px;
       line-height: 1.1em;
-      color: #000000;
+      color: #000084;
       margin-bottom: 14px;
       text-align: center;
       font-weight: 600;
+    }
+    .card-intro {
+      color: #858796;
+    }
+    .card-info h5 {
+      font-size: 17px;
     }
     .already_taken {
       background: #000084;
@@ -1394,4 +1406,14 @@ label {
     }
     .education-slider a:hover {
       text-decoration: none !important;
+    }
+    /* logout css */
+    .logout-btn {
+      background-color: #fd5c26 !important;
+      border-color: #fd5c26 !important;
+    }
+    .logout-cancel, .logout-cancel:hover {
+      background: #fff !important;
+      border-color: #fff !important;
+      color: #000;
     }

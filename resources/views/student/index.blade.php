@@ -7,9 +7,9 @@
         <!-- Main Content -->
         <div id="content">
            @include('student.layouts.topbar')
-            
-        
-           
+
+
+
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 @if ($message = Session::get('success'))
@@ -62,7 +62,7 @@
                                             <div class="col-auto">
                                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $comp_goals }}</div>
                                             </div>
-                                           
+
                                         </div>
                                     </div>
                                     <div class="col-auto"> <i class="fas fa-clipboard-list fa-2x text-gray-300"></i> </div>
@@ -87,7 +87,7 @@
                 </div>
                 <!-- Content Row -->
                 <div class="row d-block">
-                    <div class="card shadow mb-12">
+                    <div class="col-lg-8 col-md-8 col-12 card shadow mb-4 p-0 ml-3">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">My Goals Achieving Progress Chart</h6>
                         </div>
@@ -115,7 +115,7 @@
         <!-- End of Footer -->
     </div>
     <!-- End of Content Wrapper -->
-    
+
 @endsection
 @push('js')
 <script>

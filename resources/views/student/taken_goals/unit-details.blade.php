@@ -6,7 +6,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
            @include('student.layouts.topbar')
-           <div class="card-body">
+           <div class="card-body p-0">
             @if ($errors->any())
                 <div class="alert alert-danger">
                 <ul>
@@ -20,21 +20,21 @@
 
            @if ($message = Session::get('success'))
            <div class="alert alert-success alert-block">
-               <button type="button" class="close" data-dismiss="alert">×</button>    
+               <button type="button" class="close" data-dismiss="alert">×</button>
                <strong>{{ $message }}</strong>
            </div>
            @endif
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Unit Topics</h1>
-                    
+                    <!-- Page Heading
+                    <h1 class="h3 mb-2 text-gray-800">Unit Topics</h1>-->
+
                     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
+                    <div class="card shadow unit-topic mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Unit Topics</h6>
-                           
+                            <h4 class="m-0 font-weight-bold">Unit Topics</h4>
+
                         </div>
                         <div class="card-body">
                             <div class="container">
@@ -42,18 +42,19 @@
                                 @foreach($goal_detials->chunk(3) as $goal_detial)
                                 <div class="row justify-content-center pt-5">
                                     @foreach($goal_detial as $detail)
-                                      <div class="cards col-lg-4 col-md-6">
-                                        <div class="card-item">
-                                          <div class="card-image">
+
+                                      <div class="cards col-lg-4 col-md-6  @if($detail->status == 3) goal_not_active @else goal_active @endif">
+                                        <div class="card-item my-goals-info">
+                                          <div class="card-image mx-auto mt-3">
                                             <img src="{{ Storage::url($detail->goal->image) }}" height="200" width="200"/>
                                           </div>
                                           <div class="card-info">
-                                            <h3 class="card-title">{{$detail->goal->topic->name}}</h3>
+                                            <h3 class="card-title h-100 mb-2">{{$detail->goal->topic->name}}</h3>
                                             <h5>Instructor:{{$detail->goal->instructor_name}}</h5>
-                                            <p class="card-intro h-100">{{Str::limit($detail->goal->description, 100)}}</p>
-                                            <div class="complete-butn d-flex">
+                                            <p class="card-intro h-100">{{Str::limit($detail->goal->description, 30)}}</p>
+                                            <div class="complete-butn d-flex align-items-center">
                                             @if($detail->status == 2)
-                                              <a href="{{ route('student.taken_goals.info',$detail->goal->id) }}" class="btn btn-warning">Details</a>
+                                              <a href="{{ route('student.taken_goals.info',$detail->goal->id) }}" class="btn btn-warning px-5">Details</a>
                                             @endif
                                             @php
                                                 $end_date = $detail->end_date;
@@ -62,8 +63,8 @@
                                                 $datetime2 = new DateTime($current_date);
                                                 $interval = $datetime2->diff($datetime1);
                                                 $days = $interval->format('%R%a');
-                                            @endphp  
-                                            @if($days < 0) Expired @else {{ str_replace('+', ' ', $days) }} Days Left @endif   
+                                            @endphp
+                                        <span>    @if($days < 0) Expired @else {{ str_replace('+', ' ', $days) }} Days Left @endif   </span>
                                             @if( checkGoalStatus($detail->unit_id,$detail->topic_id) == 1)
                                             <button class="btn btn-success">Completed</button>
                                             @endif
@@ -75,7 +76,7 @@
                                 </div>
                                 @endforeach
                                 @else
-                              
+
                                 <div class="cards col-lg-4 col-md-6">
                                     <div class="card-item">
                                       <div class="card-image">
@@ -96,7 +97,7 @@
             </div>
             <!-- End of Main Content -->
 
-           
+
         </div>
         <!-- End of Content Wrapper -->
 
