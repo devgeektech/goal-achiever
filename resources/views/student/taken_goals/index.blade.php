@@ -49,7 +49,7 @@
                                         <div class="card-item">
                                           <div class="card-image taken-goals">
                                             <img src="{{ Storage::url($detial[0]->goal->image) }}" height="200" width="200"/>
-                                            
+
                                             <div class="progress-card">
                                               <svg class="progress-circle" width="200px" height="200px" xmlns="http://www.w3.org/2000/svg">
                                                 <circle class="progress-circle-back"

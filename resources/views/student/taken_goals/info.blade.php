@@ -1,5 +1,6 @@
 @extends('student.layouts.master')
 @section('content')
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
            @include('student.layouts.topbar')
@@ -56,7 +57,7 @@
                                             <div class="download d-flex justify-content-between align-items-center ">
                                                 <span>Download</span>
                                                 <a download="Document" href="{{ Storage::url($media->media) }}" title="{{ Storage::url($media->media) }}"><i class="fa fa-download mr-0" aria-hidden="true" title="Download"></i></a>
-                                            
+
                                             </div>
                                             </div>
                                         @endforeach
@@ -124,23 +125,46 @@
     <div class="modal-dialog" role="document">
     <form method="post" action="{{ route('student.taken_goals.upload_assignments') }}" enctype="multipart/form-data">
      @csrf
-      <div class="modal-content">
+      <div class="modal-content submit-paper">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Upload Asignments</h5>
+          <h4 class="modal-title" id="exampleModalLabel">Upload Asignments</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
             <input type="hidden" name="assign_goal_id" id="assign_goal_id">
-            <input type="file"  name="goal_assignment[]" multiple accept="image/png, image/gif, image/jpeg">
-            @error('goal_assignment') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror     
+           <!-- <input type="file"  name="goal_assignment[]" multiple accept="image/png, image/gif, image/jpeg">
+            @error('goal_assignment') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
             <label for="markCompleted">Mark Completed</label>
-            <input type="checkbox" name="mark_goal_completed" id="mark_completed">Completed 
-        </div>
+
+            <input type="checkbox" name="mark_goal_completed" id="mark_completed">Completed
+            -->
+            <div class="zone">
+
+            <div id="dropZ">
+            <img src="{{ URL::to('./images/cloud-arrow-up-solid.png') }}" height="50" width="80" class="uplaod-img mb-3"/>
+                <div>Drag and drop your file here</div>
+                <span>OR</span>
+                <div class="selectFile">
+                <label for="file">Select file</label>
+                <input type="file"  name="goal_assignment[]" multiple accept="image/png, image/gif, image/jpeg">
+                </div>
+
+                <form>
+                    <input type="checkbox" id="mark_completed" name="mark_goal_completed" value="Complete">
+                    <label for="mark_completed">Complete</label>
+
+                </form>
+                </div>
+
+            </div>
+
+            </div>
+
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Upload</button>
+          <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary upload-btn">Upload</button>
         </div>
       </div>
     </form>

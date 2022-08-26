@@ -1,6 +1,6 @@
 //Change goal satus
-jQuery(".registerBtn").on('click',function() { 
-   
+jQuery(".registerBtn").on('click',function() {
+
     var name = jQuery('#m_name').val() != "" ? jQuery('#m_name').val() : jQuery('#name').val();
     var email = jQuery('#m_email').val() != "" ? jQuery('#m_email').val() : jQuery('#email').val();
     var password = jQuery('#m_pwd').val() != "" ? jQuery('#m_pwd').val() : jQuery('#password').val();
@@ -8,7 +8,7 @@ jQuery(".registerBtn").on('click',function() {
     var country = jQuery('#m_country').val() != "" ? jQuery('#m_country').val() : jQuery('#country').val();
     var age = jQuery('#m_age').val() != "" ? jQuery('#m_age').val() : jQuery('#age').val();
     var register_from = 'plan';
-   
+
     var username_error = email_error = password_error = con_password_error = password_match_error = age_error = false;
     if(name == "" || typeof name === "undefined"){
         jQuery(".username_error").html('Please enter name.');
@@ -30,7 +30,7 @@ jQuery(".registerBtn").on('click',function() {
     }else{
         $(".password_error").html('');
         password_error = true;
-    } 
+    }
     if (password_confirmation == '' || typeof password_confirmation === "undefined") {
         $(".confirm-pwd_error").html('Please re-enter your password.');
          con_password_error = false;
@@ -48,7 +48,7 @@ jQuery(".registerBtn").on('click',function() {
         $(".age_error").html('');
         age_error = true;
     }
-  
+
     if((username_error == true) && (email_error == true) && (password_error == true) && (con_password_error == true) && (password_match_error == true) && (age_error == true)){
         jQuery("#membershipModal").modal('show');
         jQuery.ajaxSetup({
@@ -56,7 +56,7 @@ jQuery(".registerBtn").on('click',function() {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
           });
-       
+
         jQuery.ajax({
             type: "post",
             url: register_route,
@@ -72,7 +72,7 @@ jQuery(".registerBtn").on('click',function() {
             beforeSend: function(){
                 jQuery('#registerBtn').html("Please wait....");
             },
-            success: function (response) { 
+            success: function (response) {
                 if (response.status == 'Success') {
                     jQuery("#user_id").val(response.user_id);
                     jQuery('#registerBtn').html("Register Now");
@@ -81,7 +81,7 @@ jQuery(".registerBtn").on('click',function() {
                     active.next().removeClass('disabled');
                     nextTab(active);
                 }else{
-                   
+
                 }
             },
             error: function(xhr){
@@ -92,7 +92,7 @@ jQuery(".registerBtn").on('click',function() {
         return false;
     }
 
-   
+
 });
 
 
@@ -100,7 +100,7 @@ jQuery(".registerBtn").on('click',function() {
  * Multistep register form functionality
  */
 $(document).ready(function () {
-        
+
     $('.nav-tabs > li a[title]').tooltip();
     //Wizard
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -132,13 +132,13 @@ $(document).ready(function () {
             $('.plan_error').css('color','red').text("Please choose atleast one plan :)");
             return false;
         }
-        
+
     });
     $(".prev-step").click(function (e) {
         var active = $('.wizard .nav-tabs li.active');
         prevTab(active);
     });
-    
+
 });
 
 function nextTab(elem) {
@@ -248,7 +248,7 @@ jQuery('#purchase_plan').on('click', function(){
         jQuery.ajax({
             type: "post",
             url: purchase_plan_route,
-            data:{  
+            data:{
                     plan_months:plan_months,
                     plan_name:plan_name,
                     plan_price:plan_price,
@@ -275,7 +275,7 @@ jQuery('#purchase_plan').on('click', function(){
                     setTimeout(() => {
                         window.location.href = "/student/dashboard";
                     }, 5000);
-                   
+
                 }
                 if(response.status == 'failed'){
                     swal("Ooh!", "Something went wrong", "warning");
@@ -296,7 +296,7 @@ jQuery('#purchase_plan').on('click', function(){
  */
 
 jQuery(".achieve_goal").on('click', function(){
-    
+
     swal("","Please wait......","warning");
     var goal_id = jQuery(this).data('id');
     var unit_id = jQuery(this).data('unit-id');
@@ -314,8 +314,8 @@ jQuery(".achieve_goal").on('click', function(){
                 goal_id:goal_id,
                 taken_from:'front'
             },
-            
-            success: function (response) { 
+
+            success: function (response) {
                 if(response.status == 'unauthenticated'){
                     jQuery("#goal_id").val(goal_id);
                     jQuery("#membershipModal").modal('show');
@@ -329,8 +329,8 @@ jQuery(".achieve_goal").on('click', function(){
                             end_date:end_date,
                             taken_from:'front'
                         },
-                        success: function (response) { 
-                          
+                        success: function (response) {
+
                             if (response.status == 'Success') {
                                 swal("Yeah!", "Goal is taken successfully!", "success");
                             }
@@ -349,8 +349,35 @@ jQuery(".achieve_goal").on('click', function(){
             }
         });
     }, 2000);
-    
+
 });
 
 
- 
+ /*  submit paper modal */
+  $(document).bind('dragover', function (e) {
+    var dropZone = $('.zone'),
+        timeout = window.dropZoneTimeout;
+    if (!timeout) {
+        dropZone.addClass('in');
+    } else {
+        clearTimeout(timeout);
+    }
+    var found = false,
+        node = e.target;
+    do {
+        if (node === dropZone[0]) {
+            found = true;
+            break;
+        }
+        node = node.parentNode;
+    } while (node != null);
+    if (found) {
+        dropZone.addClass('hover');
+    } else {
+        dropZone.removeClass('hover');
+    }
+    window.dropZoneTimeout = setTimeout(function () {
+        window.dropZoneTimeout = null;
+        dropZone.removeClass('in hover');
+    }, 100);
+});

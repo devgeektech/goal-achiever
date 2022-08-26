@@ -790,3 +790,124 @@ label[for=forDocuments], label[for=forVideos], label[for=forExam] {
   background: #000084;
   border-color: #000084;
 }
+.goal_not_active .card-item {
+
+  background: rgb(180 180 180 / 28%);
+  box-shadow: none;
+}
+
+.modal-content.submit-paper {
+  margin: auto;
+  background: radial-gradient(ellipse at center, #678dff 0, #193273 100%);
+  width: 80%;
+  text-align: center;
+  color: white;
+  z-index: 20;
+  transition: all 0.3s ease-out;
+}
+
+.zone i {
+  text-align: center;
+  font-size: 30px;
+  color: #fff;
+  margin-top: 50px;
+}
+.zone .selectFile {
+  height: 50px;
+  margin: 15px auto;
+  position: relative;
+  width: 200px;
+}
+.zone label[for="file"],
+.selectFile input {
+  cursor: pointer;
+  display: block;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  border-radius: 5px;
+}
+.zone label[for="file"] {
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  display: inline-block;
+  font-size: 1.2em;
+  line-height: 50px;
+  padding: 0;
+  text-align: center;
+  text-transform: uppercase;
+
+
+}
+.zone input[type=file] {
+  opacity: 0;
+}
+
+input[type=checkbox] + label {
+  display: block;
+  margin: 0.2em;
+  cursor: pointer;
+  padding: 0.2em;
+  font-size: 20px;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+input[type=checkbox] + label:before {
+  content: "\2714";
+  border: 0.1em solid #fff;
+  border-radius: 0.2em;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  padding-left: 0.2em;
+  padding-bottom: 0.3em;
+  margin-right: 0.2em;
+  vertical-align: bottom;
+  color: transparent;
+  transition: .2s;
+}
+
+input[type=checkbox] + label:active:before {
+  transform: scale(0);
+}
+
+input[type=checkbox]:checked + label:before {
+  background-color: #000;
+  border-color: #000;
+  color: #fff;
+}
+
+input[type=checkbox]:disabled + label:before {
+  transform: scale(1);
+  border-color: #aaa;
+}
+
+input[type=checkbox]:checked:disabled + label:before {
+  transform: scale(1);
+  background-color: #bfb;
+  border-color: #bfb;
+}
+.close-btn {
+  color: #fff;
+  background-color: transparent !important;
+  border-color: #fff !important;
+}
+.close-btn:hover {
+  color: #000;
+  background-color: #fff !important;
+  border-color: #fff !important;
+}
+.upload-btn {
+  background-color: #fff !important;
+  border-color: #fff !important;
+  color: #000;
+}
+.upload-btn:hover {
+  color: #000;
+}

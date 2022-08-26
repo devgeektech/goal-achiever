@@ -15,18 +15,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-   
+
   </head>
   <body> @include('web.layouts.topbar') @yield('content') <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content logout">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title text-white" id="exampleModalLabel">Ready to Leave?</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-body text-white">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
             <form method="POST" action="{{ route('logout') }}"> @csrf <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -42,7 +42,7 @@
     <div class="modal fade" id="membershipModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <!-- Modal content -->
       <div class="modal-content">
-       
+
         <section>
           <section class="signup-step-container">
             <h3 class="popup-heading text-center text-white">Membership</h3>
@@ -74,7 +74,7 @@
                         </li>
                       </ul>
                     </div>
-                   
+
                       <div class="tab-content" id="main_form">
                         <div class="tab-pane active" role="tabpanel" id="step1">
                           <h4 class="text-center mb-4 text-white">Register</h4>
@@ -110,7 +110,7 @@
                           </form>
                           <!-- Form HTML End-->
                         </div>
-                        
+
                         <div class="tab-pane" role="tabpanel" id="step2">
                           <h4 class="text-center text-white">Select Plan</h4>
                           <div class="plan row free-months-row pt-2">
@@ -118,11 +118,11 @@
                               <div class="row mt-4">
                                 <input type="hidden" name="plan_months" id="plan_months" value="">
                                 <input type="hidden" name="plan_name" id="plan_name" value="">
-                                <input type="hidden" name="plan_price" id="plan_price" value=""> 
-                                <input type="hidden" name="plan_id" id="plan_id" value=""> 
+                                <input type="hidden" name="plan_price" id="plan_price" value="">
+                                <input type="hidden" name="plan_id" id="plan_id" value="">
                                 <input type="hidden" name="user_id" id="user_id" value="">
                                 <input type="hidden" name="goal_id" id="goal_id" value="">
-                                  @foreach ($plans as $plan) 
+                                  @foreach ($plans as $plan)
                                   <div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
                                     <label>
                                       <input type="radio" data-price="{{$plan->price}}" data-name="{{$plan->name}}" data-months="{{$plan->months}}" name="plan" class="card-input-element d-none plan-input" id="plan" value="{{$plan->id}}">
@@ -134,7 +134,7 @@
                                         </div>
                                       </div>
                                     </label>
-                                  </div> 
+                                  </div>
                                   @endforeach
                               </div>
                               <span class="plan_error"></span> @error('plan') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
@@ -152,10 +152,10 @@
                         <div class="tab-pane" role="tabpanel" id="step3">
                           <h4 class="text-center text-white">Payment</h4>
                           <div class="container">
-                            
+
                             <label class="payment-label pl-3 text-center text-white">What type of subscription you want to select?</label>
                             <div class='row my-4 justify-content-center subscription-type'>
-                             
+
                             </div>
                             <div class='col-md-12'>
                               <div class='form-row'>
@@ -206,9 +206,9 @@
                             </li>
                           </ul>
                         </div>
-                     
+
                   </div>
-               
+
                 </div>
               </div>
             </div>
@@ -216,7 +216,7 @@
         </section>
       </div>
     </div>
-    <!----------FOOTER-SECTION-END-HERE---------> 
+    <!----------FOOTER-SECTION-END-HERE--------->
     @extends('web.layouts.scripts')
     @extends('web.layouts.footer')
     @push('js')
