@@ -6,12 +6,12 @@
            @include('student.layouts.topbar')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Goal Info</h1>
+                    <!-- Page Heading
+                    <h1 class="h3 mb-2 text-gray-800">Goal Info</h1> -->
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h3 class="m-0 font-weight-bold text-primary text-center">Goal Info</h3>
+                        <div class="card-header student-dashboard py-3">
+                            <h3 class="m-0 font-weight-bold">Goal Info</h3>
                             <a href="{{ route('student.goals.index')}}"class="btn btn-primary" style="float: right;">Back</a>
                         </div>
                         <div class="card-body goal-info-section">
@@ -127,7 +127,7 @@
      @csrf
       <div class="modal-content submit-paper">
         <div class="modal-header">
-          <h4 class="modal-title" id="exampleModalLabel">Upload Asignments</h4>
+          <h4 class="modal-title" id="exampleModalLabel" class="upload-assignmnt">Upload Assignments</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -153,7 +153,7 @@
 
                 <form>
                     <input type="checkbox" id="mark_completed" name="mark_goal_completed" value="Complete">
-                    <label for="mark_completed">Complete</label>
+                    <label for="mark_completed">Please Check this Box To Complete The Goal</label>
 
                 </form>
                 </div>

@@ -87,7 +87,7 @@
                 </div>
                 <!-- Content Row -->
                 <div class="row d-block">
-                    <div class="col-lg-8 col-md-8 col-12 card shadow mb-4 p-0">
+                    <div class="col-lg-8 col-md-8 col-12 card shadow mb-4 p-0 ml-3">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">My Goals Achieving Progress Chart</h6>
                         </div>
