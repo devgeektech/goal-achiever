@@ -1221,13 +1221,13 @@ label {
 /* Goals page css */
 
 
-.education-slider-goals .col-lg-4:nth-child(1) .goal-box,
-.education-slider-goals .col-lg-4:nth-child(2) .goal-box,
-.education-slider-goals .col-lg-4:nth-child(3) .goal-box,
-.education-slider-goals .col-lg-4:nth-child(4) .goal-box,
-.education-slider-goals .col-lg-4:nth-child(5) .goal-box,
-.education-slider-goals .col-lg-4:nth-child(6) .goal-box,
-.education-slider-goals .col-lg-4:nth-child(7) .goal-box
+.education-slider-goals-0 .col-lg-4:nth-child(1) .goal-box,
+.education-slider-goals-0 .col-lg-4:nth-child(2) .goal-box,
+.education-slider-goals-0 .col-lg-4:nth-child(3) .goal-box,
+.education-slider-goals-1 .col-lg-4:nth-child(1) .goal-box,
+.education-slider-goals-1 .col-lg-4:nth-child(2) .goal-box,
+.education-slider-goals-1 .col-lg-4:nth-child(3) .goal-box,
+.education-slider-goals-2 .col-lg-4:nth-child(1) .goal-box
 {
     background: url(../images/course-javascript.png) !important;
     background-repeat: no-repeat !important;
@@ -1241,24 +1241,24 @@ label {
     max-width: 299px;
     transition: 0.3s ease-in-out;
 }
-.education-slider-goals .col-lg-4.col-md-4.col-sm-6:nth-child(2) .goal-box {
+.education-slider-goals-0 .col-lg-4.col-md-4.col-sm-6:nth-child(2) .goal-box {
     background: url(../images/arabic.png) !important;
 }
 
-.education-slider-goals .col-lg-4:nth-child(3) .goal-box{
+.education-slider-goals-0 .col-lg-4:nth-child(3) .goal-box{
     background: url(../images/course-react.png) !important;
 }
 
-.education-slider-goals .col-lg-4:nth-child(4) .goal-box {
+.education-slider-goals-1 .col-lg-4:nth-child(1) .goal-box {
     background: url(../images/course-css.png) !important;
 }
-.education-slider-goals .col-lg-4:nth-child(5) .goal-box {
+.education-slider-goals-1 .col-lg-4:nth-child(2) .goal-box {
     background: url(../images/dhivehi.png) !important;
 }
-.education-slider-goals .col-lg-4:nth-child(6) .goal-box {
+.education-slider-goals-1 .col-lg-4:nth-child(3) .goal-box {
     background: url(../images/computer.png) !important;
 }
-.education-slider-goals .col-lg-4:nth-child(7) .goal-box {
+.education-slider-goals-2 .col-lg-4:nth-child(1) .goal-box {
     background: url(../images/math.png) !important;
 }
 .goal-box:hover {
@@ -1329,8 +1329,11 @@ label {
 
   .card-image img {
       width: 100%;
+      max-width: 240px;
       height: 100%;
       max-height: 233px;
+      display: block;
+      margin: 0px auto;
   }
   .achieve-btn {
       background: #fd5c26;

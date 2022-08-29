@@ -22,16 +22,16 @@
                         <div class="card-body">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
+                                    <label for="forProfileImage">Profile Image</label><br>
+                                    <img src="@if($student->profile_image){{ Storage::url($student->profile_image) }} @else {{URL::to('/admin-panel/img/undraw_profile.svg')}} @endif" height="100px" width="100px">
+                                </div>
+                                <div class="form-group">
                                     <label for="forName">Name</label>
                                     <input type="text" class="form-control" name="name" id="name" value="{{ $student->name }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="forEmail">Email</label>
                                     <input type="email" class="form-control" name="email" id="email" value="{{ $student->email }}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="forProfileImage">Profile Image</label><br>
-                                    <img src="@if($student->profile_image){{ Storage::url($student->profile_image) }} @else {{URL::to('/admin-panel/img/undraw_profile.svg')}} @endif" height="100px" width="100px">
                                 </div>
                                 <div class="form-group">
                                     <label for="forGoalsAchieved">Goals Achieved</label>

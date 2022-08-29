@@ -74,19 +74,9 @@ class IndexController extends Controller
     }
 
     /**
-     * Download Documents
+     * When student select goal fron frontend
      */
-    public function doc_download($filename)
-    {
-       
-        /* $file= public_path(). "/download/".$doc;
-        
-        $headers = array(
-                'Content-Type: application/pdf',
-                );
-        return Response::download($file, $doc, $headers); */
-    }
-
+    
     public function take_goal(Request $request)
     {
         $request->validate([

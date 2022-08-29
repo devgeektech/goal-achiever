@@ -538,11 +538,6 @@ label {
   }
 }
 
-
-
-.card-image img {
-    width: 100%;
-}
 .achieve-btn {
     background: #fd5c26;
     color: #fff;
@@ -647,6 +642,10 @@ label {
 }
 .taken-goals {
   position: relative;
+}
+.taken-goals img {
+  display: block;
+  margin: 0px auto;
 }
 .taken-goals::before {
   content: "";

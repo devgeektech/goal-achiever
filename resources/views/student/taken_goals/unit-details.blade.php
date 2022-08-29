@@ -46,7 +46,7 @@
                                       <div class="cards col-lg-4 col-md-6  @if($detail->status == 3) goal_not_active @else goal_active @endif">
                                         <div class="card-item my-goals-info">
                                           <div class="card-image mx-auto mt-3">
-                                            <img src="{{ Storage::url($detail->goal->image) }}" height="200" width="200"/>
+                                            <img src="{{ Storage::url($detail->goal->image) ?? URL::to('/images/dummy.jpg') }}" height="200" width="200"/>
                                           </div>
                                           <div class="card-info">
                                             <h3 class="card-title h-100 mb-2">{{$detail->goal->topic->name}}</h3>
