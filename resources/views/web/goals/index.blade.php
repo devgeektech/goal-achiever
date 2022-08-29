@@ -12,7 +12,7 @@
         @foreach($subject as $sub)
         <div class="col-lg-4 col-md-4 col-sm-6 d-flex justify-content-center mb-4">
           <a href="{{ route('info',$sub->id)}}" class="goal-box mb-3 text-white">
-            <img src="{{Storage::url($sub->image)}}" />
+            <img src="@if($sub->image){{Storage::url($sub->image)}} @else {{ URL::to('/images/no-goals-taken.jpg') }} @endif" />
             <h3>{{$sub->title}}</h3>
           </a>
         </div>
