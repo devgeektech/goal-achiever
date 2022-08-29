@@ -13,7 +13,7 @@
           <div class="cards col-lg-4 col-md-6">
             <div class="card-item">
               <div class="card-image">
-                <img src="{{ Storage::url($detial->image) }}" class="img-fluid" />
+                <img src="{{ Storage::url($detial->image) ?? URL::to('/images/no-goals-taken.jpg') }}" class="img-fluid" />
               </div>
               <div class="card-info">
                 <h3 class="card-title">{{$detial->topic->name}}</h3>

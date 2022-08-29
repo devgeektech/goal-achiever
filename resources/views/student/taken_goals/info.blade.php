@@ -82,7 +82,7 @@
                                         <label class="form-group d-flex mb-2 font-weight-bold text-primary mb-3" for="forExam">Exam Documents</label>
                                         @foreach($exam_document as $exam_doc)
                                             <div class="form-group videoImgBlock" style="display:inline-flex;cursor:pointer;">
-                                                <img src="{{Storage::url($exam_doc->media) ?? URL::to('/images/dummy.jpg')}}" class="goal-info-img">
+                                                <img src="{{Storage::url($exam_doc->media) ?? URL::to('/images/no-goals-taken.jpg') }}" class="goal-info-img">
                                                 <h5>Documents</h5>
                                                 <div class="download d-flex justify-content-between align-items-center">
                                                 <span>Download</span>

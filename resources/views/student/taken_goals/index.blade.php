@@ -49,7 +49,7 @@
                                       <div class="cards col-lg-4 col-md-6">
                                         <div class="card-item">
                                           <div class="card-image taken-goals py-4 px-4">
-                                            <img src="{{ Storage::url($detial[0]->goal->image) ?? URL::to('/images/dummy.jpg') }}" height="200" width="200"/>
+                                            <img src="{{ Storage::url($detial[0]->goal->image) ?? ?? URL::to('/images/no-goals-taken.jpg') }}" height="200" width="200"/>
 
                                             <div class="progress-card">
                                               <svg class="progress-circle" width="200px" height="200px" xmlns="http://www.w3.org/2000/svg">
