@@ -963,7 +963,6 @@ input[type=checkbox]:checked:disabled + label:before {
   flex-wrap: wrap;
   margin-bottom: -0.5rem;
   font-size: 1rem;
-  padding-left: 0px;
   margin-bottom: 10px;
 }
 

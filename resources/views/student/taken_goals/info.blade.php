@@ -9,10 +9,8 @@
                     <!-- Page Heading
                     <h1 class="h3 mb-2 text-gray-800">Goal Info</h1> -->
                     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header student-dashboard py-3">
-                        <nav aria-label="Breadcrumbs">
-                          <ul class="breadcrumbs">
+                    <nav aria-label="Breadcrumbs">
+                          <ul class="breadcrumbs pl-4">
                             <li class="breadcrumbs__item">
                               <a href="#" class="breadcrumbs-link">Home</a>
                             </li>
@@ -24,6 +22,8 @@
                             </li>
                           </ul>
                         </nav>
+                    <div class="card shadow mb-4">
+                        <div class="card-header student-dashboard py-3">
                             <h3 class="m-0 font-weight-bold">Goal Info</h3>
                             <a href="{{ route('student.goals.index')}}"class="btn btn-primary" style="float: right;">Back</a>
                         </div>
