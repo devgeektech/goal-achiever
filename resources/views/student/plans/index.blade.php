@@ -20,21 +20,21 @@
 
            @if ($message = Session::get('success'))
            <div class="alert alert-success alert-block">
-               <button type="button" class="close" data-dismiss="alert">×</button>    
+               <button type="button" class="close" data-dismiss="alert">×</button>
                <strong>{{ $message }}</strong>
            </div>
            @endif
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">My Payment Plans</h1>
-                    
+                    <!-- Page Heading -
+                    <h1 class="h3 mb-2 text-gray-800">My Payment Plans</h1> -->
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">My Payment Plans</h6>
-                           
+
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -61,7 +61,7 @@
                                     </tfoot>
                                     <tbody>
                                         @isset($membership_plans)
-                                            @foreach ($membership_plans as $membership)                                         
+                                            @foreach ($membership_plans as $membership)
                                                 <tr>
                                                     <td>{{ $membership->plan->name}}</td>
                                                     <td>${{ $membership->plan->price}}</td>
@@ -73,7 +73,7 @@
                                                        <a href="{{ route('student.plans.info',$membership->plan_id) }}" class="btn btn-warning">Info</a>
                                                     </td> --}}
                                                 </tr>
-                                            @endforeach                                           
+                                            @endforeach
                                         @endisset
                                     </tbody>
                                 </table>
@@ -87,7 +87,7 @@
             </div>
             <!-- End of Main Content -->
 
-           
+
         </div>
         <!-- End of Content Wrapper -->
 

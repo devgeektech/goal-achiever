@@ -11,8 +11,21 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header student-dashboard py-3">
-                            <h3 class="m-0 font-weight-bold"><a href="{{ route('student.taken_goals.index') }}">My Goals</a>>> <a href="{{ route('student.taken_goals.unit_details',$goal_unit_id)  }}">{{ $unit_name}}</a>>>{{ $topic_name }}</h3>
-                            <a href="{{ route('student.taken_goals.index')}}"class="btn btn-primary" style="float: right;">Back</a>
+                        <nav aria-label="Breadcrumbs">
+                          <ul class="breadcrumbs">
+                            <li class="breadcrumbs__item">
+                              <a href="{{ route('student.taken_goals.index') }}" class="breadcrumbs-link">My Goals</a>
+                            </li>
+                            <li class="breadcrumbs__item">
+                              <a href="{{ route('student.taken_goals.unit_details',$goal_unit_id)  }}" class="breadcrumbs-link">{{ $unit_name}}</a>
+                            </li>
+                            <li class="breadcrumbs__item breadcrumbs__item--is-current">
+                              <span aria-current="location" class="breadcrumbs-link">{{ $topic_name }}</span>
+                            </li>
+                          </ul>
+                        </nav>
+                           
+                            <a href="{{ route('student.goals.index')}}"class="btn btn-primary" style="float: right;">Back</a>
                         </div>
                         <div class="card-body goal-info-section">
                             <form action="{{ route('student.goals.take_goal')}}" method="post">

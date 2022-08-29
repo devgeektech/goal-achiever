@@ -33,8 +33,18 @@
                     <!-- DataTales Example -->
                     <div class="card shadow unit-topic mb-4">
                         <div class="card-header py-3">
-                            <h4 class="m-0 font-weight-bold"><a href="{{ route('student.taken_goals.index') }}">My Goals</a>>{{ $unit_name }}</h4>
-
+                          
+                        <nav aria-label="Breadcrumbs">
+                          <ul class="breadcrumbs">
+                            <li class="breadcrumbs__item">
+                              <a href="{{ route('student.taken_goals.index') }}" class="breadcrumbs-link">My Goals</a>
+                            </li>
+                            <li class="breadcrumbs__item breadcrumbs__item--is-current">
+                              <span aria-current="location" class="breadcrumbs-link">{{ $unit_name }}</span>
+                            </li>
+                          </ul>
+                        </nav>
+                           
                         </div>
                         <div class="card-body">
                             <div class="container">

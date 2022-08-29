@@ -737,7 +737,7 @@ label {
   max-width: 64px;
   margin: 0px auto 12px;
 }
-label[for=forDocuments], label[for=forVideos], label[for=forExam], .student-dashboard h3, .unit-topic h4, .goal-dashboard h4, .goals-heading  {
+label[for=forDocuments], label[for=forVideos], label[for=forExam], .student-dashboard h3, .unit-topic h4, .goal-dashboard h4, .goals-heading, .dashboard-heading  {
   font-size: 28px;
   justify-content: start;
   color: #000084 !important;
@@ -820,7 +820,7 @@ label[for=forDocuments], label[for=forVideos], label[for=forExam], .student-dash
   background: rgb(0 0 0 / 9%);
 }
 
-.modal-content.submit-paper {
+.modal-content.submit-paper, .modal-content.submit-paper.goal-edit {
   margin: auto;
   background: radial-gradient(ellipse at center, #678dff 0, #193273 100%);
   width: 80%;
@@ -955,4 +955,69 @@ input[type=checkbox]:checked:disabled + label:before {
 }
 .submit-paper h4 {
   font-weight: 600;
+}
+.breadcrumbs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: -0.5rem;
+  font-size: 1rem;
+  padding-left: 0px;
+  margin-bottom: 10px;
+}
+
+.breadcrumbs__item {
+  position: relative;
+  margin-bottom: 0.5em;
+  padding: 0.25em;
+  background-color: #3c63d2;
+  color: #ffffff;
+}
+.breadcrumbs__item:not(:first-child) {
+  margin-left: 15px;
+}
+.breadcrumbs__item:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  height: 100%;
+  width: 1.5em;
+  background-color: #3c63d2;
+  -webkit-clip-path: polygon(50% 50%, -50% -50%, 0 100%);
+          clip-path: polygon(50% 50%, -50% -50%, 0 100%);
+}
+.breadcrumbs__item:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  border-left: 15px solid #f7f7f7;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  left: 0;
+}
+.breadcrumbs__item--is-current,.breadcrumbs__item--is-current:hover {
+  background-color: #fd5c26 !important;
+}
+.breadcrumbs__item--is-current:before, .breadcrumbs__item--is-current:after, .breadcrumbs__item--is-current:hover:before, .breadcrumbs__item--is-current:hover:after {
+  background-color: #fd5c26 !important;
+}
+.breadcrumbs__item:hover, .breadcrumbs__item:hover:after, .breadcrumbs__item:hover:before {
+  background-color:#587de4 ;
+}
+.breadcrumbs-link {
+  padding: 0px 15px 10px 20px;
+  color: #fff;
+}
+.breadcrumbs-link:hover {
+  text-decoration: none;
+  color: #fff;
+}
+.breadcrumbs__item {
+  list-style-type: none;
+}
+.breadcrumbs-link-active {
+  background-color:#fd5c26 ;
 }
