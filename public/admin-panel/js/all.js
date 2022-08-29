@@ -218,7 +218,7 @@ $(document).ready(function(){
       }
     });
   });
-  
+
 /**
  * Uplad Assignments functionality
  */
@@ -260,11 +260,11 @@ function progressBar(progressVal, totalPercentageVal = 100,progress_text,progres
     }
 
     //
-    
+
     $('.total_percentage').each(function(index, obj)
     {
-        let percentage_id = $(this).data('percentage_id'); 
+        let percentage_id = $(this).data('percentage_id');
         progressBar($(this).text(), 100,"progress_text_"+percentage_id,"progress_circle_prog_"+percentage_id);
     });
 
-  
+

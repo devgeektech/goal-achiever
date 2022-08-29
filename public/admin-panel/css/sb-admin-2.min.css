@@ -65,7 +65,7 @@
 
 
 .button-checkbox-area input[type="radio"] {
-     display: none; 
+     display: none;
   }
 
 .button-checkbox-area input[type="radio"]:checked + label {
@@ -103,4 +103,71 @@
 }
 .modal-dialog .modal-content {
   width:100% !important;
+}
+.modal-content.submit-paper, .modal-content.submit-paper.goal-edit {
+  margin: auto;
+  background: radial-gradient(ellipse at center, #678dff 0, #193273 100%);
+  width: 80%;
+  text-align: center;
+  color: white;
+  z-index: 20;
+  transition: all 0.3s ease-out;
+}
+
+.zone i {
+  text-align: center;
+  font-size: 30px;
+  color: #fff;
+  margin-top: 50px;
+}
+.zone .selectFile {
+  height: 50px;
+  margin: 15px auto;
+  position: relative;
+  width: 200px;
+}
+.zone label[for="file"],
+.selectFile input {
+  cursor: pointer;
+  display: block;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  border-radius: 5px;
+}
+.zone label[for="file"] {
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  display: inline-block;
+  font-size: 1.2em;
+  line-height: 50px;
+  padding: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+.zone input[type=file] {
+  opacity: 0;
+}
+.close-btn {
+  color: #fff;
+  background-color: transparent !important;
+  border: 1px solid #fff !important;
+}
+.close-btn:hover {
+  color: #000;
+  background-color: #fff !important;
+  border: 1px solid #fff !important;
+}
+.upload-btn {
+  background-color: #fff !important;
+  border: 1px solid #fff !important;
+  color: #000;
+}
+.upload-btn:hover {
+  color: #fff;
+  border: 1px solid #fff !important;
+  background: transparent !important;
 }

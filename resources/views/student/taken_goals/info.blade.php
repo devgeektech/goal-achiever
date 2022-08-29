@@ -11,6 +11,19 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header student-dashboard py-3">
+                        <nav aria-label="Breadcrumbs">
+                          <ul class="breadcrumbs">
+                            <li class="breadcrumbs__item">
+                              <a href="#" class="breadcrumbs-link">Home</a>
+                            </li>
+                            <li class="breadcrumbs__item">
+                              <a href="#" class="breadcrumbs-link">Unit Topics</a>
+                            </li>
+                            <li class="breadcrumbs__item breadcrumbs__item--is-current">
+                              <span aria-current="location" class="breadcrumbs-link">Goal Info</span>
+                            </li>
+                          </ul>
+                        </nav>
                             <h3 class="m-0 font-weight-bold">Goal Info</h3>
                             <a href="{{ route('student.goals.index')}}"class="btn btn-primary" style="float: right;">Back</a>
                         </div>
