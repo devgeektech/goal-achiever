@@ -33,7 +33,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow unit-topic mb-4">
                         <div class="card-header py-3">
-                            <h4 class="m-0 font-weight-bold">Unit Topics</h4>
+                            <h4 class="m-0 font-weight-bold"><a href="{{ route('student.taken_goals.index') }}">My Goals</a>>{{ $unit_name }}</h4>
 
                         </div>
                         <div class="card-body">

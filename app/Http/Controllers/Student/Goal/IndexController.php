@@ -39,11 +39,11 @@ class IndexController extends Controller
             $data['goal'] = $goal;
        }   
        $media_document = GoalMedia::where('goal_id',$id)->where('type','document')->get();
-       if(count($media_document)> 0){
+       if(count($media_document) > 0){
            $data['media_document'] = $media_document;
        }
        $media_video = GoalMedia::where('goal_id',$id)->where('type','video')->get();
-       if(count($media_video)> 0){
+       if(count($media_video) > 0){
            $data['media_video'] = $media_video;
        }
        $exam_document = GoalMedia::where('goal_id',$id)->where('type','exam_document')->get();
@@ -99,7 +99,7 @@ class IndexController extends Controller
             }
             
             $goal_ids = Goal::select('id')->where('unit_id',$request->unit_id)->pluck('id')->toArray();      
-            if(count($goal_ids)>0)      {
+            if(count($goal_ids)>0){
                 $topics = Topic::where('unit_id',$request->unit_id)->get();
                 $i = 0;
                

@@ -26,8 +26,8 @@
     <li class="nav-item {{ (request()->is('admin/plans*')) ? 'active' : '' }}">
         <a class="nav-link" href="{{route('admin.plans.index') }}"> <i class="fas fa-fw fa-list"></i> <span>Membership Plans</span></a>
     </li>
-    <li class="nav-item {{ (request()->is('admin/subscriptions*')) ? 'active' : '' }}">
-        <a class="nav-link" href="{{route('admin.subscriptions.index') }}"> <i class="fas fa-fw fa-list"></i> <span>Subscriptions</span></a>
+    <li class="nav-item {{ (request()->is('admin/transactions*')) ? 'active' : '' }}">
+        <a class="nav-link" href="{{route('admin.transactions.index') }}"> <i class="fas fa-fw fa-list"></i> <span>Transactions History</span></a>
     </li>
 
     

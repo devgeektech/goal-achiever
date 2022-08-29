@@ -68,8 +68,8 @@ Route::group([
             Route::post('/destroy/{id}', [App\Http\Controllers\Admin\Topic\IndexController::class,'destroy'])->name('destroy');
         });
 
-        Route::group(['prefix' => 'subscriptions','as' => 'subscriptions.'], function ($router) {
-            Route::get('/', [App\Http\Controllers\Admin\Subscription\IndexController::class,'index'])->name('index');
+        Route::group(['prefix' => 'transactions','as' => 'transactions.'], function ($router) {
+            Route::get('/', [App\Http\Controllers\Admin\Transaction\IndexController::class,'index'])->name('index');
         });
         
     });

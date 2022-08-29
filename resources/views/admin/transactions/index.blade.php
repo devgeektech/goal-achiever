@@ -11,7 +11,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Subscriptions</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Transactions History</h1>
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -27,6 +27,7 @@
                                             <th>Plan Price</th>
                                             <th>Plan Months</th>
                                             <th>Plan Expire Date</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -36,16 +37,18 @@
                                             <th>Plan Price</th>
                                             <th>Plan Months</th>
                                             <th>Plan Expire Date</th>
+                                            <th>Status</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach($subscriptions as $subscription)
+                                        @foreach($transactions as $transaction)
                                         <tr>
-                                            <td>{{ $subscription->user->name }}</td>
-                                            <td>{{ $subscription->plan->name }}</td>
-                                            <td>{{ $subscription->plan->price }}</td>
-                                            <td>{{ $subscription->plan->months }}</td>
-                                            <td>@if(strtotime(now()) > strtotime($subscription->expiry_date) ) Plan Expired @else {{ \Carbon\Carbon::parse($subscription->expiry_date)->format('j F, Y') }} @endif</td>
+                                            <td>{{ $transaction->user->name }}</td>
+                                            <td>{{ $transaction->plan->name }}</td>
+                                            <td>{{ $transaction->plan->price }}</td>
+                                            <td>{{ $transaction->plan->months }}</td>
+                                            <td>@if(strtotime(now()) > strtotime($transaction->expiry_date) ) Plan Expired @else {{ \Carbon\Carbon::parse($transaction->expiry_date)->format('j F, Y') }} @endif</td>
+                                            <td>@if(strtotime(now()) > strtotime($transaction->expiry_date) ) <button class="btn btn-warning">Expired</button> @else <button class="btn btn-success">Active</button> @endif</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

@@ -21,7 +21,9 @@
                 <p class="card-intro h-100">{{Str::limit($detial[0]->description, 100)}}</p>
                 <div class="already-taken-btn d-flex">
                 {{-- <a href="{{ route('description',$detial[0]->unit_id) }}" class="achieve-btn">Details</a> --}}
-                <a data-id="{{$detial[0]->id}}" data-subject-id="{{$detial[0]->subject_id}}" data-end-date="{{$detial[0]->end_date}}" data-unit-id="{{$detial[0]->unit_id}}" data-topic-id="{{$detial[0]->topic_id}}" class="achieve-btn @if(checkGoalAval($detial[0]->id) == 'yes') already_taken @endif achieve_goal">@if(checkGoalAval($detial[0]->id) == 'yes') Already Taken  @else Achieve This Goal @endif</a>
+                @if(Auth::user()->role == 3)
+                  <a data-id="{{$detial[0]->id}}" data-subject-id="{{$detial[0]->subject_id}}" data-end-date="{{$detial[0]->end_date}}" data-unit-id="{{$detial[0]->unit_id}}" data-topic-id="{{$detial[0]->topic_id}}" class="achieve-btn @if(checkGoalAval($detial[0]->id) == 'yes') already_taken @endif achieve_goal">@if(checkGoalAval($detial[0]->id) == 'yes') Already Taken  @else Achieve This Goal @endif</a>
+                @endif
               </div>
             </div>
             </div>
