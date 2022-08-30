@@ -1,5 +1,6 @@
 @extends('web.layouts.master')
 @section('content')
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <section id="banner" class="banner-section pt-5">
   <div class="container">
     <div class="row align-items-center pt-5">
@@ -152,13 +153,14 @@
     <div class="container">
       <h2>Progress Chart Of The Active Student</h2>
       <div class="graph-chart d-flex">
-        <canvas id="myChart" style="width:100%; max-width: 100%;"></canvas>
-        <ul>
+        <!-- <canvas id="myChart" style="width:100%; max-width: 100%;"></canvas> -->
+        <div id="columnchart_material" style="width: 100%; min-width: 25%; height: 500px;"></div>
+        <!-- <ul>
           <li>Quran</li>
           <li>Islam</li>
           <li>Arabic</li>
           <li>English</li>
-        </ul>
+        </ul> -->
       </div>
     </div>
     <!--/.Carousel Wrapper-->

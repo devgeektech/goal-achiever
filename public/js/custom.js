@@ -381,3 +381,28 @@ jQuery(".achieve_goal").on('click', function(){
         dropZone.removeClass('in hover');
     }, 100);
 });
+
+    // bar graph //
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['', 'Quran', 'Islam', 'Arabic', 'English'],
+        ['Aban Fajr', 1000, 700, 300, 300],
+        ['Athar Kairo', 1170, 460, 250, 300],
+        ['Safi Talal', 660, 1120, 300, 300],
+        ['Zayd Omar', 1030, 540, 350, 300],
+        ['Malik Kairo', 1030, 540, 350, 300]
+      ]);
+      var options = {
+        chart: {
+          title: '',
+          subtitle: ''
+        }
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
