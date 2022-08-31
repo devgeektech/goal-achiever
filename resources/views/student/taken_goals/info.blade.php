@@ -24,7 +24,6 @@
                             </li>
                           </ul>
                         </nav>
-                           
                             <a href="{{ route('student.goals.index')}}"class="btn btn-primary" style="float: right;">Back</a>
                         </div>
                         <div class="card-body goal-info-section">
