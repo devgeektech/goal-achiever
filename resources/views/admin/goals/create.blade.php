@@ -44,9 +44,9 @@
                                   <label for="goalUnit">Unit</label>
                                   <select class="form-select form-control"  name="unit" id="unit">
                                     <option value="">Select Unit</option>
-                                    @foreach($units as $unit)
+                                    {{-- @foreach($units as $unit)
                                         <option value="{{$unit->id}}">{{$unit->name}}</option>
-                                    @endforeach   
+                                    @endforeach    --}}
                                 </select>
                                 @error('unit') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                 </div>
@@ -54,9 +54,9 @@
                                     <label for="goalTopic">Topic</label>
                                     <select class="form-select form-control"  name="topic" id="topic">
                                         <option value="">Select Topic</option>
-                                        @foreach($topics as $topic)
+                                        {{-- @foreach($topics as $topic)
                                             <option value="{{$topic->id}}">{{$topic->name}}</option>
-                                        @endforeach   
+                                        @endforeach    --}}
                                     </select>
                                     @error('topic') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                 </div>

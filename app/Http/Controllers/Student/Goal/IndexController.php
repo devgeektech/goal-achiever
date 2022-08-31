@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\GoalMedia;
 use App\Models\Unit;
 use App\Models\Topic;
+use App\Models\Country;
+use App\Models\Plan;
 use App\Models\TakenGoal;
 use Exception;
 class IndexController extends Controller
@@ -17,7 +19,7 @@ class IndexController extends Controller
     {   
         $data = [];
         $data = getMembershipDetails();
-        $goals = Goal::latest()->get();
+        $goals = Goal::latest()->get()->groupBy('unit_id');
         if(count($goals)> 0){
             $data['goals'] = $goals;
         }
@@ -37,11 +39,11 @@ class IndexController extends Controller
             $data['goal'] = $goal;
        }   
        $media_document = GoalMedia::where('goal_id',$id)->where('type','document')->get();
-       if(count($media_document)> 0){
+       if(count($media_document) > 0){
            $data['media_document'] = $media_document;
        }
        $media_video = GoalMedia::where('goal_id',$id)->where('type','video')->get();
-       if(count($media_video)> 0){
+       if(count($media_video) > 0){
            $data['media_video'] = $media_video;
        }
        $exam_document = GoalMedia::where('goal_id',$id)->where('type','exam_document')->get();
@@ -54,25 +56,33 @@ class IndexController extends Controller
     }
 
     /**
-     * Download Documents
+     * Unit Info
      */
-    public function doc_download($filename)
+    public function details($id)
     {
-       
-        /* $file= public_path(). "/download/".$doc;
-        
-        $headers = array(
-                'Content-Type: application/pdf',
-                );
-        return Response::download($file, $doc, $headers); */
+        try{
+            $data = [];
+            $data = getMembershipDetails();
+            $unit_detials = Goal::where('unit_id',$id)->get();
+            if(count($unit_detials)> 0){
+                $data['unit_detials'] = $unit_detials;
+            }
+            return view('student.goals.details',$data);
+        }catch(Exception $e){
+            return redirect()->route('student.goals.details',$data)->with('error',$e->getMessage());
+        }
     }
 
+    /**
+     * When student select goal fron frontend
+     */
+    
     public function take_goal(Request $request)
     {
         $request->validate([
             'goal_id' => 'required',
         ]);
-        
+       
         try{
             $data = getMembershipDetails();
             $goals = Goal::latest()->get();
@@ -89,7 +99,7 @@ class IndexController extends Controller
             }
             
             $goal_ids = Goal::select('id')->where('unit_id',$request->unit_id)->pluck('id')->toArray();      
-            if(count($goal_ids)>0)      {
+            if(count($goal_ids)>0){
                 $topics = Topic::where('unit_id',$request->unit_id)->get();
                 $i = 0;
                

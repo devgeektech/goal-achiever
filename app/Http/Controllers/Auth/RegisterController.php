@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Goal;
+use App\Models\Topic;
 use App\Models\Payment;
 use App\Models\Membership;
 use App\Models\TakenGoal;
@@ -106,8 +108,9 @@ class RegisterController extends Controller
      */
     public function paymentStore(Request $request)
     {
+       
         try{
-            switch ($request->plan) {
+            switch ($request->plan_id) {
             case '1':
                 $plan_days = countDays($request->plan_months);
                 $expire_date = getExpiryDate($request->plan_months);
@@ -135,9 +138,9 @@ class RegisterController extends Controller
             }
            
             $membership = new Membership;
-            $membership->plan_id = $request->plan;
+            $membership->plan_id = $request->plan_id;
             $membership->student_id = $request->user_id;
-            $membership->subject_id = $request->plan_subject;
+            $membership->subject_id = $request->subject_id;
             $membership->plan_days = $plan_days;
             $membership->type = $type;
             $membership->subscription = $request->subscription_type;
@@ -145,9 +148,9 @@ class RegisterController extends Controller
             $membership->save();
             if(intval($membership->id) > 0){
                 $payment = new Payment;
-                $payment->plan_id = $request->plan;
+                $payment->plan_id = $request->plan_id;
                 $payment->student_id = $request->user_id;
-                $payment->subject_id = $request->plan_subject;
+                $payment->subject_id = $request->subject_id;
                 $payment->name_on_card = base64_encode($request->name_on_card);
                 $payment->card_number = substr_replace($request->card_number, str_repeat("X", 8), 4, 8);
                 $payment->cvc = substr_replace($request->cvc_number, str_repeat("X", 2), 0, 2);
@@ -157,19 +160,31 @@ class RegisterController extends Controller
                     $user = User::find($request->user_id);
                     Auth::login($user);
                     if(isset($request->goal_id)){
-                        $get_info = TakenGoal::where('goal_id',$request->goal_id)->where('student_id',Auth::user()->id)->first();
+                        $get_info = TakenGoal::where('goal_id',$request->goal_id)->where('unit_id',$request->unit_id)->where('student_id',Auth::user()->id)->first();
                         if($get_info){
                             return response()->json([ 'status' => 'already']);
                         }
-                        $taken_goal = new TakenGoal;
-                        $taken_goal->goal_id = $request->goal_id;
-                        $taken_goal->student_id = Auth::user()->id;
-                        $taken_goal->status = 'inprogress';
-                        $taken_goal->save();
-                        if(intval($taken_goal->id) > 0){
-                            return response()->json([ 'status' => 'Success']);
-                        }else{
-                            return response()->json([ 'status' => 'failed']);
+                        $goal_ids = Goal::select('id')->where('unit_id',$request->unit_id)->pluck('id')->toArray();      
+                        if(count($goal_ids)>0)      {
+                            $topics = Topic::where('unit_id',$request->unit_id)->get();
+                            $i = 0;
+                            foreach($topics as $topic){
+                                $taken_goal = new TakenGoal;
+                                $taken_goal->goal_id = $goal_ids[$i];
+                                $taken_goal->student_id = Auth::user()->id;
+                                $taken_goal->status = ($i == 0) ? '2' : '3';
+                                $taken_goal->subject_id = $topic->subject_id;
+                                $taken_goal->unit_id = $topic->unit_id;
+                                $taken_goal->topic_id = $topic->id;
+                                $taken_goal->end_date = $request->end_date;
+                                $taken_goal->save();
+                                $i++;
+                            }
+                            if(intval($taken_goal->id) > 0){
+                                return response()->json([ 'status' => 'Success']);
+                            }else{
+                                return response()->json([ 'status' => 'failed']);
+                            }
                         }
                     }
                     return response()->json([ 'status' => 'Success', 'message' => 'true','user_id' => Auth::user()->id]);

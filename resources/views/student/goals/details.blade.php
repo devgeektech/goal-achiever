@@ -6,7 +6,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
            @include('student.layouts.topbar')
-           <div class="card-body p-0">
+           <div class="card-body">
             @if ($errors->any())
                 <div class="alert alert-danger">
                 <ul>
@@ -20,21 +20,20 @@
 
            @if ($message = Session::get('success'))
            <div class="alert alert-success alert-block">
-               <button type="button" class="close" data-dismiss="alert">×</button>
+               <button type="button" class="close" data-dismiss="alert">×</button>    
                <strong>{{ $message }}</strong>
            </div>
            @endif
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -
-                    <h1 class="h3 mb-2 text-gray-800">Goals</h1> -->
-
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Unit Detail</h1>
+                    
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h3 class="m-0 font-weight-bold goals-heading">Goals</h3>
-
+                         
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -43,7 +42,7 @@
                                         <tr>
                                             <th>Subject</th>
                                             <th>Unit</th>
-                                            <th>Goal End Date</th>
+                                            <th>Toipc</th>
                                             <th>Creator's Name</th>
                                             <th>Instructor's Name</th>
                                             <th>Action</th>
@@ -53,26 +52,26 @@
                                         <tr>
                                             <th>Subject</th>
                                             <th>Unit</th>
-                                            <th>Goal End Date</th>
+                                            <th>Toipc</th>
                                             <th>Creator's Name</th>
                                             <th>Instructor's Name</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @isset($goals)
-                                            @foreach ($goals as $goal)
+                                        @isset($unit_detials)
+                                            @foreach ($unit_detials as $unit_detial)                                            
                                                 <tr>
-                                                    <td>{{ getSubjectName($goal[0]->subject_id) }}</td>
-                                                    <td>{{ getUnitName($goal[0]->unit_id) }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($goal[0]->end_date)->format('j F, Y') }}</td>
-                                                    <td>{{ $goal[0]->creator_name}}</td>
-                                                    <td>{{ $goal[0]->instructor_name}}</td>
+                                                    <td>{{ $unit_detial->subject->title }}</td>
+                                                    <td>{{ $unit_detial->unit->name }}</td>
+                                                    <td>{{ $unit_detial->topic->name }}</td>
+                                                    <td>{{ $unit_detial->creator_name }}</td>
+                                                    <td>{{ $unit_detial->instructor_name }}</td>
                                                     <td>
-                                                       <a href="{{ route('student.goals.details',$goal[0]->unit_id) }}" class="btn btn-warning">Info</a>
+                                                       <a href="{{ route('student.goals.info',$unit_detial->id) }}" class="btn btn-warning">Info</a>
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                            @endforeach                                           
                                         @endisset
                                     </tbody>
                                 </table>
@@ -86,7 +85,7 @@
             </div>
             <!-- End of Main Content -->
 
-
+           
         </div>
         <!-- End of Content Wrapper -->
 

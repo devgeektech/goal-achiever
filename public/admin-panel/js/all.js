@@ -53,13 +53,36 @@ $(document).ready(function () {
                         .id + '">' + value.name + '</option>');
                 });
                 $('#topic').html('<option value="">Select Topic</option>');
+
+                var unit_id = $("#unit").val();
+                $('#topic').html('');
+                $.ajaxSetup({
+                    headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: get_topics,
+                    data:{ subject_id:subject_id,unit_id:unit_id},
+                    type: "POST",
+                    success: function (res) {
+                        $.each(res, function (key, value) {
+                            $('#topic').append('<option value="' + value
+                                .id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+  
             }
         });
     });
 
+
+});
 /**
  * Get Topics on unit change
  */
+ $(document).ready(function () {
     $('#unit').on('change', function () {
         var unit_id = $(this).val();
         var subject_id = $("#subject_id").val();
@@ -81,6 +104,7 @@ $(document).ready(function () {
             }
         });
     });
+});
 
 /**
  * Get months of selected plan in register modal
@@ -174,8 +198,6 @@ $(document).ready(function () {
           }
      });
 
-
-});
 $(document).ready(function () {
     /*disable non active tabs*/
     $('.nav-tabs li').not('.active').addClass('disabled');

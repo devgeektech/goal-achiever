@@ -6,13 +6,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
            @include('student.layouts.topbar')
-           <nav aria-label="Breadcrumbs">
-                          <ul class="breadcrumbs pl-4">
-                            <li class="breadcrumbs__item breadcrumbs__item--is-current">
-                              <span aria-current="location" class="breadcrumbs-link">Breadcrumbs</span>
-                            </li>
-                          </ul>
-                        </nav>
+
            <div class="card-body p-0">
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -40,22 +34,29 @@
                     <!-- DataTales Example -->
                     <div class="card shadow goal-dashboard mb-4">
                         <div class="card-header py-3">
-                            <h4 class="m-0 font-weight-bold">My Goals</h4>
+                        <nav aria-label="Breadcrumbs">
+                          <ul class="breadcrumbs">
+                            <li class="breadcrumbs__item breadcrumbs__item--is-current">
+                              <span aria-current="location" class="breadcrumbs-link">My Goals</span>
+                            </li>
+                          </ul>
+                        </nav>
 
                         </div>
                         <div class="card-body">
                             <div class="container">
                                 @isset($goal_detials)
+                                @php
+                                  $i = 0;
+                                @endphp
                                 @foreach($goal_detials->chunk(3) as $goal_detial)
                                 <div class="row pt-5">
-                                  @php
-                                      $i = 0;
-                                  @endphp
+
                                     @foreach($goal_detial as $detial)
                                       <div class="cards col-lg-4 col-md-6">
                                         <div class="card-item">
                                           <div class="card-image taken-goals py-4 px-4">
-                                            <img src="{{ Storage::url($detial[0]->goal->image) }}" height="200" width="200"/>
+                                            <img src="@if($detial[0]->goal->image) {{ Storage::url($detial[0]->goal->image) }} @else  {{ URL::to('/images/no-goals-taken.jpg') }} @endif" height="200" width="200"/>
 
                                             <div class="progress-card">
                                               <svg class="progress-circle" width="200px" height="200px" xmlns="http://www.w3.org/2000/svg">
@@ -115,8 +116,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-
    @endsection
    @push('js')
     <script src="{{URL::to('/admin-panel/js/all.js')}}"></script>

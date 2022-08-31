@@ -118,11 +118,15 @@
                               <div class="row mt-4">
                                 <input type="hidden" name="plan_months" id="plan_months" value="">
                                 <input type="hidden" name="plan_name" id="plan_name" value="">
-                                <input type="hidden" name="plan_price" id="plan_price" value="">
-                                <input type="hidden" name="plan_id" id="plan_id" value="">
-                                <input type="hidden" name="user_id" id="user_id" value="">
+                                <input type="hidden" name="plan_price" id="plan_price" value=""> 
+                                <input type="hidden" name="plan_id" id="plan_id" value=""> 
+                                <input type="hidden" name="get_user_id" id="get_user_id" value="">
                                 <input type="hidden" name="goal_id" id="goal_id" value="">
-                                  @foreach ($plans as $plan)
+                                <input type="hidden" name="subject_id" id="subject_id" value="">
+                                <input type="hidden" name="unit_id" id="unit_id" value="">
+                                <input type="hidden" name="topic_id" id="topic_id" value="">
+                                <input type="hidden" name="end_date" id="end_date" value="">
+                                  @foreach ($plans as $plan) 
                                   <div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
                                     <label>
                                       <input type="radio" data-price="{{$plan->price}}" data-name="{{$plan->name}}" data-months="{{$plan->months}}" name="plan" class="card-input-element d-none plan-input" id="plan" value="{{$plan->id}}">

@@ -105,9 +105,10 @@ class IndexController extends Controller
      {
         $data = [];
         $data = getMembershipDetails();
-        $goal_detials = TakenGoal::where('unit_id',$id)->get();
+        $goal_detials = TakenGoal::where('unit_id',$id)->where('student_id',Auth::user()->id)->get();
         if(count($goal_detials)> 0){
             $data['goal_detials'] = $goal_detials;
+            $data['unit_name'] = getUnitName($goal_detials[0]->unit_id);
         }
         return view('student.taken_goals.unit-details',$data);
      }
@@ -122,7 +123,10 @@ class IndexController extends Controller
         $data = getMembershipDetails();
         $goal = Goal::find($id);
         if($goal){
-                $data['goal'] = $goal;
+            $data['goal'] = $goal;
+            $data['unit_name'] = getUnitName($goal->unit_id);
+            $data['topic_name'] = getTopicName($goal->topic_id);
+            $data['goal_unit_id'] = $goal->unit_id;
         }   
         $media_document = GoalMedia::where('goal_id',$id)->where('type','document')->get();
         if(count($media_document)> 0){

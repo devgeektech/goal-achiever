@@ -12,28 +12,35 @@
                     <nav aria-label="Breadcrumbs">
                           <ul class="breadcrumbs pl-4">
                             <li class="breadcrumbs__item">
-                              <a href="#" class="breadcrumbs-link">Home</a>
+                              <a href="{{ route('student.taken_goals.index') }}" class="breadcrumbs-link">My Goals</a>
                             </li>
                             <li class="breadcrumbs__item">
-                              <a href="#" class="breadcrumbs-link">Unit Topics</a>
+                              <a href="{{ route('student.taken_goals.unit_details',$goal_unit_id)  }}" class="breadcrumbs-link">{{ $unit_name}}</a>
                             </li>
                             <li class="breadcrumbs__item breadcrumbs__item--is-current">
-                              <span aria-current="location" class="breadcrumbs-link">Goal Info</span>
+                              <span aria-current="location" class="breadcrumbs-link">{{ $topic_name }}</span>
                             </li>
                           </ul>
                         </nav>
                     <div class="card shadow mb-4">
-                        <div class="card-header student-dashboard py-3">
+                        <!-- <div class="card-header student-dashboard py-3">
                             <h3 class="m-0 font-weight-bold">Goal Info</h3>
                             <a href="{{ route('student.goals.index')}}"class="btn btn-primary" style="float: right;">Back</a>
-                        </div>
+                        </div> -->
                         <div class="card-body goal-info-section">
+                            <div class="row">
+                            <div class="col-lg-5 col-md-5 unit-btns d-flex flex-column p-0">
+                            <a href="#" class="unit-btn mb-3">Unit 1- <span>Calculus</span></a>
+                            <a href="#" class="topic-btn mb-3">Topic A-<span> Continuity and Differentiability</span></a>
+                            <a href="#" class="lesson-btn mb-3">Lesson-<span> 1</span></a>
+                            </div>
+                            </div>
                             <form action="{{ route('student.goals.take_goal')}}" method="post">
                                 @csrf
-                                <div class="row goalWrap">
+                                <div class="row goalWrap flex-column">
                                     <input type="hidden" name="goal_id" id="goal_id" value="{{$goal->id}}">
                                 <div class="row">
-                                    <div class="form-group goal-info col-lg-3 col-6">
+                                    <!-- <div class="form-group goal-info col-lg-3 col-6">
                                         <div class="goals-info-box">
                                         <img src="{{ URL::to('/images/book.png')}}">
                                         <label for="forSubject">Subject</label>
@@ -60,7 +67,7 @@
                                         <label for="forGoalEndDate">Goal End Date</label>
                                         <input type="text" class="form-control border-0" value="{{ \Carbon\Carbon::parse($goal->end_date)->format('j F, Y') }}" readonly>
                                     </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-xs-12 col-sm-12 col-md-12 mt-4">
                                         <label class="form-group d-flex mb-2 font-weight-bold text-primary text-center mb-3" for="forDocuments">Documents</label>
                                         @foreach($media_document as $media)
@@ -95,7 +102,7 @@
                                         <label class="form-group d-flex mb-2 font-weight-bold text-primary mb-3" for="forExam">Exam Documents</label>
                                         @foreach($exam_document as $exam_doc)
                                             <div class="form-group videoImgBlock" style="display:inline-flex;cursor:pointer;">
-                                                <img src="{{Storage::url($exam_doc->media) ?? URL::to('/images/dummy.jpg')}}" class="goal-info-img">
+                                                <img src="{{Storage::url($exam_doc->media) ?? URL::to('/images/no-goals-taken.jpg') }}" class="goal-info-img">
                                                 <h5>Documents</h5>
                                                 <div class="download d-flex justify-content-between align-items-center">
                                                 <span>Download</span>
@@ -107,8 +114,8 @@
                                     @endisset
                                     <hr>
                                 </div>
-                                <div class="submit-paper mx-auto">
-                                <button type="button" class="btn btn-primary ml-3" id="submit_papers">Submit Papers</button>
+                                <div class="submit-paper mx-auto mt-5">
+                                <button type="button" class="btn btn-primary ml-3 mt-5" id="submit_papers">Submit Papers</button>
                                 </div>
                             </div>
                         </form>
@@ -165,7 +172,7 @@
                 </div>
 
                 <form>
-                    <input type="checkbox" id="mark_completed" name="mark_goal_completed" value="Complete">
+                    <input type="checkbox" id="mark_completed" name="mark_goal_completed">
                     <label for="mark_completed">Please Check this Box To Complete The Goal</label>
 
                 </form>

@@ -33,10 +33,12 @@ class ResetPasswordController extends Controller
 
     public function index()
     {  
+        $data = [];
+        $data = getMembershipDetails();
         if(Auth::user()->role == 1){
             return view('admin.profile.update');
         }else{
-            return view('student.profile.update');
+            return view('student.profile.update',$data);
         }
         
     }

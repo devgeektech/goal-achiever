@@ -538,11 +538,6 @@ label {
   }
 }
 
-
-
-.card-image img {
-    width: 100%;
-}
 .achieve-btn {
     background: #fd5c26;
     color: #fff;
@@ -647,6 +642,10 @@ label {
 }
 .taken-goals {
   position: relative;
+}
+.taken-goals img {
+  display: block;
+  margin: 0px auto;
 }
 .taken-goals::before {
   content: "";
@@ -1020,4 +1019,27 @@ input[type=checkbox]:checked:disabled + label:before {
 }
 .breadcrumbs-link-active {
   background-color:#fd5c26 ;
+}
+.unit-btn, .topic-btn, .lesson-btn {
+  background: #f56954;
+  padding: 20px;
+  color: #fff;
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+}
+.unit-btn:hover, .topic-btn:hover, .lesson-btn:hover {
+  text-decoration: none;
+  color: #fff;
+}
+.unit-btn span, .topic-btn span, .lesson-btn span {
+  font-weight: 400;
+}
+.topic-btn {
+  background: #00a65a;
+
+}
+.lesson-btn {
+  background: #00c0ef;
+
 }

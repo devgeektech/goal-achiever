@@ -6,16 +6,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
            @include('student.layouts.topbar')
-           <nav aria-label="Breadcrumbs">
-                          <ul class="breadcrumbs pl-4">
-                            <li class="breadcrumbs__item">
-                              <a href="#" class="breadcrumbs-link">My Goals</a>
-                            </li>
-                            <li class="breadcrumbs__item breadcrumbs__item--is-current">
-                              <span aria-current="location" class="breadcrumbs-link">Unit Topics</span>
-                            </li>
-                          </ul>
-                        </nav>
+
            <div class="card-body p-0">
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -43,7 +34,17 @@
                     <!-- DataTales Example -->
                     <div class="card shadow unit-topic mb-4">
                         <div class="card-header py-3">
-                            <h4 class="m-0 font-weight-bold">Unit Topics</h4>
+
+                        <nav aria-label="Breadcrumbs">
+                          <ul class="breadcrumbs">
+                            <li class="breadcrumbs__item">
+                              <a href="{{ route('student.taken_goals.index') }}" class="breadcrumbs-link">My Goals</a>
+                            </li>
+                            <li class="breadcrumbs__item breadcrumbs__item--is-current">
+                              <span aria-current="location" class="breadcrumbs-link">{{ $unit_name }}</span>
+                            </li>
+                          </ul>
+                        </nav>
 
                         </div>
                         <div class="card-body">
@@ -56,7 +57,7 @@
                                       <div class="cards col-lg-4 col-md-6  @if($detail->status == 3) goal_not_active @else goal_active @endif">
                                         <div class="card-item my-goals-info">
                                           <div class="card-image mx-auto mt-3">
-                                            <img src="{{ Storage::url($detail->goal->image) }}" height="200" width="200"/>
+                                            <img src="@if($detail->goal->image) {{ Storage::url($detail->goal->image) }} @else {{ URL::to('/images/no-goals-taken.jpg') }} @endif" height="200" width="200"/>
                                           </div>
                                           <div class="card-info">
                                             <h3 class="card-title h-100 mb-2">{{$detail->goal->topic->name}}</h3>

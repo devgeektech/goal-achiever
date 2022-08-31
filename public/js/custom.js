@@ -74,7 +74,7 @@ jQuery(".registerBtn").on('click',function() {
             },
             success: function (response) {
                 if (response.status == 'Success') {
-                    jQuery("#user_id").val(response.user_id);
+                    jQuery("#get_user_id,#user_id").val(response.user_id);
                     jQuery('#registerBtn').html("Register Now");
                     jQuery('#registerBtn').addClass("btn btn-primary register d-block mx-auto");
                     var active = $('.wizard .nav-tabs li.active');
@@ -198,10 +198,14 @@ jQuery('#purchase_plan').on('click', function(){
     var expiration_month = jQuery('#expiration_month').val();
     var expiration_year = jQuery('#expiration_year').val();
     var subscription_type = jQuery('#option-1').val();
-    var plan = jQuery('#plan_id').val();
+    var plan_id = jQuery('#plan_id').val();
     var goal_id = jQuery('#goal_id').val();
-    var user_id = jQuery('#user_id').val();
-
+    var subject_id = jQuery('#subject_id').val();
+    var unit_id = jQuery('#unit_id').val();
+    var topic_id = jQuery('#topic_id').val();
+    var user_id = jQuery('#get_user_id').val();
+    var end_date = jQuery('#end_date').val();
+   
     var card_name_error = card_number_error = cvc_error = exp_month_error = exp_year_error = false;
     if(name_on_card == ""){
         jQuery(".card_name_error").html("Please enter card holder name.");
@@ -258,16 +262,21 @@ jQuery('#purchase_plan').on('click', function(){
                     expiration_month:expiration_month,
                     expiration_year:expiration_year,
                     subscription_type:subscription_type,
-                    plan:plan,
+                    plan_id:plan_id,
                     user_id:user_id,
-                    goal_id:goal_id
+                    goal_id:goal_id,
+                    subject_id:subject_id,
+                    unit_id:unit_id,
+                    topic_id:topic_id,
+                    end_date:end_date,
                 },
+           
             beforeSend: function(msg){
                 jQuery('#purchase_plan').html("Processing....");
             },
             success: function (response) {
                 if(response.status == 'already'){
-                    swal("Ooh!", "You have alreadyb taken this goal", "warning");
+                    swal("Ooh!", "You have already taken this goal", "warning");
                 }
                 if (response.status == 'Success') {
                     jQuery("#membershipModal").hide();
@@ -299,8 +308,15 @@ jQuery(".achieve_goal").on('click', function(){
 
     swal("","Please wait......","warning");
     var goal_id = jQuery(this).data('id');
+    var subject_id = jQuery(this).data('subject-id');
     var unit_id = jQuery(this).data('unit-id');
+    var topic_id = jQuery(this).data('topic-id');
     var end_date = jQuery(this).data('end-date');
+    jQuery("#subject_id").val(subject_id);
+    jQuery("#unit_id").val(unit_id);
+    jQuery("#topic_id").val(topic_id);
+    jQuery("#end_date").val(end_date);
+
     setTimeout(() => {
         jQuery.ajaxSetup({
             headers: {
@@ -325,7 +341,9 @@ jQuery(".achieve_goal").on('click', function(){
                         url: achieve_goal,
                         data:{
                             goal_id:goal_id,
+                            subject_id:subject_id,
                             unit_id:unit_id,
+                            topic_id:topic_id,
                             end_date:end_date,
                             taken_from:'front'
                         },
