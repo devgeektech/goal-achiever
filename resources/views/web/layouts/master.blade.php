@@ -140,8 +140,9 @@
                                     </label>
                                   </div>
                                   @endforeach
+                                  <span class="plan_error"></span> 
                               </div>
-                              <span class="plan_error"></span> @error('plan') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
+                             
                             </div>
                           </div>
                           <ul class="list-inline pull-right">
@@ -157,11 +158,30 @@
                           <h4 class="text-center text-white">Payment</h4>
                           <div class="container">
 
-                            <label class="payment-label pl-3 text-center text-white">What type of subscription you want to select?</label>
+                            
                             <div class='row my-4 justify-content-center subscription-type'>
 
                             </div>
+                          
+                          
                             <div class='col-md-12'>
+                              
+                              <div class='form-row'>
+                                <div class=' col-md-12 col-xs-12 form-group required'>
+                                  <label class='control-label text-white'>PLEASE  PAY VIA BANK TRANSFER</label>
+                                  <label class='control-label text-white'>Account name : Aishath Nahula</label>
+                                  <label class='control-label text-white'>Account number: 7770000008259</label>
+                                  <label class='control-label text-white'>Viber no: 9822035</label>
+                                  <label class='control-label text-white'>When you transfer the payment, please add your full name in the remarks column of the slip and share the slip in the above Viber number.</label>
+                                </div>
+                              
+                                <div class=' col-md-12 col-xs-12 form-group required'>
+                                  <label class='control-label text-white'>Transaction Id</label>
+                                  <input class='form-control' type='text' id="transaction_id" name="transaction_id" required>
+                                  <span class="transaction_id_error error"></span>
+                                </div>
+                              </div>
+                            <!--  
                               <div class='form-row'>
                                 <div class=' col-md-12 col-xs-12 form-group required'>
                                   <label class='control-label text-white'>Name on Card</label>
@@ -169,6 +189,7 @@
                                   <span class="card_name_error error"></span>
                                 </div>
                               </div>
+                            
                               <div class='form-row'>
                                 <div class=' col-md-12 col-xs-12 form-group required'>
                                   <label class='control-label text-white'>Card Number</label>
@@ -176,6 +197,7 @@
                                   <span class="card_number_error error"></span>
                                 </div>
                               </div>
+                             
                               <div class='form-row'>
                                 <div class='col-xs-4 col-md-4 form-group cvc required'>
                                   <label class='control-label text-white'>CVC</label>
@@ -193,6 +215,7 @@
                                   <span class="exp_year_error error"></span>
                                 </div>
                               </div>
+                              
                               <div class='form-row'>
                                 <div class='col-md-12'>
                                   <div class='form-control total btn btn-info'> Total: <span class='amount' id="total_amount"></span>
@@ -201,6 +224,9 @@
                               </div>
                             </div>
                           </div>
+
+                        -->
+
                           <ul class="list-inline pull-right">
                             <li>
                               <button type="button" class="default-btn prev-step">Back</button>

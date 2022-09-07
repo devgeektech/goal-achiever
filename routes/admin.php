@@ -26,6 +26,7 @@ Route::group([
         Route::group(['prefix' => 'students','as' => 'students.'], function ($router) {
             Route::get('/', [App\Http\Controllers\Admin\Student\IndexController::class,'index'])->name('index');
             Route::get('/info/{id}', [App\Http\Controllers\Admin\Student\IndexController::class,'show'])->name('info');
+            Route::post('/activate/{id}', [App\Http\Controllers\Admin\Student\IndexController::class,'activate'])->name('activate');
         });
        
         Route::group(['prefix' => 'goals','as' => 'goals.'], function ($router) {

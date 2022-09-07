@@ -75,10 +75,10 @@ class RegisterController extends Controller
         if($request->register_from == 'plan'){
           return response()->json([ 'status' => 'Success', 'user_id' => $user->id]);
         }
-        //Mail::to('nahu_ooo@hotmail.com')->send(new RegisterMailToAdmin($user));
+        Mail::to('nahu_ooo@hotmail.com')->send(new RegisterMailToAdmin($user));
         Auth::login($user);
         if(Auth::check()){
-            //Mail::to('nahu_ooo@hotmail.com')->send(new RegisterMail($user));
+            Mail::to('nahu_ooo@hotmail.com')->send(new RegisterMail($user));
                 if($user->role == 3){
                   return redirect()->route("student.dashboard");
                 }
@@ -99,7 +99,8 @@ class RegisterController extends Controller
         'password' => Hash::make($data['password']),
         'role' => 3,
         'country' => $data['country'],
-        'age' => $data['age']
+        'age' => $data['age'],
+        'status' => 2
       ]);
     }  
     
@@ -145,6 +146,7 @@ class RegisterController extends Controller
             $membership->type = $type;
             $membership->subscription = $request->subscription_type;
             $membership->expiry_date = $expire_date;
+            $membership->transaction_id = $request->transaction_id;
             $membership->save();
             if(intval($membership->id) > 0){
                 $payment = new Payment;
@@ -158,9 +160,9 @@ class RegisterController extends Controller
                 $payment->save();
                 if(intval($membership->id) > 0){
                     $user = User::find($request->user_id);
-                    Auth::login($user);
+                    //Auth::login($user);
                     if(isset($request->goal_id)){
-                        $get_info = TakenGoal::where('goal_id',$request->goal_id)->where('unit_id',$request->unit_id)->where('student_id',Auth::user()->id)->first();
+                        $get_info = TakenGoal::where('goal_id',$request->goal_id)->where('unit_id',$request->unit_id)->where('student_id',$request->user_id)->first();
                         if($get_info){
                             return response()->json([ 'status' => 'already']);
                         }
@@ -171,7 +173,7 @@ class RegisterController extends Controller
                             foreach($topics as $topic){
                                 $taken_goal = new TakenGoal;
                                 $taken_goal->goal_id = $goal_ids[$i];
-                                $taken_goal->student_id = Auth::user()->id;
+                                $taken_goal->student_id = $request->user_id;
                                 $taken_goal->status = ($i == 0) ? '2' : '3';
                                 $taken_goal->subject_id = $topic->subject_id;
                                 $taken_goal->unit_id = $topic->unit_id;
@@ -187,7 +189,7 @@ class RegisterController extends Controller
                             }
                         }
                     }
-                    return response()->json([ 'status' => 'Success', 'message' => 'true','user_id' => Auth::user()->id]);
+                    return response()->json([ 'status' => 'Success', 'message' => 'true','user_id' => $request->user_id]);
                 }
             }
         }catch(Exception $e){

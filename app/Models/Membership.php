@@ -46,7 +46,8 @@ class Membership extends Model
 		'plan_days',
 		'type',
 		'subscription',
-		'expiry_date'
+		'expiry_date',
+		'transaction_id'
 	];
 
 	public function plan()

@@ -6,6 +6,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
            @include('student.layouts.topbar')
+         
            <div class="card-body p-0">
             @if ($errors->any())
                 <div class="alert alert-danger">

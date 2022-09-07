@@ -61,7 +61,8 @@ class User extends Authenticatable
 		'role',
 		'profile_image',
 		'country',
-		'age'
+		'age',
+		'status'
 	];
 
 	public function goal_assignments()

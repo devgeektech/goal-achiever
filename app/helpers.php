@@ -209,6 +209,19 @@ function get_percentage($unit_id,$student_id){
 }
 
 
+ 
+/**
+ * Get Subject Name by Id
+ */
+function getSubName($id){
+    $get_subject = Subject::find($id); 
+    if($get_subject){
+        return $get_subject;
+    }else{
+        return 'no subject';
+    }
+}
+
 /**
  * Check Goal Status From Goal Taken Table
  */
@@ -218,6 +231,15 @@ function checkGoalStatus($unit_id,$topic_id){
         return '1';
     }else{
         return '2';
+    }
+}
+
+function getStudentName($id){
+    $get_user = User::find($id); 
+    if($get_user){
+        return $get_user;
+    }else{
+        return 'no user';
     }
 }
 ?>

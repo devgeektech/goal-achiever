@@ -4,9 +4,7 @@
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
            @include('admin.layouts.topbar')
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -48,6 +46,14 @@
                                             <td>{{ getPendingGoals($student->id)}}</td>
                                             <td>
                                                 <a href="{{ route('admin.students.info',$student->id) }}" class="btn btn-primary">Info</a>
+                                                @if($student->status == '2')
+                                                <form action="{{ route('admin.students.activate',['id' => $student->id]) }}" method="POST" style="margin-left: 49px;margin-top: -38px">
+                                                    @csrf
+                                                    <button style="margin-left:10px; border-radius: 0.35rem;" type="submit" class="btn btn-warning">Deactivate</button>
+                                                </form>
+                                                @else
+                                                    <a href="#" class="btn btn-success">Activate</a>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach

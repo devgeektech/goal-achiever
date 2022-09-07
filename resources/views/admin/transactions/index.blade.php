@@ -27,6 +27,7 @@
                                             <th>Plan Price</th>
                                             <th>Plan Months</th>
                                             <th>Plan Expire Date</th>
+                                            <th>Transaction ID</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -37,6 +38,7 @@
                                             <th>Plan Price</th>
                                             <th>Plan Months</th>
                                             <th>Plan Expire Date</th>
+                                            <th>Transaction ID</th>
                                             <th>Status</th>
                                         </tr>
                                     </tfoot>
@@ -48,6 +50,7 @@
                                             <td>{{ $transaction->plan->price }}</td>
                                             <td>{{ $transaction->plan->months }}</td>
                                             <td>@if(strtotime(now()) > strtotime($transaction->expiry_date) ) Plan Expired @else {{ \Carbon\Carbon::parse($transaction->expiry_date)->format('j F, Y') }} @endif</td>
+                                            <td>{{ $transaction->transaction_id }}</td>
                                             <td>@if(strtotime(now()) > strtotime($transaction->expiry_date) ) <button class="btn btn-warning">Expired</button> @else <button class="btn btn-success">Active</button> @endif</td>
                                         </tr>
                                         @endforeach
@@ -56,7 +59,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 

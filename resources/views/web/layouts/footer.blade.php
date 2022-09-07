@@ -33,19 +33,22 @@
             <h5>Links</h5>
             <ul>
               <li>
-                <a href="#">Quran Videos</a>
+                <a href="https://islamicolc.com/quran" target="_blank">Quran Videos</a>
               </li>
               <li>
-                <a href="#">Hadith Videos</a>
+                <a href="https://islamicolc.com/hadith" target="_blank">Hadith Videos</a>
               </li>
               <li>
-                <a href="#">Dhuas</a>
+                <a href="https://islamicolc.com/dhua" target="_blank">Dhuas</a>
               </li>
               <li>
-                <a href="#">Quotes</a>
+                <a href="https://islamicolc.com/quotes" target="_blank">Quotes</a>
               </li>
               <li>
-                <a href="#">Articles</a>
+                <a href="https://islamicolc.com/articals" target="_blank">Articles</a>
+              </li>
+              <li>
+                <a href="https://islamicolc.com/shop" target="_blank">E-Book Shop</a>
               </li>
             </ul>
           </div>

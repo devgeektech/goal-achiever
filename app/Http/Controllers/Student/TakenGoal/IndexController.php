@@ -108,7 +108,7 @@ class IndexController extends Controller
         $goal_detials = TakenGoal::where('unit_id',$id)->where('student_id',Auth::user()->id)->get();
         if(count($goal_detials)> 0){
             $data['goal_detials'] = $goal_detials;
-            $data['unit_name'] = getUnitName($goal_detials[0]->unit_id);
+            $data['unit_name'] = getSubName($goal_detials[0]->subject_id)->title;
         }
         return view('student.taken_goals.unit-details',$data);
      }

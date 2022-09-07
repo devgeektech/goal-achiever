@@ -1,3 +1,6 @@
+$(document).ready(function(){
+    //window.scrollTo(0, 0);
+});
 //Change goal satus
 jQuery(".registerBtn").on('click',function() {
 
@@ -167,14 +170,14 @@ $('.nav-tabs').on('click', 'li', function () {
         $.ajax({
             success: function () {
                 $('.subscription-type').html("");
-                $('.subscription-type').append('<div class="btn-wrapper"><input type="radio" name="subscription_type" id="option-1" value="manual" checked><label for="option-1" class="option option-1"><span>Manual</span></label></div>');
+                //$('.subscription-type').append('<div class="btn-wrapper"><input type="radio" name="subscription_type" id="option-1" value="manual" checked><label for="option-1" class="option option-1"><span>Manual</span></label></div>');
             }
         });
     }else{
         $.ajax({
             success: function () {
                 $('.subscription-type').html("");
-                $('.subscription-type').append('<div class="btn-wrapper"><input type="radio" name="subscription_type" id="option-1" value="manual" checked><label for="option-1" class="option option-1"><span>Manual</span></label></div>');
+                //$('.subscription-type').append('<div class="btn-wrapper"><input type="radio" name="subscription_type" id="option-1" value="manual" checked><label for="option-1" class="option option-1"><span>Manual</span></label></div>');
             }
         });
     }
@@ -205,8 +208,9 @@ jQuery('#purchase_plan').on('click', function(){
     var topic_id = jQuery('#topic_id').val();
     var user_id = jQuery('#get_user_id').val();
     var end_date = jQuery('#end_date').val();
+    var transaction_id = jQuery('#transaction_id').val();
    
-    var card_name_error = card_number_error = cvc_error = exp_month_error = exp_year_error = false;
+    var card_name_error = card_number_error = cvc_error = exp_month_error = exp_year_error = transaction_id_error = false;
     if(name_on_card == ""){
         jQuery(".card_name_error").html("Please enter card holder name.");
         card_name_error = false;
@@ -242,8 +246,15 @@ jQuery('#purchase_plan').on('click', function(){
         jQuery(".exp_year_error").html("");
         exp_year_error = true;
     }
+    if(transaction_id == "" || typeof transaction_id === "undefined"){
+        jQuery(".transaction_id_error").html("Please enter transaction ID.");
+        transaction_id_error = false;
+    }else{
+        jQuery(".transaction_id_error").html("");
+        transaction_id_error = true;
+    }
 
-    if((card_name_error == true) && (card_number_error == true) && (cvc_error == true) && (exp_month_error == true) &&  (exp_year_error == true)){
+    if((card_name_error == true) && (card_number_error == true) && (cvc_error == true) && (exp_month_error == true) &&  (exp_year_error == true) && (transaction_id_error == true)){
         jQuery.ajaxSetup({
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -269,6 +280,7 @@ jQuery('#purchase_plan').on('click', function(){
                     unit_id:unit_id,
                     topic_id:topic_id,
                     end_date:end_date,
+                    transaction_id:transaction_id
                 },
            
             beforeSend: function(msg){
@@ -280,11 +292,10 @@ jQuery('#purchase_plan').on('click', function(){
                 }
                 if (response.status == 'Success') {
                     jQuery("#membershipModal").hide();
-                    swal("Good!", "You have successfully purchased '" +plan_name+ "' plan!Now you are redirecting to Student Dashboard!", "success");
-                    setTimeout(() => {
+                    swal("Good!", "You have successfully purchased '" +plan_name+ "' plan!", "success");
+                   /*  setTimeout(() => {
                         window.location.href = "/student/dashboard";
-                    }, 5000);
-
+                    }, 5000); */
                 }
                 if(response.status == 'failed'){
                     swal("Ooh!", "Something went wrong", "warning");
@@ -372,7 +383,7 @@ jQuery(".achieve_goal").on('click', function(){
 
 
  /*  submit paper modal */
-  $(document).bind('dragover', function (e) {
+  /* $(document).bind('dragover', function (e) {
     var dropZone = $('.zone'),
         timeout = window.dropZoneTimeout;
     if (!timeout) {
@@ -398,4 +409,9 @@ jQuery(".achieve_goal").on('click', function(){
         window.dropZoneTimeout = null;
         dropZone.removeClass('in hover');
     }, 100);
-});
+}); */
+
+
+
+
+   

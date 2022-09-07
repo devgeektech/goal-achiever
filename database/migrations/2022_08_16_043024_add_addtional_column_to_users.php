@@ -16,6 +16,7 @@ class AddAddtionalColumnToUsers extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('country')->nullable();
             $table->string('age')->nullable();
+            $table->integer('status')->nullable()->comment("1=active,2=deactivate");
         });
     }
 

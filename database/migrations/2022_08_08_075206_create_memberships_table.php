@@ -25,6 +25,7 @@ class CreateMembershipsTable extends Migration
             $table->string('type')->nullable();
             $table->string('subscription')->nullable();
             $table->string('expiry_date')->nullable();
+            $table->string('transaction_id')->nullable();
             $table->timestamps();
         });
     }

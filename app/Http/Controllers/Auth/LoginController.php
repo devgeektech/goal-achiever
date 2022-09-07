@@ -50,10 +50,19 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             if(Auth::user()->role == 1){
                 return redirect()->route('admin.dashboard');
+            }else if(Auth::user()->role == 3){
+                if(Auth::user()->status == 1){
+                    return redirect()->route('student.dashboard');
+                }else{
+                    Auth::logout();
+                    return back()->with("errors", "Your account in not activated yet!");
+                }
+            }else{
+                return back()->with("errors", "Your account in not activated yet!");
             }
-            return redirect()->route('student.dashboard');
+            
         }else{
-            return back()->with("errors", "Email or password incorrect!");;
+            return back()->with("errors", "Email or password incorrect!");
         }
     }
 

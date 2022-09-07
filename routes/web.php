@@ -29,3 +29,4 @@ Route::get('/description/{id}', [App\Http\Controllers\Web\Goals\IndexController:
 Route::post('/payment-store', [App\Http\Controllers\Auth\RegisterController::class,'paymentStore'])->name('payment_store');
 Route::post('/check_auth', [App\Http\Controllers\Auth\RegisterController::class,'check_auth'])->name('check_auth');
 
+Route::post('getBarGraphData', [App\Http\Controllers\IndexController::class,'getBarGraphData'])->name('getBarGraphData');

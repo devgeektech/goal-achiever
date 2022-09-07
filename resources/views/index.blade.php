@@ -1,12 +1,13 @@
 @extends('web.layouts.master')
 @section('content')
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <section id="banner" class="banner-section pt-5">
   <div class="container">
     <div class="row align-items-center pt-5">
       <div class="@guest col-lg-7 col-md-6 @endguest @auth col-lg-12 col-md-12 @endauth">
         <div class="LeftContent text-white">
           <h6>About The Site</h6>
-          <h1>This Site is Made for students to achieve some educational goals successfully</h1>
+          <h1>This site is made for students to achieve some educational goals successfully</h1>
           <a href="{{ route('goals')}}">VIEW ALL GOALS<i class="fa-regular fa-arrow-right ml-2"></i>
           </a>
         </div>
@@ -148,17 +149,11 @@
     </div>
   </section>
   <section id="progress-chart" class="progress-chart-section py-5">
-    <input type="hidden" id="students" name="students" value='Aban Fajr, Athar Kairo, Safi Talal, Zayd Omar, Malik Kairo'>
+    <input type="hidden" id="student_list" name="student_list" value="['Aban Fajr', 1000, 700, 300, 300], ['Athar Kairo', 1170, 460, 250, 300], ['Safi Talal', 660, 1120, 300, 300], ['Zayd Omar', 1030, 540, 350, 300],  ['Malik Kairo', 1030, 540, 350, 300]">
     <div class="container">
       <h2>Progress Chart Of The Active Student</h2>
       <div class="graph-chart d-flex">
-        <canvas id="myChart" style="width:100%; max-width: 100%;"></canvas>
-        <ul>
-          <li>Quran</li>
-          <li>Islam</li>
-          <li>Arabic</li>
-          <li>English</li>
-        </ul>
+        <div id="columnchart_material" style="width: 100%; min-width: 25%; height: 500px;"></div>
       </div>
     </div>
     <!--/.Carousel Wrapper-->
@@ -239,4 +234,70 @@
   </section>
 
   @endsection
+  @push('js')
+  <script>
+    let barGraphArr = "{{ route('getBarGraphData') }}";
+     // display bar graph 
+     function barGraph(barGraphArray){
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChart);
+        var subjects = ['', 'Quran', 'Islam','Computer', 'Math'];
+        let dataArr = barGraphArray;
+
+        function drawChart() {  
+          if(dataArr.length >= 5){
+            var data = google.visualization.arrayToDataTable([
+                subjects,
+                dataArr[0],
+                dataArr[1],
+                dataArr[2],
+                dataArr[3],
+                dataArr[4]
+            ]);
+          }else{
+            var data = google.visualization.arrayToDataTable([
+              subjects,
+              ['Aban Fajr', 100,30,50,70],
+              ['Athar Kairo', 90,70,40,20],
+              ['Safi Talal', 20,60,40,30],
+              ['Zayd Omar', 85,65,60,80],
+              ['Malik Kairo', 10,60,50,70] 
+            ]); 
+          }
+            
+            var options = {
+                chart: {
+                    title: '',
+                    subtitle: ''
+                }
+            };
+          var chart = new google.charts.Bar(document.getElementById('columnchart_material'));    
+          chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    }
+  
+    function getBarGraphArr(){
+        jQuery.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        jQuery.ajax({
+            type: "post",
+            url: barGraphArr,
+            success: function (response) {
+                if (response.status == 'true') {
+                    barGraph(response.data);
+                }
+            },
+            error: function(xhr){
+                console.error('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+            }
+        });
+    }
+    getBarGraphArr();
+  </script>
+  @endpush
+
+  
 

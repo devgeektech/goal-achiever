@@ -83,6 +83,11 @@ class IndexController extends Controller
             } 
             $data['get_units'] = $get_units_name;
             $data['get_percentage'] = $get_units_percentage;
+
+            // Get each unit percentage
+
+          
+
             return view('student.index',$data);
         }catch(Exception $e){
             
