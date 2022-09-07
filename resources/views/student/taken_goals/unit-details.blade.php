@@ -6,7 +6,6 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
            @include('student.layouts.topbar')
-         
            <div class="card-body p-0">
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -34,7 +33,6 @@
                     <!-- DataTales Example -->
                     <div class="card shadow unit-topic mb-4">
                         <div class="card-header py-3">
-                          
                         <nav aria-label="Breadcrumbs">
                           <ul class="breadcrumbs">
                             <li class="breadcrumbs__item">
@@ -45,7 +43,6 @@
                             </li>
                           </ul>
                         </nav>
-                           
                         </div>
                         <div class="card-body">
                             <div class="container">

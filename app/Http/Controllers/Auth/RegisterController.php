@@ -144,7 +144,7 @@ class RegisterController extends Controller
             $membership->subject_id = $request->subject_id;
             $membership->plan_days = $plan_days;
             $membership->type = $type;
-            $membership->subscription = $request->subscription_type;
+            $membership->subscription = 'manual';
             $membership->expiry_date = $expire_date;
             $membership->transaction_id = $request->transaction_id;
             $membership->save();

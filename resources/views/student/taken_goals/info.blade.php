@@ -22,15 +22,25 @@
                             </li>
                           </ul>
                         </nav>
+                    <div class="card shadow mb-4">
+                        <!-- <div class="card-header student-dashboard py-3">
+                            <h3 class="m-0 font-weight-bold">Goal Info</h3>
                             <a href="{{ route('student.goals.index')}}"class="btn btn-primary" style="float: right;">Back</a>
-                        </div>
+                        </div> -->
                         <div class="card-body goal-info-section">
+                            <div class="row">
+                            <div class="col-lg-5 col-md-5 unit-btns d-flex flex-column p-0">
+                            <a href="#" class="unit-btn mb-3">Unit 1- <span>{{ $unit_name }}</span></a>
+                            <a href="#" class="topic-btn mb-3">Topic A-<span> {{ $topic_name }}</span></a>
+                            <a href="#" class="lesson-btn mb-3">Lesson-<span> 1 </span></a>
+                            </div>
+                            </div>
                             <form action="{{ route('student.goals.take_goal')}}" method="post">
                                 @csrf
-                                <div class="row goalWrap">
+                                <div class="row goalWrap flex-column">
                                     <input type="hidden" name="goal_id" id="goal_id" value="{{$goal->id}}">
                                 <div class="row">
-                                    <div class="form-group goal-info col-lg-3 col-6">
+                                    <!-- <div class="form-group goal-info col-lg-3 col-6">
                                         <div class="goals-info-box">
                                         <img src="{{ URL::to('/images/book.png')}}">
                                         <label for="forSubject">Subject</label>
@@ -57,7 +67,7 @@
                                         <label for="forGoalEndDate">Goal End Date</label>
                                         <input type="text" class="form-control border-0" value="{{ \Carbon\Carbon::parse($goal->end_date)->format('j F, Y') }}" readonly>
                                     </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-xs-12 col-sm-12 col-md-12 mt-4">
                                         <label class="form-group d-flex mb-2 font-weight-bold text-primary text-center mb-3" for="forDocuments">Documents</label>
                                         @foreach($media_document as $media)
@@ -104,8 +114,8 @@
                                     @endisset
                                     <hr>
                                 </div>
-                                <div class="submit-paper mx-auto">
-                                <button type="button" class="btn btn-primary ml-3" id="submit_papers">Submit Papers</button>
+                                <div class="submit-paper mx-auto mt-5">
+                                <button type="button" class="btn btn-primary ml-3 mt-5" id="submit_papers">Submit Papers</button>
                                 </div>
                             </div>
                         </form>

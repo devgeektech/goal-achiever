@@ -6,7 +6,6 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
            @include('student.layouts.topbar')
-         
            <div class="card-body p-0">
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -41,7 +40,6 @@
                             </li>
                           </ul>
                         </nav>
-                          
                         </div>
                         <div class="card-body">
                             <div class="container">
@@ -51,7 +49,7 @@
                                 @endphp
                                 @foreach($goal_detials->chunk(3) as $goal_detial)
                                 <div class="row pt-5">
-                                 
+
                                     @foreach($goal_detial as $detial)
                                       <div class="cards col-lg-4 col-md-6">
                                         <div class="card-item">
