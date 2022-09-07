@@ -42,7 +42,7 @@
                 <a href="https://islamicolc.com/dhua" target="_blank">Dhuas</a>
               </li>
               <li>
-                <a href="https://islamicolc.com/quotes" target="_blank">Quotes</a>
+                <a href="https://islamicolc.com/qoutes" target="_blank">Quotes</a>
               </li>
               <li>
                 <a href="https://islamicolc.com/articals" target="_blank">Articles</a>

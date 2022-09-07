@@ -167,7 +167,7 @@ class RegisterController extends Controller
                             return response()->json([ 'status' => 'already']);
                         }
                         $goal_ids = Goal::select('id')->where('unit_id',$request->unit_id)->pluck('id')->toArray();      
-                        if(count($goal_ids)>0)      {
+                        if(count($goal_ids)>0){
                             $topics = Topic::where('unit_id',$request->unit_id)->get();
                             $i = 0;
                             foreach($topics as $topic){

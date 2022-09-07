@@ -126,7 +126,7 @@ class IndexController extends Controller
                 }
             } 
             
-            return redirect()->route('student.goals.index',$data)->with('error','Not goals found :(');
+            return redirect()->route('student.goals.index',$data)->with('error','No goal found :(');
             
             
         }catch(Exception $e){
