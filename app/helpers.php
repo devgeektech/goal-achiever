@@ -12,6 +12,7 @@ use App\Models\Membership;
 use App\Models\TakenGoal;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+
 function uploadImageS3($request_file, $filename){     
     
     //Upload File to s3
@@ -69,7 +70,9 @@ function getMembershipDetails(){
         foreach($plan_details as $key => $val){
             if((strtotime(now()) > strtotime($val->expiry_date)) && ($val->subscription == 'manual')){
                 Session::put('plan_expire', 1);
+                Membership::where('student_id',Auth::user()->id)->delete();
             }else{
+                Session::put('plan_expire', 2);
                 if((strtotime(now()) > strtotime($val->expiry_date)) && ($val->subscription == 'auto')){
                     $new_expiry_date = getNewExpiryDate($val->plan_id,$val->expiry_date);
                     update_membership_plan($val->id,$new_expiry_date);

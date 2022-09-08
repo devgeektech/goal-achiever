@@ -17,6 +17,9 @@ class IndexController extends Controller
     {
         try{
             
+            Session::forget('set_plan');
+            Session::forget('plan_expire');
+
             $data = [];
             //Get plan details
             $plan_details = Membership::where('student_id',Auth::user()->id)->get();
@@ -43,9 +46,9 @@ class IndexController extends Controller
             if($subjects){
                 $data['subjects'] = $subjects;
             }
-            //Get all Plans
-            $get_free_plan_id = Membership::where('student_id',Auth::user()->id)->first();
-            if(!empty($get_free_plan_id)){
+            //Get all Plans 
+            $get_free_plan_id = Auth::user()->memberships()->withTrashed()->count();                        
+            if( intval($get_free_plan_id) > 0 ){
                 $plans = DB::table('plans')->whereNotIn('id', [1])->get();
             }else{
                 $plans = DB::table('plans')->get();

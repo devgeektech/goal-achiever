@@ -19,14 +19,13 @@ class CreateMembershipsTable extends Migration
             $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');
             $table->bigInteger('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
-            $table->bigInteger('subject_id')->unsigned();
-            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->string('plan_days')->nullable();
             $table->string('type')->nullable();
             $table->string('subscription')->nullable();
-            $table->string('expiry_date')->nullable();
+            $table->timestamp('expiry_date')->nullable();
             $table->string('transaction_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

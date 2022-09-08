@@ -1,5 +1,9 @@
 $(document).ready(function(){
-    //window.scrollTo(0, 0);
+    /* var is_plan = $('#is_plan').val();
+    var is_plan_expire = $('#plan_expire').val();
+    if((is_plan == 2) || (is_plan_expire == 1)){
+        $('#membershipModal').modal('show');
+    } */
 });
 //Change goal satus
 jQuery(".registerBtn").on('click',function() {
@@ -208,7 +212,7 @@ jQuery('#purchase_plan').on('click', function(){
     var topic_id = jQuery('#topic_id').val();
     var user_id = jQuery('#get_user_id').val();
     var end_date = jQuery('#end_date').val();
-    var transaction_id = jQuery('#transaction_id').val();
+    var reference_no = jQuery('#reference_no').val();
    
     var card_name_error = card_number_error = cvc_error = exp_month_error = exp_year_error = transaction_id_error = false;
     if(name_on_card == ""){
@@ -246,15 +250,15 @@ jQuery('#purchase_plan').on('click', function(){
         jQuery(".exp_year_error").html("");
         exp_year_error = true;
     }
-    if(transaction_id == "" || typeof transaction_id === "undefined"){
-        jQuery(".transaction_id_error").html("Please enter transaction ID.");
-        transaction_id_error = false;
+    if(reference_no == "" || typeof reference_no === "undefined"){
+        jQuery(".reference_no_error").html("Please enter reference number.");
+        reference_no_error = false;
     }else{
-        jQuery(".transaction_id_error").html("");
-        transaction_id_error = true;
+        jQuery(".reference_no_error").html("");
+        reference_no_error = true;
     }
 
-    if((card_name_error == true) && (card_number_error == true) && (cvc_error == true) && (exp_month_error == true) &&  (exp_year_error == true) && (transaction_id_error == true)){
+    if((card_name_error == true) && (card_number_error == true) && (cvc_error == true) && (exp_month_error == true) &&  (exp_year_error == true) && (reference_no_error == true)){
         jQuery.ajaxSetup({
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -280,7 +284,7 @@ jQuery('#purchase_plan').on('click', function(){
                     unit_id:unit_id,
                     topic_id:topic_id,
                     end_date:end_date,
-                    transaction_id:transaction_id
+                    reference_no:reference_no
                 },
            
             beforeSend: function(msg){
@@ -292,7 +296,7 @@ jQuery('#purchase_plan').on('click', function(){
                 }
                 if (response.status == 'Success') {
                     jQuery("#membershipModal").hide();
-                    swal("Good!", "You have successfully purchased '" +plan_name+ "' plan!", "success");
+                    swal("Good!", "Thanks for purchasing '" +plan_name+ "' plan. Admin will approve and you will get a confirmation via email or Viber!", "success");
                    /*  setTimeout(() => {
                         window.location.href = "/student/dashboard";
                     }, 5000); */

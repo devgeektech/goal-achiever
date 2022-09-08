@@ -8,7 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Membership
  * 
@@ -31,6 +31,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Membership extends Model
 {
+	use SoftDeletes;
+	
 	protected $table = 'memberships';
 
 	protected $casts = [
@@ -42,7 +44,6 @@ class Membership extends Model
 	protected $fillable = [
 		'plan_id',
 		'student_id',
-		'subject_id',
 		'plan_days',
 		'type',
 		'subscription',

@@ -141,12 +141,11 @@ class RegisterController extends Controller
             $membership = new Membership;
             $membership->plan_id = $request->plan_id;
             $membership->student_id = $request->user_id;
-            $membership->subject_id = $request->subject_id;
             $membership->plan_days = $plan_days;
             $membership->type = $type;
             $membership->subscription = 'manual';
             $membership->expiry_date = $expire_date;
-            $membership->transaction_id = $request->transaction_id;
+            $membership->transaction_id = $request->reference_no;
             $membership->save();
             if(intval($membership->id) > 0){
                 $payment = new Payment;

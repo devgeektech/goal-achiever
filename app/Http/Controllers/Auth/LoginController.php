@@ -55,7 +55,7 @@ class LoginController extends Controller
                     return redirect()->route('student.dashboard');
                 }else{
                     Auth::logout();
-                    return back()->with("errors", "Your account in not activated yet!");
+                    return back()->with("errors", "Your account in not activated yet OR Update your subscription plan.");
                 }
             }else{
                 return back()->with("errors", "Your account in not activated yet!");

@@ -46,15 +46,10 @@
                             <i>Select Plan</i>
                           </a>
                         </li>
+                        
                         <li role="presentation" class="disabled">
-                          <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" aria-expanded="false">
+                          <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab">
                             <span class="round-tab">2</span>
-                            <i>Select Subject</i>
-                          </a>
-                        </li>
-                        <li role="presentation" class="disabled">
-                          <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab">
-                            <span class="round-tab">3</span>
                             <i>Payment</i>
                           </a>
                         </li>
@@ -65,7 +60,7 @@
                           <h4 class="text-center">Select Plan</h4>
                           <div class="plan row free-months-row">
                             <div class="container">
-                              <div class="row mt-4">
+                              <div class="row mt-4 justify-content-center">
                                 <input type="hidden" name="plan_months" id="plan_months" value="">
                                 <input type="hidden" name="plan_name" id="plan_name" value="">
                                 <input type="hidden" name="plan_price" id="plan_price" value=""> @foreach ($plans as $plan) <div class="col-12 col-sm-3 col-md-6 col-lg-3 col-xl-3 months-area selct-plan">
@@ -90,79 +85,41 @@
                             </li>
                           </ul>
                         </div>
+                        
                         <div class="tab-pane" role="tabpanel" id="step2">
-                          <h4 class="text-center">Select Subject</h4>
+                          <h4 class="text-center text-white">Payment</h4>
                           <div class="container">
-                            <div class="row mt-4"> @foreach ($subjects as $subject) <div class="col-lg-3 col-md-4 edu-popup">
-                                <label>
-                                  <input type="radio" name="plan_subject" class="card-input-element d-none" id="demo1" value="{{$subject->id}}">
-                                  <div class="card card-body bg-light d-flex justify-content-center  align-items-center">
-                                    <div class="box mb-2 d-flex flex-column align-items-center text-white">
-                                      <img src="{{Storage::url($subject->image)}}" />
-                                      <h6>{{$subject->title}}</h6>
-                                    </div>
-                                  </div>
-                                </label>
-                              </div> @endforeach </div>
-                            <span class="plan_subject_error"></span> @error('plan_subject') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
-                          </div>
+                           
+                            <div class='col-md-12'>
+                              
+                              <div class='form-row'>
+                                <div class=' col-md-12 col-xs-12 form-group required'>
+                                  <label class='control-label text-white'>PLEASE  PAY VIA BANK TRANSFER</label>
+                                  <label class='control-label text-white'>Account name : Aishath Nahula</label>
+                                  <label class='control-label text-white'>Account number: 7770000080879</label>
+                                  <label class='control-label text-white'>Viber no: 9822035</label>
+                                  <label class='control-label text-white'>When you transfer the payment, please add your full name in the remarks column of the slip and share the slip in the above Viber number.</label>
+                                </div>
+                              
+                                <div class=' col-md-12 col-xs-12 form-group required'>
+                                  <label class='control-label text-white'>Reference Number</label>
+                                  <input class='form-control' type='text' id="reference_no" name="reference_no" required>
+                                  <span class="reference_no_error error"></span>
+                                </div>
+                              </div>
+                           
+
                           <ul class="list-inline pull-right">
                             <li>
                               <button type="button" class="default-btn prev-step">Back</button>
                             </li>
                             <li>
-                              <button type="button" class="default-btn next-step subject_button">Continue</button>
+                              <button type="submit" id="" class="default-btn next-step">Pay</button>
                             </li>
                           </ul>
                         </div>
-                        <div class="tab-pane" role="tabpanel" id="step3">
-                          <h4 class="text-center">Payment</h4>
-                          <div class="container">
-                            <label class="payment-label pl-3 text-center">What type of subscription you want to select?</label>
-                            <div class='row my-4 justify-content-center subscription-type'></div>
-                            <div class='col-md-12'>
-                              <div class='form-row'>
-                                <div class=' col-md-12 col-xs-12 form-group required'>
-                                  <label class='control-label'>Name on Card</label>
-                                  <input class='form-control' size='4' type='text' name="name_on_card" required>
-                                </div>
-                              </div>
-                              <div class='form-row'>
-                                <div class=' col-md-12 col-xs-12 form-group required'>
-                                  <label class='control-label'>Card Number</label>
-                                  <input id="cr_no" type="text" maxlength="16" name="card_number" class='form-control card-number' placeholder="xxxx xxxx xxxx xxxx" required>
-                                </div>
-                              </div>
-                              <div class='form-row'>
-                                <div class='col-xs-4 col-md-4 form-group cvc required'>
-                                  <label class='control-label'>CVC</label>
-                                  <input autocomplete='off' name="cvc_number" class='form-control card-cvc' placeholder='ex. 311' size='4' type='text' required>
-                                </div>
-                                <div class='col-xs-4 col-md-4 form-group expiration required'>
-                                  <label class='control-label'>Expiration</label>
-                                  <input class='form-control card-expiry-month' name="expiration_month" placeholder='MM' size='2' type='text' required>
-                                </div>
-                                <div class='col-xs-4 col-md-4 form-group expiration required'>
-                                  <label class='control-label'></label>
-                                  <input class='form-control card-expiry-year' name="expiration_year" placeholder='YYYY' size='4' type='text' required>
-                                </div>
-                              </div>
-                              <div class='form-row'>
-                                <div class='col-md-12'>
-                                  <div class='form-control total btn btn-info'> Total: <span class='amount' id="total_amount"></span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                           </div>
-                          <ul class="list-inline pull-right">
-                            <li>
-                              <button type="button" class="default-btn prev-step">Back</button>
-                            </li>
-                            <li>
-                              <button type="submit" class="default-btn next-step">Pay</button>
-                            </li>
-                          </ul>
+                         
                         </div>
                       </div>
                     </form>

@@ -80,7 +80,7 @@ button:focus,
   height: 2px;
   background: #e0e0e0;
   position: absolute;
-  width: 67%;
+  width: 50%;
   margin: 0 auto;
   left: 0;
   right: 0;
@@ -120,7 +120,7 @@ span.round-tab i {
 }
 
 .wizard .nav-tabs > li {
-  width: 33.3%;
+  width: 50%;
 }
 
 .wizard li:after {
@@ -390,12 +390,24 @@ label {
   }
 
   /* Modal Content */
-  .modal-content {
+  /* .modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
+  } */
+  .modal-content {
+
+    margin: auto;
+    padding: 20px;
+    width: 50%;
+    background: url(../images/smooth-dark-blue-background1.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transition: .2s;
+
   }
 
   /* The Close Button */

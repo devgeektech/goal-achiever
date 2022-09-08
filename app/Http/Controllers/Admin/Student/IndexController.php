@@ -55,7 +55,7 @@ class IndexController extends Controller
                         $create_expiration_date = getExpiryDate($get_plan_months->months);
                         $membership = Membership::where('student_id',$id)->where('plan_id',$get_plan_id)->update(['expiry_date'=> $create_expiration_date]);
                         if($membership){
-                            Mail::to('nahu_ooo@hotmail.com')->send(new ActivateMail($student));
+                            //Mail::to('nahu_ooo@hotmail.com')->send(new ActivateMail($student));
                             return view('admin.student.index',$data);
                         }
                     }
