@@ -152,6 +152,6 @@
           </div>
         </div>
       </div> 
-	  @include('student.layouts.scripts')
+	  @include('student.layouts.scripts') 
   </body>
 </html>
