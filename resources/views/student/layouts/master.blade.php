@@ -31,7 +31,7 @@
       <div class="modal-content">
         <section>
           <section class="signup-step-container">
-            <h3 class="popup-heading text-center">Membership</h3>
+            <h3 class="popup-heading text-center text-white">Membership</h3>
             <hr>
             <div class="container mt-5">
               <div class="row d-flex justify-content-center">
@@ -46,7 +46,7 @@
                             <i>Select Plan</i>
                           </a>
                         </li>
-                        
+
                         <li role="presentation" class="disabled">
                           <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab">
                             <span class="round-tab">2</span>
@@ -57,7 +57,7 @@
                     </div>
                     <form action="{{ route('student.plans.store') }}" method="post" id="plan_form" enctype="multipart/form-data"> @csrf <div class="tab-content" id="main_form">
                         <div class="tab-pane active" role="tabpanel" id="step1">
-                          <h4 class="text-center">Select Plan</h4>
+                          <h4 class="text-center text-white">Select Plan</h4>
                           <div class="plan row free-months-row">
                             <div class="container">
                               <div class="row mt-4 justify-content-center">
@@ -85,13 +85,13 @@
                             </li>
                           </ul>
                         </div>
-                        
+
                         <div class="tab-pane" role="tabpanel" id="step2">
                           <h4 class="text-center text-white">Payment</h4>
                           <div class="container">
-                           
+
                             <div class='col-md-12'>
-                              
+
                               <div class='form-row'>
                                 <div class=' col-md-12 col-xs-12 form-group required'>
                                   <label class='control-label text-white'>PLEASE  PAY VIA BANK TRANSFER</label>
@@ -100,14 +100,14 @@
                                   <label class='control-label text-white'>Viber no: 9822035</label>
                                   <label class='control-label text-white'>When you transfer the payment, please add your full name in the remarks column of the slip and share the slip in the above Viber number.</label>
                                 </div>
-                              
+
                                 <div class=' col-md-12 col-xs-12 form-group required'>
                                   <label class='control-label text-white'>Reference Number</label>
                                   <input class='form-control' type='text' id="reference_no" name="reference_no" required>
                                   <span class="reference_no_error error"></span>
                                 </div>
                               </div>
-                           
+
 
                           <ul class="list-inline pull-right">
                             <li>
@@ -119,7 +119,7 @@
                           </ul>
                         </div>
                           </div>
-                         
+
                         </div>
                       </div>
                     </form>
@@ -151,7 +151,7 @@
             </form>
           </div>
         </div>
-      </div> 
-	  @include('student.layouts.scripts') 
+      </div>
+	  @include('student.layouts.scripts')
   </body>
 </html>

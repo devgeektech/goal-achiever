@@ -108,15 +108,15 @@ span.round-tab i {
   color: #555555;
 }
 .wizard li.active span.round-tab {
-  background: #000084;
+  background: #fd5c26;
   color: #fff;
-  border-color: #000084;
+  border-color: #fd5c26;
 }
 .wizard li.active span.round-tab i {
   color: #5bc0de;
 }
 .wizard .nav-tabs > li.active > a i {
-  color: #000084;
+  color: #fff;
 }
 
 .wizard .nav-tabs > li {
@@ -155,7 +155,7 @@ span.round-tab i {
   transform: translate(-24%, -50%);
   font-size: 12px;
   font-weight: 700;
-  color: #000;
+  color: #fff;
 }
 
 .wizard .nav-tabs > li a:hover {
@@ -183,7 +183,7 @@ span.round-tab i {
   color: #fff;
 }
 .next-step:hover {
-  background-color: #000084;
+  background-color: #0ebd18;
   color: #fff;
 }
 .step-head {
@@ -402,7 +402,7 @@ label {
     margin: auto;
     padding: 20px;
     width: 50%;
-    background: url(../images/smooth-dark-blue-background1.jpg);
+    background-image: linear-gradient(to right, #0f3d57, #124561, #195a7b, #085e8a, #0b6a98);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
