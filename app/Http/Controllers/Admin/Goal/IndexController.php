@@ -67,12 +67,18 @@ class IndexController extends Controller
             'end_date' => 'required',
             'creator_name' => 'required',
             'instructor_name' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'sadhaqah' => 'required'
         ]);
         try{
             if($request->hasFile('goal_image')){ 
                 $image_name = $request->file('goal_image')->getClientOriginalName();
                 $image_path = $request->file('goal_image')->store('public/images');
+            }
+
+            if($request->hasFile('sadhaqah')){ 
+                $sadhaqah_image_name = $request->file('sadhaqah')->getClientOriginalName();
+                $sadhaqah_image_path = $request->file('sadhaqah')->store('public/images');
             }
 
             $medias = array();
@@ -117,6 +123,7 @@ class IndexController extends Controller
             $goal->status = 1;
             $goal->image = $image_path;
             $goal->description = $request->description;
+            $goal->sadhaqah = $sadhaqah_image_path;
             $goal->save();
             if(intval($goal->id) > 0){
                 if(count($medias) > 0){

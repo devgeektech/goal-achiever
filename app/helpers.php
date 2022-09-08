@@ -94,7 +94,6 @@ function getMembershipDetails(){
         }else{
             $plans = DB::table('plans')->get();
         }
-
         if(count($plans) > 0){
             $data['plans'] = $plans;
         }

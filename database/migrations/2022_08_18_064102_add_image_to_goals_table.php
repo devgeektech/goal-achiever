@@ -16,6 +16,7 @@ class AddImageToGoalsTable extends Migration
         Schema::table('goals', function (Blueprint $table) {
             $table->string('image')->nullable();
             $table->string('description')->nullable();
+            $table->string('sadhaqah')->nullable();
         });
     }
 
@@ -29,6 +30,7 @@ class AddImageToGoalsTable extends Migration
         Schema::table('goals', function (Blueprint $table) {
             $table->dropColumn('image');
             $table->dropColumn('description');
+            $table->dropColumn('sadhaqah');
         });
     }
 }

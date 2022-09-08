@@ -77,7 +77,7 @@
                                     <label class="form-label d-flex" for="goalImage">Goal Image</label>
                                     <div class="form-group videoImgBlock" style="display:inline-flex;">
                                         <i class="fas fa-edit goal_image_edit" data-id="{{$goal->id}}" style="cursor:pointer"></i>
-                                        <img src="{{Storage::url($goal->image) ?? URL::to('/images/dummy.jpg')}}" height="100" widht="100">
+                                        <img src="@if($goal->image) {{Storage::url($goal->image)}} @else {{URL::to('/images/no_goal.png')}}@endif" height="100" widht="100">
                                     </div>
                                     @error('goal_image') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                 </div>

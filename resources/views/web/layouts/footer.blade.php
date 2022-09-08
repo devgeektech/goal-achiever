@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
           <div class="footer-logo-area">
-            <a href="{{ route('index')}}">
+            <a target="_blank" href="https://islamicolc.com">
               <img class="img-fluid" src="{{URL::to('images/footer-logo.png')}}">
             </a>
             <p>Connect With Us</p>
@@ -55,7 +55,9 @@
         </div>
         <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
           <div class="google-add-image">
-            <img class="img-fluid" src="{{URL::to('images/google-add.png')}}">
+            <a href="https://noorart.com/?ref=Aishath" target="_blank">
+              <img class="img-fluid" src="{{URL::to('images/noorart.jpeg')}}">
+            </a>
           </div>
         </div>
       </div>

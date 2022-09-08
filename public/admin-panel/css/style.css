@@ -409,6 +409,9 @@ label {
     transition: .2s;
 
   }
+  .signup-step-container hr {
+    border-top: 1px solid rgb(217 217 217 / 20%) !important;
+}
 
   /* The Close Button */
   .close {

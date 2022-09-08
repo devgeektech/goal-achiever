@@ -51,7 +51,7 @@
                                             <td>{{ $transaction->plan->months }}</td>
                                             <td>@if(strtotime(now()) > strtotime($transaction->expiry_date) ) Plan Expired @else {{ \Carbon\Carbon::parse($transaction->expiry_date)->format('j F, Y') }} @endif</td>
                                             <td>{{ $transaction->transaction_id }}</td>
-                                            <td>@if(strtotime(now()) > strtotime($transaction->expiry_date) ) <button class="btn btn-warning">Expired</button> @else <button class="btn btn-success">Active</button> @endif</td>
+                                            <td>@if(strtotime(now()) > strtotime($transaction->expiry_date) || $transaction->user->status != 1 ) <button class="btn btn-warning">Deactivate</button> @else <button class="btn btn-success">Active</button> @endif</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

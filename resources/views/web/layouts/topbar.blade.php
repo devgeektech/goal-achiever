@@ -1,7 +1,7 @@
 <header>
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand mr-5" href="{{ route('index')}}">
+        <a class="navbar-brand mr-5" href="https://islamicolc.com">
           <img src="{{URL::to('./images/logo.png')}}">
         </a>
         <h4 class="nav-heading">GOAL ACHIEVER</h4>

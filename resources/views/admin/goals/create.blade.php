@@ -80,9 +80,15 @@
                                     <input type="file" class="form-control"  name="exam_document[]" multiple accept="image/png, image/gif, image/jpeg"/>
                                     @error('exam_document') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="examDocument">Give Sadhaqah</label>
+                                    <input type="file" class="form-control"  name="sadhaqah" accept="image/png, image/gif, image/jpeg"/>
+                                    @error('sadhaqah') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
+                                </div>
                                 
                                 <div class="form-group">
-                                    <label for="goalEndDate">Goal End Name</label>
+                                    <label for="goalEndDate">Goal End Date</label>
                                     <input type="date" class="form-control" name="end_date" id="datepicker" placeholder="Goal End Date">
                                     @error('end_date') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
                                 </div>
