@@ -31,11 +31,11 @@ class IndexController extends Controller
         if($plans){
             $data['plans'] = $plans;
         }
-    
+
        /*  $get_students = $get_comp_goals = []; */
-             
+
         return view('index', $data);
-        
+
     }
 
     public function contact(Request $request)
@@ -77,18 +77,18 @@ class IndexController extends Controller
         $get_students = [];
         foreach($subject_ids as $subject_id){
             $get_students = TakenGoal::select('student_id')->where('subject_id',$subject_id)->distinct('subject_id')->pluck('student_id')->toArray();
-            foreach($get_students as $student){       
-                $studentInfo = getStudentName($student); 
-                $get_all_units = $studentInfo->taken_goals->where('subject_id',$subject_id);    
+            foreach($get_students as $student){
+                $studentInfo = getStudentName($student);
+                $get_all_units = $studentInfo->taken_goals->where('subject_id',$subject_id);
                 $get_completed_units = $studentInfo->taken_goals->where('subject_id',$subject_id)->where('status', '1');
                 $cal_percentage[$studentInfo->name][] = round(count($get_completed_units)/count($get_all_units)*100);
             }
-        }        
-        $graphArrData = [];
-        foreach($cal_percentage as $k => $per){            
-            $graphArrData[] = [$k,...$per];            
         }
-        return response()->json(['status' => 'true', 'data' => $graphArrData]); 
+        $graphArrData = [];
+        foreach($cal_percentage as $k => $per){
+           // $graphArrData[] = [$k,...$per];
+        }
+        return response()->json(['status' => 'true', 'data' => $graphArrData]);
     }
 
 }
