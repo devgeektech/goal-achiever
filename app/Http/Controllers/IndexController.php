@@ -86,7 +86,7 @@ class IndexController extends Controller
         }
         $graphArrData = [];
         foreach($cal_percentage as $k => $per){
-           // $graphArrData[] = [$k,...$per];
+            $graphArrData[] = [$k,...$per];
         }
         return response()->json(['status' => 'true', 'data' => $graphArrData]);
     }
