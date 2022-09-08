@@ -86,8 +86,10 @@ function getMembershipDetails(){
             $data['subjects'] = $subjects;
         }
         //Get all Plans
-        $get_free_plan_id = Membership::where('student_id',Auth::user()->id)->first();
-        if(!empty($get_free_plan_id)){
+        //$get_free_plan_id = Membership::where('student_id',Auth::user()->id)->first();
+        $get_free_plan_id = Auth::user()->memberships()->withTrashed()->count();
+        
+        if(intval($get_free_plan_id) > 0 ){
             $plans = DB::table('plans')->whereNotIn('id', [1])->get();
         }else{
             $plans = DB::table('plans')->get();

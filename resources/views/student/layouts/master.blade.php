@@ -81,7 +81,7 @@
                           </div>
                           <ul class="list-inline pull-right">
                             <li>
-                              <button type="button" class="default-btn next-step plans_button">Continue</button>
+                              <button type="button" class="default-btn next-step">Continue</button>
                             </li>
                           </ul>
                         </div>

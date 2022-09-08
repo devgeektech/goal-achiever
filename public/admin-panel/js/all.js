@@ -37,7 +37,6 @@ $(document).ready(function () {
         var subject_id = $(this).val();
         $("#subject_id").val(subject_id);
         $('#unit').html('');
-
         $.ajaxSetup({
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -152,18 +151,6 @@ $(document).ready(function () {
             }
         });
         $(".next-step").click(function (e) {
-            if($(this).hasClass('subject_button')){
-                if( $("input[name='plan_subject']").is(':checked') ){
-                    var active = $('.wizard .nav-tabs li.active');
-                    active.next().removeClass('disabled');
-                    nextTab(active);
-                    $('.plan_subject_error').text("");
-                }
-                else{
-                    $('.plan_subject_error').css('color','red').text("Please choose atleast one subject :)");
-                    return false;
-                }
-            }
             if( $("input[name='plan']").is(':checked') ){
                 var active = $('.wizard .nav-tabs li.active');
                 active.next().removeClass('disabled');
@@ -174,7 +161,6 @@ $(document).ready(function () {
                 $('.plan_error').css('color','red').text("Please choose atleast one plan :)");
                 return false;
             }
-
         });
         $(".prev-step").click(function (e) {
             var active = $('.wizard .nav-tabs li.active');
@@ -252,15 +238,6 @@ $(document).ready(function(){
         $('#uploadAssignmentsModal').modal('show');
     });
 });
-
-/**
- * Download Document
- */
- $("#goal_document").on('click', function(){
-    console.log('clicked');
-    return false;
-});
-
 
 
 /*progress-circle*/
