@@ -245,7 +245,7 @@
         let dataArr = barGraphArray;
 
         function drawChart() {  
-          if(dataArr.length >= 5){
+          if(dataArr.length >= 100){
             var data = google.visualization.arrayToDataTable([
                 subjects,
                 dataArr[0],

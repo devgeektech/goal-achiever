@@ -69,7 +69,7 @@
                                     <div class="card card-body bg-light">
                                       <div class="box mb-2">
                                         <h6>{{$plan->name}}
-                                          <br>@if($plan->name == 'FREE') <span>${{ $plan->price}}</span> @else ${{ $plan->price}}@endif
+                                          <br>@if($plan->name == 'FREE') <span>{{ $plan->price}}</span> @else ${{ $plan->price}}@endif
                                         </h6>
                                       </div>
                                     </div>
