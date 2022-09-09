@@ -64,22 +64,34 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                @foreach(getGoalsTakenByStudent($student->id) as $item)
-                                                {{$item}}
-                                                <br>
-                                                @endforeach
+                                                @if(getGoalsTakenByStudent($student->id) != "")
+                                                    @foreach(getGoalsTakenByStudent($student->id) as $item)
+                                                    {{$item}}
+                                                    <br>
+                                                    @endforeach
+                                                @else 
+                                                    -
+                                                @endif
                                             </td>
                                             <td> 
-                                                @foreach(getGoalsAchievedByStudent($student->id) as $item)
-                                                {{$item}}
-                                                <br>
-                                                @endforeach
+                                                @if(getGoalsAchievedByStudent($student->id) != "")
+                                                    @foreach(getGoalsAchievedByStudent($student->id) as $item)
+                                                    {{$item}}
+                                                    <br>
+                                                    @endforeach
+                                                @else 
+                                                    -
+                                                @endif
                                             </td>
                                             <td>
-                                                @foreach(getGoalsPendingByStudent($student->id) as $item)
-                                                {{$item}}
-                                                <br>
-                                                @endforeach
+                                                @if(getGoalsPendingByStudent($student->id) != "")
+                                                    @foreach(getGoalsPendingByStudent($student->id) as $item)
+                                                    {{$item}}
+                                                    <br>
+                                                    @endforeach
+                                                @else 
+                                                    -
+                                                @endif
                                             </td>
                                         </tr>
                                         
