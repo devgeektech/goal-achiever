@@ -41,7 +41,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Subject</th>
+                                            <th>Category</th>
                                             <th>Unit</th>
                                             <th>Topic</th>
                                             <th>Goal End Date</th>
@@ -53,7 +53,7 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Subject</th>
+                                            <th>Category</th>
                                             <th>Unit</th>
                                             <th>Topic</th>
                                             <th>Goal End Date</th>

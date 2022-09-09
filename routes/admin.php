@@ -27,6 +27,7 @@ Route::group([
             Route::get('/', [App\Http\Controllers\Admin\Student\IndexController::class,'index'])->name('index');
             Route::get('/info/{id}', [App\Http\Controllers\Admin\Student\IndexController::class,'show'])->name('info');
             Route::post('/activate/{id}', [App\Http\Controllers\Admin\Student\IndexController::class,'activate'])->name('activate');
+            Route::post('/destroy/{id}', [App\Http\Controllers\Admin\Student\IndexController::class,'destroy'])->name('destroy');
         });
        
         Route::group(['prefix' => 'goals','as' => 'goals.'], function ($router) {
@@ -40,6 +41,7 @@ Route::group([
             Route::post('/get_units', [App\Http\Controllers\Admin\Goal\IndexController::class,'get_units'])->name('get_units');
             Route::post('/get_topics', [App\Http\Controllers\Admin\Goal\IndexController::class,'get_topics'])->name('get_topics');
             Route::post('/update_image', [App\Http\Controllers\Admin\Goal\IndexController::class,'update_image'])->name('update_image');
+            Route::post('/update_sadhaqah', [App\Http\Controllers\Admin\Goal\IndexController::class,'update_sadhaqah'])->name('update_sadhaqah');
             
             
         });

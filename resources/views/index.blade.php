@@ -171,7 +171,7 @@
         <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 months-area">
           <div class="free-months-area-inner" @guest data-toggle="modal" data-target="#membershipModal" @endguest  style="cursor: pointer">
             <p>{{ $plan->name}} <br>
-              @if($plan->name != 'FREE') ${{ $plan->price}}@else<span>{{ $plan->price}}</span>@endif
+              @if($plan->name != 'FREE') {{ $plan->price}}@else<span>{{ $plan->price}}</span>@endif
             </p>
           </div>
         </div>

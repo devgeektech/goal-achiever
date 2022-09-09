@@ -170,7 +170,8 @@
                                 <div class=' col-md-12 col-xs-12 form-group required'>
                                   <label class='control-label text-white'>PLEASE  PAY VIA BANK TRANSFER</label>
                                   <label class='control-label text-white'>Account name : Aishath Nahula</label>
-                                  <label class='control-label text-white'>Account number: 7770000080879</label>
+                                  <label class='control-label text-white'>MRF Account number: 7770000008259</label>
+                                  <label class='control-label text-white'>US$ Account number: 7770000080879</label>
                                   <label class='control-label text-white'>Viber no: 9822035</label>
                                   <label class='control-label text-white'>When you transfer the payment, please add your full name in the remarks column of the slip and share the slip in the above Viber number.</label>
                                 </div>

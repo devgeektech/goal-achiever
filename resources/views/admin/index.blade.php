@@ -48,15 +48,10 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1"> Goals Completed </div>
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1"> No. of Goals Taken </div>
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@isset($cal_percentage) {{ round($cal_percentage) }}% @endisset</div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="progress progress-sm mr-2">
-                                                    <div class="progress-bar bg-info" role="progressbar" style="width: {{ round($cal_percentage) }}%" aria-valuenow="{{ round($cal_percentage) }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@isset($all_taken_goals) {{ $all_taken_goals }} @endisset</div>
                                             </div>
                                         </div>
                                     </div>
@@ -71,8 +66,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Goals Pending </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">@isset($goals){{ $goals - $completed_goals }} @endisset</div>
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total No. of Goals Achieved </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">@isset($completed_goals){{ $completed_goals }} @endisset</div>
                                     </div>
                                     <div class="col-auto"> <i class="fas fa-comments fa-2x text-gray-300"></i> </div>
                                 </div>

@@ -26,7 +26,7 @@
                                     <input type="hidden" name="goal_id" id="goal_id" value="{{$goal->id}}">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group" >
-                                        <label for="forSubject">Subject</label>
+                                        <label for="forSubject">Category</label>
                                         <input type="text" class="form-control" value="{{ $goal->subject->title }}" readonly>
                                     </div>
                                     <div class="form-group">
@@ -70,6 +70,7 @@
                                             </div>
                                         @endforeach
                                     </div>
+
                                     <hr>
                                 </div>
                                 <button type="submit" class="btn btn-primary ml-3">Ready To Achieve</button>

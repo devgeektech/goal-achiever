@@ -40,34 +40,7 @@
                                 <div class="row goalWrap flex-column">
                                     <input type="hidden" name="goal_id" id="goal_id" value="{{$goal->id}}">
                                 <div class="row">
-                                    <!-- <div class="form-group goal-info col-lg-3 col-6">
-                                        <div class="goals-info-box">
-                                        <img src="{{ URL::to('/images/book.png')}}">
-                                        <label for="forSubject">Subject</label>
-                                        <input type="text" class="form-control border-0" value="{{ $goal->subject->title }}" readonly>
-                                    </div>
-                                    </div>
-                                    <div class="form-group goal-info col-lg-3 col-6">
-                                    <div class="goals-info-box">
-                                    <img src="{{ URL::to('/images/unit.png')}}">
-                                        <label for="forUnit">Unit</label>
-                                        <input type="text" class="form-control border-0" value="{{ getUnitName($goal->unit_id) }}" readonly>
-                                    </div>
-                                    </div>
-                                    <div class="form-group goal-info col-lg-3 col-6">
-                                    <div class="goals-info-box">
-                                    <img src="{{ URL::to('/images/trending-topic.png')}}">
-                                        <label for="forTopic">Topic</label>
-                                        <input type="text" class="form-control border-0" value="{{ getTopicName($goal->topic_id) }}" readonly>
-                                    </div>
-                                    </div>
-                                    <div class="form-group goal-info col-lg-3 col-6">
-                                    <div class="goals-info-box">
-                                    <img src="{{ URL::to('/images/time-left.png')}}">
-                                        <label for="forGoalEndDate">Goal End Date</label>
-                                        <input type="text" class="form-control border-0" value="{{ \Carbon\Carbon::parse($goal->end_date)->format('j F, Y') }}" readonly>
-                                    </div>
-                                    </div> -->
+                                
                                     <div class="col-xs-12 col-sm-12 col-md-12 mt-4">
                                         <label class="form-group d-flex mb-2 font-weight-bold text-primary text-center mb-3" for="forDocuments">Documents</label>
                                         @foreach($media_document as $media)
@@ -112,6 +85,21 @@
                                         @endforeach
                                     </div>
                                     @endisset
+
+                                    @isset($goal->sadhaqah)
+                                    <div class="col-xs-12 col-sm-12 col-md-12 my-4">
+                                        <label class="form-group d-flex mb-2 font-weight-bold text-primary mb-3" for="forExam">Give Sadhaqah</label>
+                                            <div class="form-group videoImgBlock" style="display:inline-flex;cursor:pointer;">
+                                                <img src="{{Storage::url($goal->sadhaqah) ?? URL::to('/images/no-goals-taken.jpg') }}" class="goal-info-img">
+                                                <h5>Sadhaqah</h5>
+                                                <div class="download d-flex justify-content-between align-items-center">
+                                                <span>Download</span>
+                                                <a download="Sadhaqah" href="{{ Storage::url($goal->sadhaqah) }}" title="{{ Storage::url($goal->sadhaqah) }}"><i class="fa fa-download mr-0" aria-hidden="true" title="Download"></i></a>
+                                            </div>
+                                            </div>
+                                    </div>
+                                    @endisset
+                                    
                                     <hr>
                                 </div>
                                 <div class="submit-paper mx-auto mt-5">

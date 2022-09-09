@@ -25,26 +25,67 @@
                                     <label for="forProfileImage">Profile Image</label><br>
                                     <img src="@if($student->profile_image){{ Storage::url($student->profile_image) }} @else {{URL::to('/admin-panel/img/undraw_profile.svg')}} @endif" height="100px" width="100px">
                                 </div>
-                                <div class="form-group">
-                                    <label for="forName">Name</label>
-                                    <input type="text" class="form-control" name="name" id="name" value="{{ $student->name }}" readonly>
+                                <div class="row">
+                                    <div class="form-group col-xs-6 col-sm-6 col-md-6">
+                                        <label for="forName">Name</label>
+                                        <input type="text" class="form-control" name="name" id="name" value="{{ $student->name }}" readonly>
+                                    </div>
+                                    <div class="form-group col-xs-6 col-sm-6 col-md-6">
+                                        <label for="forEmail">Email</label>
+                                        <input type="email" class="form-control" name="email" id="email" value="{{ $student->email }}" readonly>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="forEmail">Email</label>
-                                    <input type="email" class="form-control" name="email" id="email" value="{{ $student->email }}" readonly>
+                                <div class="row">
+                                    <div class="form-group col-xs-6 col-sm-6 col-md-6">
+                                        <label for="forAge">Age</label>
+                                        <input type="text" class="form-control" name="age" id="age" value="{{ $student->age }}" readonly>
+                                    </div>
+                                    <div class="form-group col-xs-6 col-sm-6 col-md-6">
+                                        <label for="forCountry">Country</label>
+                                        <input type="text" class="form-control" name="country" id="country" value="{{ $student->country }}" readonly>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="forGoalsAchieved">Goals Achieved</label>
-                                    <input type="text" class="form-control" name="goal_achieved" id="goal_achieved" value="{{ getTotalGoalsAchieved($student->id) }}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="forGoalsTaken">Paricipated in Goals</label>
-                                    <input type="text" class="form-control" name="goal_taken" id="goal_taken" value="{{ getTotalGoalsTaken($student->id) }}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="forGoalsPending">Goals Pending</label>
-                                    <input type="text" class="form-control" name="goal_pending" id="goal_pending" value="{{ getPendingGoals($student->id) }}" readonly>
-                                </div>
+                                <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Goals Participated</th>
+                                            <th>Goals Achieved</th>
+                                            <th>Goals Pending</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>{{getSubjectTakenByStudent($student->id)}}</th>
+                                            <th>{{getGoalsCountAchievedByStudent($student->id)}}</th>
+                                            <th>{{getSubjectTakenByStudent($student->id) - getGoalsCountAchievedByStudent($student->id) }}</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                @foreach(getGoalsTakenByStudent($student->id) as $item)
+                                                {{$item}}
+                                                <br>
+                                                @endforeach
+                                            </td>
+                                            <td> 
+                                                @foreach(getGoalsAchievedByStudent($student->id) as $item)
+                                                {{$item}}
+                                                <br>
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach(getGoalsPendingByStudent($student->id) as $item)
+                                                {{$item}}
+                                                <br>
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
                             </div>
                         </div>
                     </div>

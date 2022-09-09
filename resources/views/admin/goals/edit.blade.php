@@ -42,7 +42,7 @@
                                 <div class="row goalWrap">
                                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                                   <div class="form-group">
-                                    <strong>Subject:</strong>
+                                    <strong>Category:</strong>
                                     <select class="form-select form-control"  name="subject" id="subject">
                                         @foreach($subjects as $subject)
                                             <option {{ $goal->subject_id == $subject->id ? 'selected':''}} value="{{$subject->id}}">{{$subject->title}}</option>
@@ -119,6 +119,14 @@
                                         <input type="file" class="form-control" id="exam_document" name="exam_document[]" multiple accept="image/png, image/gif, image/jpeg"/>
                                 </div>
 
+                                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                                    <label class="form-label d-flex" for="goalImage">Give Sadhaqah</label>
+                                    <div class="form-group sadhaqahBlock" style="display:inline-flex;">
+                                        <i class="fas fa-edit sadhaqah_edit" data-id="{{$goal->id}}" style="cursor:pointer"></i>
+                                        <img src="@if($goal->sadhaqah) {{Storage::url($goal->sadhaqah)}} @else {{URL::to('/images/no_goal.png')}}@endif" height="100" widht="100">
+                                    </div>
+                                    @error('sadhaqah') <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div> @enderror
+                                </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                                     <div class="form-group">
                                         <strong>Goal End Date:</strong>
@@ -249,36 +257,6 @@
     </div>
   </div>
     <!-- Goal Image Edit Modal-->
-     <!-- Modal -
-     <div class="modal fade" id="edit_goal_image" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update Image</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('admin.goals.update_image') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <input type="hidden" name="goal_id" id="goal_id" value="">
-                        <label class="form-label"  for="goalImage">Image</label>
-                        <input type="file" class="form-control"  name="goal_image" accept="image/png, image/gif, image/jpeg,video/mp4,video/x-m4v,video/* "/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-        </div>
-    </div> -->
-
-
 
     <!-- Modal -->
 <div class="modal fade" id="edit_goal_image" tabindex="-1" role="dialog" aria-labelledby="uploadAssignmentsModalLabel" aria-hidden="true">
@@ -315,20 +293,6 @@
 
             </div>
             </form>
-
-         <!--   <form action="{{ route('admin.goals.update_image') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <input type="hidden" name="goal_id" id="goal_id" value="">
-                        <label class="form-label"  for="goalImage">Image</label>
-                        <input type="file" class="form-control"  name="goal_image" accept="image/png, image/gif, image/jpeg,video/mp4,video/x-m4v,video/* "/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form> -->
-
             </div>
 
         <div class="modal-footer">
@@ -340,6 +304,41 @@
     </div>
   </div>
 
+
+      <!-- Give Sadhaqah Modal -->
+<div class="modal fade" id="edit_sadhaqah" tabindex="-1" role="dialog" aria-labelledby="uploadAssignmentsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <form method="post" action="{{ route('admin.goals.update_sadhaqah') }}" enctype="multipart/form-data">
+     @csrf
+      <div class="modal-content submit-paper goal-edit">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel" class="upload-assignmnt">Update Sadhqah</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" name="sadhaqah_goal_id" id="sadhaqah_goal_id">
+            <div class="zone">
+            <div id="dropZ">
+            <img src="{{ URL::to('./images/cloud-arrow-up-solid.png') }}" height="50" width="80" class="uplaod-img mb-3"/>
+                <div>Drag and drop your Image here</div>
+                <span>OR</span>
+                <div class="selectFile">
+                <label for="file">Select file</label>
+                <input type="file" class="form-control"  name="edit_sadhaqah" accept="image/png, image/gif, image/jpeg,video/mp4,video/x-m4v,video/* "/>
+                </div>
+                </div>
+            </div>
+            </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary upload-btn">Update</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>

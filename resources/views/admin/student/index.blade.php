@@ -49,11 +49,15 @@
                                                 @if($student->status == '2')
                                                 <form action="{{ route('admin.students.activate',['id' => $student->id]) }}" method="POST" style="margin-left: 49px;margin-top: -38px">
                                                     @csrf
-                                                    <button style="margin-left:10px; border-radius: 0.35rem;" type="submit" class="btn btn-warning">Deactivate</button>
+                                                    <button style="margin-left:10px; border-radius: 0.35rem;" type="submit" class="btn btn-warning">Not Active</button>
                                                 </form>
                                                 @else
                                                     <a href="#" class="btn btn-success">Activate</a>
                                                 @endif
+                                                <form action="{{ route('admin.students.destroy',['id' => $student->id]) }}" method="POST" style="margin-left: 120px;margin-top: -38px">
+                                                    @csrf
+                                                    <button style="margin-left:45px; border-radius: 0.35rem;" type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @endforeach

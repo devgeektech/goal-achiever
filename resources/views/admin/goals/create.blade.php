@@ -31,9 +31,9 @@
                                 <input type="hidden" name="subject_id" id="subject_id" value="">
                                 <input type="hidden" name="unit_id" id="unit_id" value="">
                                 <div class="form-group">
-                                  <label for="goalSubject">Subject</label>
+                                  <label for="goalSubject">Category</label>
                                     <select class="form-select form-control"  name="subject" id="subject">
-                                        <option value="">Select Subject</option>
+                                        <option value="">Select Category</option>
                                         @foreach($subjects as $subject)
                                             <option value="{{$subject->id}}">{{$subject->title}}</option>
                                         @endforeach   

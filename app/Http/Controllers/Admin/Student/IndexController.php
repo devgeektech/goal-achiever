@@ -10,6 +10,7 @@ use App\Models\Plan;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Mail;
+use Exception;
 class IndexController extends Controller
 {
     /**
@@ -55,7 +56,7 @@ class IndexController extends Controller
                         $create_expiration_date = getExpiryDate($get_plan_months->months);
                         $membership = Membership::where('student_id',$id)->where('plan_id',$get_plan_id)->update(['expiry_date'=> $create_expiration_date]);
                         if($membership){
-                            Mail::to('nahu_ooo@hotmail.com')->send(new ActivateMail($student));
+                            Mail::to($student->email)->send(new ActivateMail($student));
                             return view('admin.student.index',$data);
                         }
                     }
@@ -63,5 +64,24 @@ class IndexController extends Controller
                 }  
             }    
        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        try{
+            $student = User::find($id);
+            $student->delete();
+            return redirect()->route('admin.students.index')
+            ->with('success','Student has been deleted successfully');
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+       
     }
 }

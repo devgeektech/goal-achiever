@@ -18,7 +18,13 @@ jQuery(".document_edit").on('click',function() {
 });
 
 
-
+/**
+ * Update Sadhaqah Document
+ */
+ jQuery(".sadhaqah_edit").on('click',function() {
+    jQuery("#sadhaqah_goal_id").val($(this).attr('data-id'));
+    jQuery('#edit_sadhaqah').modal('show');
+});
 
 /**
  * Get Units and Topics dropdown

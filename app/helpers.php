@@ -139,6 +139,7 @@ function getTotalParticipants($goal_id){
 }
 
 //Get total number of goals taken by student
+
 function getTotalGoalsTaken($id){
     $get_total_goals_taken = TakenGoal::where('student_id', $id)->get();
     if(!empty($get_total_goals_taken)){
@@ -244,6 +245,116 @@ function getStudentName($id){
         return $get_user;
     }else{
         return 'no user';
+    }
+}
+
+
+//Get names of total number of goals taken by student
+
+function getGoalsTakenByStudent($id){
+    $data = [];
+    $get_goals_taken = TakenGoal::where('student_id', $id)->groupBy('subject_id')->pluck('subject_id')->toArray();
+    if(!empty($get_goals_taken)){
+        foreach($get_goals_taken as $goal_taken){
+            $data[] = getSubName($goal_taken)->title;
+            //$data['total_goals'] = $get_goals_taken->count();
+        }
+        return $data;
+    }else{
+        return 0;
+    }
+}
+
+/**
+ * Get Goals name Achieved By Students
+ */
+
+function getGoalsAchievedByStudent($id){
+    $data = $data1 = [];
+    $get_goals_taken = TakenGoal::where('student_id', $id)->groupBy('subject_id')->pluck('subject_id')->toArray();
+    if(!empty($get_goals_taken)){
+        foreach($get_goals_taken as $goal_taken){
+            $data1['taken'][] = TakenGoal::where('student_id', $id)->where('subject_id',$goal_taken)->count();
+            $data1['completed'][] = TakenGoal::where('student_id', $id)->where('subject_id',$goal_taken)->where('status', 1)->count();
+            if($data1['taken'] == $data1['completed']){
+                $data[] = getSubName($goal_taken)->title;
+            }
+        }
+        
+        return $data;
+    }else{
+        return 0;
+    }
+}
+
+/**
+ * Get Goals name Pending By Students
+ */
+
+function getGoalsPendingByStudent($id){
+    $data = $data1 = [];
+    $get_goals_taken = TakenGoal::where('student_id', $id)->groupBy('subject_id')->pluck('subject_id')->toArray();
+    if(!empty($get_goals_taken)){
+        foreach($get_goals_taken as $goal_taken){
+            $data1['taken'][] = TakenGoal::where('student_id', $id)->where('subject_id',$goal_taken)->count();
+            $data1['completed'][] = TakenGoal::where('student_id', $id)->where('subject_id',$goal_taken)->where('status', 1)->count();
+            if($data1['taken'] != $data1['completed']){
+                $data[] = getSubName($goal_taken)->title;
+            }
+        }
+        
+        return $data;
+    }else{
+        return 0;
+    }
+}
+
+
+//Get names of total number of goals taken by student
+
+function getSubjectTakenByStudent($id){
+    $data = [];
+    $get_goals_taken = TakenGoal::where('student_id', $id)->groupBy('subject_id')->pluck('subject_id')->toArray();
+    if(!empty($get_goals_taken)){
+        $data = count($get_goals_taken);
+        return $data;
+    }else{
+        return 0;
+    }
+}
+
+//Get names of total number of goals taken by student
+
+function getSubjectAchievedByStudent($id){
+    $data = [];
+    $get_goals_taken = TakenGoal::where('student_id', $id)->groupBy('subject_id')->pluck('subject_id')->toArray();
+    if(!empty($get_goals_taken)){
+        $data = count($get_goals_taken);
+        return $data;
+    }else{
+        return 0;
+    }
+}
+
+/**
+ * Get Goals count Achieved By Students
+ */
+
+function getGoalsCountAchievedByStudent($id){
+    $data = $data1 = [];
+    $get_goals_taken = TakenGoal::where('student_id', $id)->groupBy('subject_id')->pluck('subject_id')->toArray();
+    if(!empty($get_goals_taken)){
+        foreach($get_goals_taken as $goal_taken){
+            $data1['taken'][] = TakenGoal::where('student_id', $id)->where('subject_id',$goal_taken)->count();
+            $data1['completed'][] = TakenGoal::where('student_id', $id)->where('subject_id',$goal_taken)->where('status', 1)->count();
+            if($data1['taken'] == $data1['completed']){
+                $data[] = $goal_taken;
+            }
+           
+        }
+        return count($data);
+    }else{
+        return 0;
     }
 }
 ?>

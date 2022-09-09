@@ -35,6 +35,10 @@ class ResetPasswordController extends Controller
     {  
         $data = [];
         $data = getMembershipDetails();
+        $user = User::where('email', Auth::user()->email)->first();
+        $data['username'] = $user->name;
+        $data['email'] = $user->email;
+      
         if(Auth::user()->role == 1){
             return view('admin.profile.update');
         }else{
@@ -66,17 +70,21 @@ class ResetPasswordController extends Controller
 
     public function update_username(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required'
+        ]);
         $user = User::where('email', Auth::user()->email)->first();
-
         if($request->profile_image){ 
             $path = $request->profile_image->store('public/profile_images');
             $profile_image = $path;
         }else{
-            $profile_image = $user->profile_image;
+            $profile_image = Auth::user()->profile_image;
         }
        
         if($user){
-            $user->name = isset($request->name) ? $request->name : $user->name;
+            $user->name = isset($request->name) ? $request->name : Auth::user()->name;
+            $user->email = isset($request->email) ? $request->email : Auth::user()->email;
             $user->profile_image = $profile_image;
             $user->save();
             if(intval($user->id) > 0){

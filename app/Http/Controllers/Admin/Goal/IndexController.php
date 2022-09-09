@@ -333,7 +333,8 @@ class IndexController extends Controller
      * Update Goal Image
      */
 
-     public function update_image(Request $request){
+     public function update_image(Request $request)
+     {
         try{
             $request->validate([
                 'goal_image' => 'required',
@@ -351,25 +352,31 @@ class IndexController extends Controller
             return redirect()->route('admin.goals.index')->with('error',$e->getMessage());
         }
      }
-    /**
-     * Delete Goal Document By ID
-     */
-    public function doc_destroy(Request $request)
-    {
-        
-       /* 
+
+     /**
+      * Update Sadhqah
+      */
+      public function update_sadhaqah(Request $request)
+      {
         try{
-            $goal_media = GoalMedia::find($id);
-            $goal_media->delete();
-            return redirect()->route('admin.goals.index')
-            ->with('success','Goal Media has been deleted successfully');
+            $request->validate([
+                'edit_sadhaqah' => 'required',
+            ]);
+            if($request->hasFile('edit_sadhaqah')){ 
+                    $path = $request->file('edit_sadhaqah')->store('public/images');
+                    $name = $request->file('edit_sadhaqah')->getClientOriginalName();
+            }
+
+            $goal = Goal::find($request->sadhaqah_goal_id);
+            $goal->sadhaqah = $path; 
+            $goal->save();
+            return redirect()->route('admin.goals.index')->with('success','Sadhaqah has been updated successfully');
         }catch(Exception $e){
-            return $e->getMessage();
-        } */
-       
-    }
-
-
+            return redirect()->route('admin.goals.index')->with('error',$e->getMessage());
+        }
+     }
+      
+  
     /**
      * Get Units according to selected subject
      */
